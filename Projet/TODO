@@ -1,6 +1,5 @@
->>> Fusionner les fichiers
+>>> Fusionner les fichiers des practicals précédents
     CylinderRenderable et CubeRenderable fusionnés pour HierarchicalRenderable
-     -> Manque partie animations
      -> Possiblement autres fichiers
     -> Manque animations
     -> Manque physique
@@ -9,12 +8,19 @@
     -> Manque évènements
 
 >>> Coder
-    -> Modèles : karts, personnages, terrain (procédural ?)
+    -> Modèles
+        Kart à tester
+         -> Différents modèles ?
+        -> Personnages
+         -> Faire avec des CylinderRenderable et CubeRenderable (cf. ./struct/Personnage pour une idée de la structure)
+        -> Terrain (procédural ?)
     -> Physique
         -> Gestion clavier
-        -> Particules, obstacles etc.
+        -> Particules
+        -> Obstacles
         -> Animation personnages
         -> IA
     -> Textures
-    -> Lumières, matériaux
+    -> Lumières
+    -> Matériaux
     -> Billboards (panneaux d'affichage)
