@@ -1,0 +1,9 @@
+
+BEWARE OF NOT OVERRIDING YOUR OWN FILES!
+
+A solution for the pracical1 cubes:
+ - CubeRenderable.hpp & .cpp : cube without indexation
+ - IndexedCubeRenderable.hpp & .cpp : cube with indexation
+ - a modified flatVertex.glsl shader, taking vColor as input
+
+

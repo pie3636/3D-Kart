@@ -1,0 +1,331 @@
+The system is: Linux - 2.6.32-573.12.1.el6.x86_64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /opt/gcc-4.9.3/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/2.8.12.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/gcc-4.9.3/bin/g++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/2.8.12.2/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3793880510/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3793880510.dir/build.make CMakeFiles/cmTryCompileExec3793880510.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3793880510.dir/testCCompiler.c.o
+/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec3793880510.dir/testCCompiler.c.o   -c /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec3793880510
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3793880510.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc       CMakeFiles/cmTryCompileExec3793880510.dir/testCCompiler.c.o  -o cmTryCompileExec3793880510 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4283305272/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4283305272.dir/build.make CMakeFiles/cmTryCompileExec4283305272.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o
+/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec4283305272
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4283305272.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc     -v CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4283305272 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/opt/gcc-4.9.3/bin/gcc
+COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes
+Thread model: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4283305272' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4283305272 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec4283305272/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4283305272.dir/build.make CMakeFiles/cmTryCompileExec4283305272.dir/build]
+  ignore line: [gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec4283305272]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4283305272.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-4.9.3/bin/gcc     -v CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec4283305272 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/gcc-4.9.3/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4283305272' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4283305272 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec4283305272] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [CMakeFiles/cmTryCompileExec4283305272.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/opt/gcc-4.9.3/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/opt/gcc-4.9.3/lib]
+  implicit libs: [c]
+  implicit dirs: [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/opt/gcc-4.9.3/lib64;/lib64;/usr/lib64;/opt/gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec440291025/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec440291025.dir/build.make CMakeFiles/cmTryCompileExec440291025.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec440291025.dir/testCXXCompiler.cxx.o
+/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec440291025.dir/testCXXCompiler.cxx.o -c /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec440291025
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec440291025.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/g++        CMakeFiles/cmTryCompileExec440291025.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec440291025 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2349870197/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2349870197.dir/build.make CMakeFiles/cmTryCompileExec2349870197.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o
+/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec2349870197
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2349870197.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/g++      -v CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec2349870197 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/opt/gcc-4.9.3/bin/g++
+COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes
+Thread model: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec2349870197' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec2349870197 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec2349870197/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2349870197.dir/build.make CMakeFiles/cmTryCompileExec2349870197.dir/build]
+  ignore line: [gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec2349870197]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2349870197.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-4.9.3/bin/g++      -v CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec2349870197 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/gcc-4.9.3/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec2349870197' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec2349870197 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec2349870197] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [CMakeFiles/cmTryCompileExec2349870197.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/opt/gcc-4.9.3/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/opt/gcc-4.9.3/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/opt/gcc-4.9.3/lib64;/lib64;/usr/lib64;/opt/gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib64/libX11.so;/usr/lib64/libXext.so passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1054367914/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1054367914.dir/build.make CMakeFiles/cmTryCompileExec1054367914.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1054367914.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec1054367914.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1054367914
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1054367914.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec1054367914.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1054367914 -rdynamic -lX11 -lXext 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3162030819/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3162030819.dir/build.make CMakeFiles/cmTryCompileExec3162030819.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3162030819.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec3162030819.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3162030819
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3162030819.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec3162030819.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3162030819 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec672810618/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec672810618.dir/build.make CMakeFiles/cmTryCompileExec672810618.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec672810618.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec672810618.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec672810618
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec672810618.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec672810618.dir/CheckFunctionExists.c.o  -o cmTryCompileExec672810618 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec138627303/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec138627303.dir/build.make CMakeFiles/cmTryCompileExec138627303.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec138627303.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec138627303.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec138627303
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec138627303.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec138627303.dir/CheckFunctionExists.c.o  -o cmTryCompileExec138627303 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec665422769/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec665422769.dir/build.make CMakeFiles/cmTryCompileExec665422769.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec665422769.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec665422769.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec665422769
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec665422769.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec665422769.dir/CheckFunctionExists.c.o  -o cmTryCompileExec665422769 -rdynamic 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1434266420/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1434266420.dir/build.make CMakeFiles/cmTryCompileExec1434266420.dir/build
+gmake[1]: Entering directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1434266420.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec1434266420.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1434266420
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1434266420.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec1434266420.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1434266420 -rdynamic -lICE 
+gmake[1]: Leaving directory `/user/4/.base/melouxm/home/TP/2A/3D/practical1/build/CMakeFiles/CMakeTmp'
+
+

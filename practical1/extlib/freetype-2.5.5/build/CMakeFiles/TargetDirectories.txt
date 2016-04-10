@@ -1,0 +1,2 @@
+/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/freetype-2.5.5/build/CMakeFiles/dist.dir
+/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/freetype-2.5.5/build/CMakeFiles/freetype.dir
