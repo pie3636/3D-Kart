@@ -7,14 +7,17 @@
 #include <GL/glew.h>
 
 SphereRenderable::SphereRenderable(ShaderProgramPtr shaderProgram) :
-    Renderable(shaderProgram),
-    m_pBuffer(0), m_cBuffer(0), m_nBuffer(0)
-{
+    HierarchicalRenderable(shaderProgram),
+    m_pBuffer(0), m_cBuffer(0), m_nBuffer(0) {
     unsigned int strips=20;
     unsigned int slices=40;
     getUnitSphere(m_positions, m_normals, strips, slices);
     m_colors.resize(m_positions.size(), glm::vec4(1.0,0.0,0.0,1.0));
-    for(size_t i=0; i<m_colors.size(); ++i) for(size_t j=0; j<3; ++j) m_colors[i][j] = m_normals[i][j];
+    for (size_t i=0; i < m_colors.size(); ++i) {
+        for (size_t j = 0; j < 3; ++j) {
+            m_colors[i][j] = m_normals[i][j];
+        }
+    }
 
     //Create buffers
     glGenBuffers(1, &m_pBuffer); //vertices
