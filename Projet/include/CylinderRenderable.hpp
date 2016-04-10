@@ -1,16 +1,16 @@
 #ifndef CYLINDER_RENDERABLE_HPP
 #define CYLINDER_RENDERABLE_HPP
 
-#include "Renderable.hpp"
+#include "HierarchicalRenderable.hpp"
 #include <vector>
 #include <glm/glm.hpp>
 
-class CylinderRenderable : public Renderable
+class CylinderRenderable : public HierarchicalRenderable
 {
 public:
     ~CylinderRenderable();
-    CylinderRenderable( ShaderProgramPtr program );
-
+    CylinderRenderable(ShaderProgramPtr program, int facets = 30);
+    
     void switchNormals();
 
 private:
@@ -21,7 +21,7 @@ private:
     std::vector< glm::vec4 > m_colors;
     std::vector< glm::vec3 > m_normals;
 
-    unsigned int m_pBuffer;
+    unsigned int m_vBuffer;
     unsigned int m_cBuffer;
     unsigned int m_nBuffer;
 };

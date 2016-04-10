@@ -1,0 +1,20 @@
+>>> Fusionner les fichiers
+    CylinderRenderable et CubeRenderable fusionnés pour HierarchicalRenderable
+     -> Manque partie animations
+     -> Possiblement autres fichiers
+    -> Manque animations
+    -> Manque physique
+    -> Manque lumière
+    -> Manque textures
+    -> Manque évènements
+
+>>> Coder
+    -> Modèles : karts, personnages, terrain (procédural ?)
+    -> Physique
+        -> Gestion clavier
+        -> Particules, obstacles etc.
+        -> Animation personnages
+        -> IA
+    -> Textures
+    -> Lumières, matériaux
+    -> Billboards (panneaux d'affichage)

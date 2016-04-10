@@ -1,29 +1,18 @@
 #include "./../include/project_scene.hpp"
 
+#include "./../include/Viewer.hpp"
 #include "./../include/ShaderProgram.hpp"
 #include "./../include/FrameRenderable.hpp"
+#include "./../include/IndexedCubeRenderable.hpp" 
 #include "./../include/CubeRenderable.hpp" 
 #include "./../include/CylinderRenderable.hpp" 
-#include "./../include/MeshRenderable.hpp" 
-#include "./../include/HierarchicalRenderable.hpp" 
+#include "./../include/MeshRenderable.hpp"
 
-void initialize_practical_07_scene(Viewer& viewer){
-    //Position the camera
-    viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -8, 8), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+#include "../include/log.hpp"
+#include <fstream>
 
-    //Default shader
-    ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-    viewer.addShaderProgram(flatShader);
-
-    //Add a 3D frame to the viewer
-    FrameRenderablePtr frame = std::make_shared<FrameRenderable>(flatShader);
-    viewer.addRenderable(frame);
-
-    //Temporary variables
-    glm::mat4 parentTransformation(1.0), localTransformation(1.0);
-    std::string filename;
-
-	std::string vShader = "./../shaders/flatVertex.glsl";
+void initialize_scene(Viewer& viewer) {
+    std::string vShader = "./../shaders/flatVertex.glsl";
     std::string fShader = "./../shaders/flatFragment.glsl";
     ShaderProgramPtr parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
     viewer.addShaderProgram(parentProg);
@@ -58,7 +47,16 @@ void initialize_practical_07_scene(Viewer& viewer){
     HierarchicalRenderable::addChild(root, wheel_hr);
 
     viewer.addRenderable(root);
+}
 
-    viewer.startAnimation();
-    viewer.setAnimationLoop(true, 4.0);
+glm::mat4 translate(RenderablePtr obj, double x, double y, double z) {
+    return glm::translate(obj->getModelMatrix(), glm::vec3(x, y, z));
+}
+
+glm::mat4 rotate(RenderablePtr obj, float alpha, double x, double y, double z) {
+    return glm::rotate(obj->getModelMatrix(), alpha, glm::vec3(x, y, z));
+}
+
+glm::mat4 scale(RenderablePtr obj, double x, double y, double z) {
+    return glm::scale(obj->getModelMatrix(), glm::vec3(x, y, z));
 }
