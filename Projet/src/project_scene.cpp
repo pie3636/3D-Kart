@@ -57,10 +57,10 @@ void initialize_scene(Viewer& viewer) {
     CubeRenderablePtr       primKart = createKartFromPrimitives         (parentProg);
     CylinderRenderablePtr   primChar = createCharacterFromPrimitives    (parentProg);
 
-    viewer.addRenderable(meshKart);
+    //viewer.addRenderable(meshKart);
     //viewer.addRenderable(primKart);
-    viewer.addRenderable(primChar);
-    
+    //viewer.addRenderable(primChar);
+
 	// Place the camera
 	viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 60 ), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
 
