@@ -110,29 +110,29 @@ CylinderRenderablePtr createCharacterFromPrimitives(ShaderProgramPtr parentProg)
     // Translation vectors (see ./struct/Personnage)
     glm::vec3 chestT        (0,                             0,                          0                                                                                       );
     glm::vec3 neckT         (0,                             0,                          (chestS.z + neckS.z)/2                                                                  );
-    glm::vec3 headT         (0,                             0,                          (chestS.z + neckS.z + headS.z)/2                                                        );
+    glm::vec3 headT         (0,                             0,                          (chestS.z + headS.z)/2 + neckS.z                                                        );
     glm::vec3 shoulderLT    ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z)/2                                                              );
-    glm::vec3 upperArmLT    ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z - upperArmS.z)/2                                                );
-    glm::vec3 elbowLT       ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z)/2                                     );
-    glm::vec3 forearmLT     ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z)/2                        );
-    glm::vec3 wristLT       ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z)/2             );
-    glm::vec3 handLT        ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z - handS.z)/2   );
+    glm::vec3 upperArmLT    ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - upperArmS.z)/2 - shoulderS.z                                                );
+    glm::vec3 elbowLT       ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - elbowS.z)/2 - shoulderS.z - upperArmS.z                                     );
+    glm::vec3 forearmLT     ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - forearmS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z                        );
+    glm::vec3 wristLT       ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - wristS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z             );
+    glm::vec3 handLT        ((-chestS.x - shoulderS.x)/2,   0,                          (chestS.z - handS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z   );
     glm::vec3 shoulderRT    ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z)/2                                                              );
-    glm::vec3 upperArmRT    ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z - upperArmS.z)/2                                                );
-    glm::vec3 elbowRT       ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z)/2                                     );
-    glm::vec3 forearmRT     ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z)/2                        );
-    glm::vec3 wristRT       ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z)/2             );
-    glm::vec3 handRT        ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z - handS.z)/2   );
+    glm::vec3 upperArmRT    ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - upperArmS.z)/2 - shoulderS.z                                                );
+    glm::vec3 elbowRT       ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - elbowS.z)/2 - shoulderS.z - upperArmS.z                                     );
+    glm::vec3 forearmRT     ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - forearmS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z                        );
+    glm::vec3 wristRT       ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - wristS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z             );
+    glm::vec3 handRT        ((chestS.x + shoulderS.x)/2,    0,                          (chestS.z - handS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z   );
     glm::vec3 upperLegLT    ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - upperLegS.z)/2                                                             );
-    glm::vec3 kneeLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z)/2                                                   );
-    glm::vec3 calfLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z)/2                                         );
-    glm::vec3 ankleLT       ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z)/2                              );
-    glm::vec3 footLT        ((upperLegS.x - chestS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z - footS.z)/2                    );
+    glm::vec3 kneeLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - kneeS.z)/2 - upperLegS.z                                                   );
+    glm::vec3 calfLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - calfS.z)/2 - upperLegS.z - kneeS.z                                         );
+    glm::vec3 ankleLT       ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - upperLegS.z - kneeS.z - calfS.z                              );
+    glm::vec3 footLT        ((upperLegS.x - chestS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - upperLegS.z - kneeS.z - calfS.z - ankleS.z                    );
     glm::vec3 upperLegRT    ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z)/2                                                             );
-    glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z)/2                                                   );
-    glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z)/2                                         );
-    glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z)/2                              );
-    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z - footS.z)/2                    );
+    glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - kneeS.z)/2 - upperLegS.z                                                   );
+    glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - calfS.z)/2 - upperLegS.z - kneeS.z                                         );
+    glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - upperLegS.z - kneeS.z - calfS.z                              );
+    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - upperLegS.z - kneeS.z - calfS.z - ankleS.z                    );
     
     
     // Set global position so that the character can be standing
