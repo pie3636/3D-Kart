@@ -36,7 +36,6 @@ void initialize_scene(Viewer& viewer) {
     ShaderProgramPtr    parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
     viewer.addShaderProgram(parentProg);
 
-<<<<<<< HEAD
     //Initialize a dynamic system (Solver, Time step, Restitution coefficient)
     DynamicSystemPtr system = std::make_shared<DynamicSystem>();
     EulerExplicitSolverPtr solver = std::make_shared<EulerExplicitSolver>();
@@ -56,14 +55,7 @@ void initialize_scene(Viewer& viewer) {
 
     viewer.addRenderable(meshKart);
     viewer.addRenderable(primKart);
-=======
-    //MeshRenderablePtr       meshKart = createKartFromMesh               (parentProg);
-    //CubeRenderablePtr       primKart = createKartFromPrimitives         (parentProg);
-    CylinderRenderablePtr   primChar = createCharacterFromPrimitives    (parentProg);
-    
-    //viewer.addRenderable(meshKart);
-    //viewer.addRenderable(primKart);
->>>>>>> 0d2159c369e4b00489fb150d05c8b477dc60d98f
+
     viewer.addRenderable(primChar);
 }
 
@@ -174,21 +166,12 @@ CylinderRenderablePtr createCharacterFromPrimitives(ShaderProgramPtr parentProg)
     glm::vec3 ankleLT       ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - upperLegS.z - kneeS.z - calfS.z                              );
     glm::vec3 footLT        ((upperLegS.x - chestS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - upperLegS.z - kneeS.z - calfS.z - ankleS.z                    );
     glm::vec3 upperLegRT    ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z)/2                                                             );
-<<<<<<< HEAD
-    glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z)/2                                                   );
-    glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z)/2                                         );
-    glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z)/2                              );
-    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - upperLegS.z - kneeS.z - ankleS.z - footS.z)/2                              );
 
-
-=======
     glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - kneeS.z)/2 - upperLegS.z                                                   );
     glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - calfS.z)/2 - upperLegS.z - kneeS.z                                         );
     glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - upperLegS.z - kneeS.z - calfS.z                              );
     glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - upperLegS.z - kneeS.z - calfS.z - ankleS.z                    );
-    
-    
->>>>>>> 0d2159c369e4b00489fb150d05c8b477dc60d98f
+
     // Set global position so that the character can be standing
     chest->setParentTransform(translate(chest, 0, 0, ankleS.z + calfS.z + kneeS.z + upperLegS.z + chestS.z));
 
