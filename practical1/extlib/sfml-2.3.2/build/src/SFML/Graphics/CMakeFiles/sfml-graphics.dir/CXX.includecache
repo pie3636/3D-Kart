@@ -560,27 +560,27 @@ android/asset_manager.h
 string
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/BlendMode.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/BlendMode.cpp
 SFML/Graphics/BlendMode.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/CircleShape.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/CircleShape.cpp
 SFML/Graphics/CircleShape.hpp
 -
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Color.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Color.cpp
 SFML/Graphics/Color.hpp
 -
 algorithm
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/ConvexShape.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/ConvexShape.cpp
 SFML/Graphics/ConvexShape.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Font.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Font.cpp
 SFML/Graphics/Font.hpp
 -
 SFML/Graphics/GLCheck.hpp
@@ -598,7 +598,7 @@ cstdlib
 cstring
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/GLCheck.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/GLCheck.cpp
 SFML/Graphics/GLCheck.hpp
 -
 SFML/System/Err.hpp
@@ -606,7 +606,7 @@ SFML/System/Err.hpp
 string
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/GLExtensions.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/GLExtensions.cpp
 SFML/Graphics/GLExtensions.hpp
 -
 SFML/Window/Context.hpp
@@ -614,19 +614,19 @@ SFML/Window/Context.hpp
 SFML/System/Err.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/GLLoader.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/GLLoader.cpp
 SFML/Graphics/GLLoader.hpp
 -
 SFML/Window/Context.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Glsl.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Glsl.cpp
 SFML/Graphics/Glsl.hpp
 -
 algorithm
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Image.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Image.cpp
 SFML/Graphics/Image.hpp
 -
 SFML/Graphics/ImageLoader.hpp
@@ -640,7 +640,7 @@ algorithm
 cstring
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/ImageLoader.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/ImageLoader.cpp
 SFML/Graphics/ImageLoader.hpp
 -
 SFML/System/InputStream.hpp
@@ -658,19 +658,19 @@ jerror.h
 cctype
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RectangleShape.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RectangleShape.cpp
 SFML/Graphics/RectangleShape.hpp
 -
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderStates.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderStates.cpp
 SFML/Graphics/RenderStates.hpp
 -
 cstddef
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTarget.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTarget.cpp
 SFML/Graphics/RenderTarget.hpp
 -
 SFML/Graphics/Drawable.hpp
@@ -690,7 +690,7 @@ cassert
 iostream
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTexture.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTexture.cpp
 SFML/Graphics/RenderTexture.hpp
 -
 SFML/Graphics/RenderTextureImplFBO.hpp
@@ -700,11 +700,11 @@ SFML/Graphics/RenderTextureImplDefault.hpp
 SFML/System/Err.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImpl.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImpl.cpp
 SFML/Graphics/RenderTextureImpl.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImplDefault.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImplDefault.cpp
 SFML/Graphics/RenderTextureImplDefault.hpp
 -
 SFML/Graphics/GLCheck.hpp
@@ -716,7 +716,7 @@ SFML/Window/Context.hpp
 SFML/System/Err.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImplFBO.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderTextureImplFBO.cpp
 SFML/Graphics/RenderTextureImplFBO.hpp
 -
 SFML/Graphics/Texture.hpp
@@ -726,13 +726,13 @@ SFML/Graphics/GLCheck.hpp
 SFML/System/Err.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/RenderWindow.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/RenderWindow.cpp
 SFML/Graphics/RenderWindow.hpp
 -
 SFML/Graphics/GLCheck.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Shader.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Shader.cpp
 SFML/Graphics/Shader.hpp
 -
 SFML/Graphics/Texture.hpp
@@ -758,7 +758,7 @@ fstream
 vector
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Shape.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Shape.cpp
 SFML/Graphics/Shape.hpp
 -
 SFML/Graphics/RenderTarget.hpp
@@ -770,7 +770,7 @@ SFML/System/Err.hpp
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Sprite.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Sprite.cpp
 SFML/Graphics/Sprite.hpp
 -
 SFML/Graphics/Texture.hpp
@@ -780,7 +780,7 @@ SFML/Graphics/RenderTarget.hpp
 cstdlib
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Text.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Text.cpp
 SFML/Graphics/Text.hpp
 -
 SFML/Graphics/Texture.hpp
@@ -790,7 +790,7 @@ SFML/Graphics/RenderTarget.hpp
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Texture.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Texture.cpp
 SFML/Graphics/Texture.hpp
 -
 SFML/Graphics/Image.hpp
@@ -814,41 +814,35 @@ cassert
 cstring
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/TextureSaver.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/TextureSaver.cpp
 SFML/Graphics/TextureSaver.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Transform.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Transform.cpp
 SFML/Graphics/Transform.hpp
 -
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Transformable.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Transformable.cpp
 SFML/Graphics/Transformable.hpp
 -
 cmath
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/Vertex.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/Vertex.cpp
 SFML/Graphics/Vertex.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/VertexArray.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/VertexArray.cpp
 SFML/Graphics/VertexArray.hpp
 -
 SFML/Graphics/RenderTarget.hpp
 -
 
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Graphics/View.cpp
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/src/SFML/Graphics/View.cpp
 SFML/Graphics/View.hpp
 -
 cmath
--
-
-/usr/include/freetype2/config/ftheader.h
-
-/usr/include/freetype2/ft2build.h
-config/ftheader.h
 -
 

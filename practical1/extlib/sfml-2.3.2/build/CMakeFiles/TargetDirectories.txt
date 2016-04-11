@@ -1,5 +1,5 @@
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/build/src/SFML/Audio/CMakeFiles/sfml-audio.dir
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/build/src/SFML/Network/CMakeFiles/sfml-network.dir
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/build/src/SFML/Window/CMakeFiles/sfml-window.dir
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/build/src/SFML/System/CMakeFiles/sfml-system.dir
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/build/src/SFML/Audio/CMakeFiles/sfml-audio.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/build/src/SFML/Network/CMakeFiles/sfml-network.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/build/src/SFML/System/CMakeFiles/sfml-system.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/sfml-2.3.2/build/src/SFML/Window/CMakeFiles/sfml-window.dir

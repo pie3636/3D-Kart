@@ -1,4 +1,4 @@
-file(REMOVE_RECURSE
+FILE(REMOVE_RECURSE
   "CMakeFiles/sfml-graphics.dir/BlendMode.cpp.o"
   "CMakeFiles/sfml-graphics.dir/Color.cpp.o"
   "CMakeFiles/sfml-graphics.dir/Font.cpp.o"
@@ -36,6 +36,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
-  include(CMakeFiles/sfml-graphics.dir/cmake_clean_${lang}.cmake OPTIONAL)
-endforeach()
+FOREACH(lang CXX)
+  INCLUDE(CMakeFiles/sfml-graphics.dir/cmake_clean_${lang}.cmake OPTIONAL)
+ENDFOREACH(lang)

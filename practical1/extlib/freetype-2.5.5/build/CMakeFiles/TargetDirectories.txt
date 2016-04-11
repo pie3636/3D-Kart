@@ -1,2 +1,2 @@
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/freetype-2.5.5/build/CMakeFiles/freetype.dir
-/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/freetype-2.5.5/build/CMakeFiles/dist.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/freetype-2.5.5/build/CMakeFiles/dist.dir
+/user/4/.base/melouxm/home/TP/2A/3D/Projet/extlib/freetype-2.5.5/build/CMakeFiles/freetype.dir
