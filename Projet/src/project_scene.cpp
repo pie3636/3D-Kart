@@ -13,17 +13,17 @@ void initialize_scene(Viewer& viewer) {
     ShaderProgramPtr    parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
     viewer.addShaderProgram(parentProg);
 
-    MeshRenderablePtr       meshKart = createKartFromMesh               (parentProg);
-    CubeRenderablePtr       primKart = createKartFromPrimitives         (parentProg);
+    //MeshRenderablePtr       meshKart = createKartFromMesh               (parentProg);
+    //CubeRenderablePtr       primKart = createKartFromPrimitives         (parentProg);
     CylinderRenderablePtr   primChar = createCharacterFromPrimitives    (parentProg);
     
-    viewer.addRenderable(meshKart);
-    viewer.addRenderable(primKart);
+    //viewer.addRenderable(meshKart);
+    //viewer.addRenderable(primKart);
     viewer.addRenderable(primChar);
 }
 
 MeshRenderablePtr createKartFromMesh(ShaderProgramPtr parentProg) {
-    return std::make_shared<MeshRenderable>(parentProg, "../Kart.obj");
+    return std::make_shared<MeshRenderable>(parentProg, "../meshes/Kart.obj");
 }
 
 CubeRenderablePtr createKartFromPrimitives(ShaderProgramPtr parentProg) {
@@ -132,7 +132,7 @@ CylinderRenderablePtr createCharacterFromPrimitives(ShaderProgramPtr parentProg)
     glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z)/2                                                   );
     glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z)/2                                         );
     glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z)/2                              );
-    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - upperLegS.z - kneeS.z - ankleS.z - footS.z)/2                              );
+    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z - footS.z)/2                    );
     
     
     // Set global position so that the character can be standing
