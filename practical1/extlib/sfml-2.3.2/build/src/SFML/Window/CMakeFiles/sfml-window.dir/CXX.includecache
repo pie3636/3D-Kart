@@ -608,7 +608,7 @@ SFML/Window/WindowImpl.hpp
 SFML/Window/iOS/ObjCType.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Context.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Context.cpp
 SFML/Window/Context.hpp
 -
 SFML/Window/GlContext.hpp
@@ -624,7 +624,7 @@ vector
 string
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/GlContext.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/GlContext.cpp
 SFML/Window/GlContext.hpp
 -
 SFML/System/ThreadLocalPtr.hpp
@@ -654,7 +654,7 @@ SFML/Window/iOS/EaglContext.hpp
 SFML/Window/EglContext.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/GlResource.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/GlResource.cpp
 SFML/Window/GlResource.hpp
 -
 SFML/Window/GlContext.hpp
@@ -664,23 +664,23 @@ SFML/System/Mutex.hpp
 SFML/System/Lock.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Joystick.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Joystick.cpp
 SFML/Window/Joystick.hpp
 -
 SFML/Window/JoystickManager.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/JoystickManager.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/JoystickManager.cpp
 SFML/Window/JoystickManager.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Keyboard.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Keyboard.cpp
 SFML/Window/Keyboard.hpp
 -
 SFML/Window/InputImpl.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Mouse.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Mouse.cpp
 SFML/Window/Mouse.hpp
 -
 SFML/Window/InputImpl.hpp
@@ -688,25 +688,25 @@ SFML/Window/InputImpl.hpp
 SFML/Window/Window.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Sensor.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Sensor.cpp
 SFML/Window/Sensor.hpp
 -
 SFML/Window/SensorManager.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/SensorManager.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/SensorManager.cpp
 SFML/Window/SensorManager.hpp
 -
 SFML/System/Err.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Touch.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Touch.cpp
 SFML/Window/Touch.hpp
 -
 SFML/Window/InputImpl.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/Display.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/Display.cpp
 SFML/System/Err.hpp
 -
 SFML/Window/Unix/Display.hpp
@@ -720,7 +720,7 @@ cassert
 map
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/GlxContext.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/GlxContext.cpp
 SFML/Window/Unix/GlxContext.hpp
 -
 SFML/Window/Unix/WindowImplX11.hpp
@@ -736,7 +736,7 @@ SFML/System/Err.hpp
 vector
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/GlxExtensions.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/GlxExtensions.cpp
 SFML/Window/Unix/GlxExtensions.hpp
 -
 SFML/Window/Context.hpp
@@ -750,7 +750,7 @@ cstddef
 string
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/InputImpl.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/InputImpl.cpp
 SFML/Window/Window.hpp
 -
 SFML/Window/Unix/InputImpl.hpp
@@ -766,7 +766,7 @@ xcb/xcb.h
 X11/keysym.h
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/JoystickImpl.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/JoystickImpl.cpp
 SFML/Window/JoystickImpl.hpp
 -
 SFML/System/Err.hpp
@@ -788,11 +788,11 @@ string
 cstring
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/SensorImpl.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/SensorImpl.cpp
 SFML/Window/SensorImpl.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/VideoModeImpl.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/VideoModeImpl.cpp
 SFML/Window/VideoModeImpl.hpp
 -
 SFML/Window/Unix/Display.hpp
@@ -806,7 +806,7 @@ xcb/randr.h
 algorithm
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/WindowImplX11.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Unix/WindowImplX11.cpp
 SFML/Window/WindowStyle.hpp
 -
 SFML/Window/Unix/WindowImplX11.hpp
@@ -854,7 +854,7 @@ SFML/Window/EglContext.hpp
 SFML/Window/Unix/GlxContext.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/VideoMode.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/VideoMode.cpp
 SFML/Window/VideoMode.hpp
 -
 SFML/Window/VideoModeImpl.hpp
@@ -864,7 +864,7 @@ algorithm
 functional
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/Window.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/Window.cpp
 SFML/Window/Window.hpp
 -
 SFML/Window/GlContext.hpp
@@ -876,7 +876,7 @@ SFML/System/Sleep.hpp
 SFML/System/Err.hpp
 -
 
-/user/4/.base/melouxm/home/TP/2A/3D/practical1/extlib/sfml-2.3.2/src/SFML/Window/WindowImpl.cpp
+/home/rafik/Ensimag/2A/G3D/3D-Kart/practical1/extlib/sfml-2.3.2/src/SFML/Window/WindowImpl.cpp
 SFML/Window/WindowImpl.hpp
 -
 SFML/Window/Event.hpp

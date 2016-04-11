@@ -3,11 +3,19 @@
 
 #include "Viewer.hpp"
 #include "ShaderProgram.hpp"
-#include "CubeRenderable.hpp" 
-#include "CylinderRenderable.hpp" 
+#include "CubeRenderable.hpp"
+#include "CylinderRenderable.hpp"
+#include "MeshRenderable.hpp"
 #include "MeshRenderable.hpp"
 
+#include "./dynamics/DynamicSystem.hpp"
+#include "./dynamics/DynamicSystemRenderable.hpp"
+
 void initialize_scene(Viewer& viewer);
+
+void kart_game_light( Viewer& viewer ) ;
+void kart_game_borders( Viewer& viewer , DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable);
+void kart_game_road( Viewer& viewer );
 
 static MeshRenderablePtr        createKartFromMesh              (ShaderProgramPtr parentProg);
 static CubeRenderablePtr        createKartFromPrimitives        (ShaderProgramPtr parentProg);

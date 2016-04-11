@@ -1,4 +1,4 @@
-FILE(REMOVE_RECURSE
+file(REMOVE_RECURSE
   "CMakeFiles/sfml-window.dir/Context.cpp.o"
   "CMakeFiles/sfml-window.dir/GlContext.cpp.o"
   "CMakeFiles/sfml-window.dir/GlResource.cpp.o"
@@ -27,6 +27,6 @@ FILE(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-FOREACH(lang CXX)
-  INCLUDE(CMakeFiles/sfml-window.dir/cmake_clean_${lang}.cmake OPTIONAL)
-ENDFOREACH(lang)
+foreach(lang CXX)
+  include(CMakeFiles/sfml-window.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

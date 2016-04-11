@@ -1,5 +1,7 @@
 #include "./../include/Utils.hpp"
 #include "./../include/log.hpp"
+#include "../include/QuadRenderable.hpp"
+#include "./../include/Bezier.hpp"
 
 #include <chrono>
 #include <random>
@@ -495,4 +497,266 @@ void getUnitCone(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& norm
         normals[counter+3*i+2] = glm::vec3(0, 0, -1);
     }
 
+}
+
+void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
+{
+    positions.push_back(glm::vec3(-2.5,-2.5,0.0));
+    positions.push_back(glm::vec3(2.5,-2.5,0.0));
+    positions.push_back(glm::vec3(2.5,2.5,0.0));
+
+    texCoords.push_back(glm::vec2(0.0,0.0));
+    texCoords.push_back(glm::vec2(1.0,0.0));
+    texCoords.push_back(glm::vec2(1.0,1.0));
+
+    //Second triangle
+    positions.push_back(glm::vec3(-2.5,-2.5,0.0));
+    positions.push_back(glm::vec3(2.5,2.5,0.0));
+    positions.push_back(glm::vec3(-2.5,2.5,0.0));
+
+    texCoords.push_back(glm::vec2(0.0,0.0));
+    texCoords.push_back(glm::vec2(1.0,1.0));
+    texCoords.push_back(glm::vec2(0.0,1.0));
+
+    for (int i=0; i<positions.size(); i++)
+      normals.push_back(glm::vec3(0.0,0.0,1.0));
+}
+
+void getWall(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
+{
+
+    for (int i=0; i<10; i++) {
+      //Plane x=0
+      //First triangle
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,0.0));
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),0.0));
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),5.0));
+      texCoords.push_back(glm::vec2(0.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,1.0));
+      //Second triangle
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,0.0));
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),5.0));
+      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,5.0));
+      texCoords.push_back(glm::vec2(0.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,1.0));
+      texCoords.push_back(glm::vec2(0.0,1.0));
+      for (int i=0; i<6; i++)
+        normals.push_back(glm::vec3(1.0,0.0,0.0));
+    }
+}
+
+void getRoad(ShaderProgramPtr flatShader, Viewer& viewer){
+  glm::vec4 color = glm::vec4(0.5,0.5,0.5,1.0);
+  glm::vec3 x1, x2, x3, x4;
+
+  PlaneRenderablePtr portion;
+
+  // 1ere ligne droite
+  x1=glm::vec3(17.5, -12.5, 0.1);
+  x2=glm::vec3(22.5, -15., 0.1);
+  x3=glm::vec3(22.5, 7.5, 0.1);
+  x4=glm::vec3(17.5, 5., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer.addRenderable(portion);
+
+  // 2eme ligne droite
+  x1 = glm::vec3( 12.5, -22.5, 0.1);
+  x2 = glm::vec3( 14., -16.5, 0.1);
+  x3 = glm::vec3( 2.5, -2.75, 0.1);
+  x4 = glm::vec3( 2.5, -10.25, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer.addRenderable(portion);
+
+  // 3eme ligne droite
+  x1=glm::vec3(-12.5, 22.5, 0.1);
+  x2=glm::vec3(-12.5, 17.5, 0.1);
+  x3=glm::vec3(13., 12.5, 0.1);
+  x4=glm::vec3(15., 17.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer.addRenderable(portion);
+
+  // 4eme ligne droite
+  x1=glm::vec3(-17.5, 12.5, 0.1);
+  x2=glm::vec3(-22.5, 15., 0.1);
+  x3=glm::vec3(-22.5, -17.5, 0.1);
+  x4=glm::vec3(-17.5, -15., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer.addRenderable(portion);
+
+  // 5eme ligne droite
+  x1 = glm::vec3( -5., -2.75, 0.1);
+  x2 = glm::vec3( -5., -10.25, 0.1);
+  x3 = glm::vec3( -12.5, -22.5, 0.1);
+  x4 = glm::vec3( -14.5, -17.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer.addRenderable(portion);
+/*
+  RoadRenderablePtr virage1 = std::make_shared<RoadRenderable>( flatShader, 2 );
+  viewer.addRenderable(virage1);
+*/
+
+//-----------------------------------------------------//
+  glm::vec3 s1, s2, s3, s4;
+  glm::vec3 t1, t2, t3, t4;
+
+  // 1er virage
+  // Points de controle de bezier
+  s1 = glm::vec3( 22.5, -15., 0.1);
+  s2 = glm::vec3( 22.5, -20., 0.1);
+  s3 = glm::vec3( 17.5, -25., 0.1);
+  s4 = glm::vec3( 12.5, -22.5, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(-4.5, 4.5, 0.);
+  t4 = glm::vec3(17.5, -12.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-3., 5.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-1., 6., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = t2 + glm::vec3(1.5, 6., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+
+  // 2eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3(  2.5, -10.25, 0.1);
+  s2 = glm::vec3( -0.5, -7., 0.1);
+  s3 = glm::vec3( -2., -7., 0.1);
+  s4 = glm::vec3( -5., -10.25, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(0., 6.5, 0.);
+  t4 = glm::vec3(2.5, -2.75, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(0., 6.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(0., 6.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = t2 + glm::vec3(0., 7.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+
+  // 3eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3( -12.5, -22.5, 0.1);
+  s2 = glm::vec3( -15, -25., 0.1);
+  s3 = glm::vec3( -20., -22.5, 0.1);
+  s4 = glm::vec3( -22.5, -17.5, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(-0.5, 5.5, 0.);
+  t4 = glm::vec3( -14.5, -17.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(1., 5., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(3., 3.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = t2 + glm::vec3(5., 2.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+
+  // 4eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3(-17.5, 12.5, 0.1);
+  s2 = glm::vec3( -16., 17.5, 0.1);
+  s3 = glm::vec3( -14., 17.5, 0.1);
+  s4 = glm::vec3(-12.5, 17.5, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(-5., 4., 0.);
+  t4 = glm::vec3(-22.5, 15., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.5);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-3., 5.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-1.5, 5.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = t2 + glm::vec3(0., 5., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+
+  // 5eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3(13., 12.5, 0.1);
+  s2 = glm::vec3(16., 12. , 0.1);
+  s3 = glm::vec3(16.5, 6.5, 0.1);
+  s4 = glm::vec3(17.5, 5., 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(3.,5.5, 0.);
+  t4 = glm::vec3(15., 17.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(3.5, 6., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(5., 4.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = t2 + glm::vec3(5., 2.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer.addRenderable(portion);
 }

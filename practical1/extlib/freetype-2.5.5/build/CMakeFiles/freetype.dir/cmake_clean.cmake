@@ -1,4 +1,4 @@
-FILE(REMOVE_RECURSE
+file(REMOVE_RECURSE
   "CMakeFiles/freetype.dir/src/autofit/autofit.c.o"
   "CMakeFiles/freetype.dir/src/base/ftadvanc.c.o"
   "CMakeFiles/freetype.dir/src/base/ftbbox.c.o"
@@ -56,6 +56,6 @@ FILE(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-FOREACH(lang C)
-  INCLUDE(CMakeFiles/freetype.dir/cmake_clean_${lang}.cmake OPTIONAL)
-ENDFOREACH(lang)
+foreach(lang C)
+  include(CMakeFiles/freetype.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

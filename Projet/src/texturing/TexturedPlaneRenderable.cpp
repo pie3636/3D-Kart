@@ -17,12 +17,16 @@ TexturedPlaneRenderable::~TexturedPlaneRenderable()
     glcheck(glDeleteTextures(1, &m_texId));
 }
 
-TexturedPlaneRenderable::TexturedPlaneRenderable(ShaderProgramPtr shaderProgram, const std::string& filename)
+TexturedPlaneRenderable::TexturedPlaneRenderable(ShaderProgramPtr shaderProgram, const std::string& filename, bool ground)
     : HierarchicalRenderable(shaderProgram),
       m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_tBuffer(0), m_wrapOption(0), m_filterOption(0)
 {
     //Initialize geometry
-    getUnitPlane(m_positions, m_normals, m_origTexCoords);
+    if (ground)
+      getGround(m_positions, m_normals, m_origTexCoords);
+    else
+      getWall(m_positions, m_normals, m_origTexCoords);
+
     m_texCoords = m_origTexCoords;
     m_colors.resize(m_positions.size(), glm::vec4(1.0,1.0,1.0,1.0));
 
