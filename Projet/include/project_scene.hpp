@@ -11,22 +11,33 @@
 #include "./dynamics/DynamicSystem.hpp"
 #include "./dynamics/DynamicSystemRenderable.hpp"
 
-void initialize_scene(Viewer& viewer);
+class Scene {
+	public:
+  		Scene(Viewer* viewer);
+  		~Scene();
 
-static void kart_game_light( Viewer& viewer ) ;
-static void kart_game_borders( Viewer& viewer , DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable);
-static void kart_game_road( Viewer& viewer );
+  private:
+  		static int kartCount;
+  		Viewer *viewer;
+  		ShaderProgramPtr flatShader;
+  		ShaderProgramPtr texShader;
+  		DynamicSystemPtr dynSystem;
+  		DynamicSystemRenderablePtr systemRenderable;
+  		
+  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
+		CubeRenderablePtr        		 createKartFromPrimitives        ();
+		CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
+		
+		void kart_game_light	();
+		void kart_game_borders	();
+  		
+		glm::mat4 translate  (RenderablePtr obj, double x, double y, double z);
+		glm::mat4 rotate     (RenderablePtr obj, float alpha, double x, double y, double z);
+		glm::mat4 scale      (RenderablePtr obj, double x, double y, double z);
 
-static TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      (ShaderProgramPtr texShader);
-static CubeRenderablePtr        		createKartFromPrimitives        (ShaderProgramPtr parentProg);
-static CylinderRenderablePtr    		createCharacterFromPrimitives   (ShaderProgramPtr parentProg);
-
-static glm::mat4 translate  (RenderablePtr obj, double x, double y, double z);
-static glm::mat4 rotate     (RenderablePtr obj, float alpha, double x, double y, double z);
-static glm::mat4 scale      (RenderablePtr obj, double x, double y, double z);
-
-static glm::mat4 translate  (RenderablePtr obj, glm::vec3 vec);
-static glm::mat4 rotate     (RenderablePtr obj, float alpha, glm::vec3 vec);
-static glm::mat4 scale      (RenderablePtr obj, glm::vec3 vec);
+		glm::mat4 translate  (RenderablePtr obj, glm::vec3 vec);
+		glm::mat4 rotate     (RenderablePtr obj, float alpha, glm::vec3 vec);
+		glm::mat4 scale      (RenderablePtr obj, glm::vec3 vec);
+};
 
 #endif // PROJECT_SCENE_H

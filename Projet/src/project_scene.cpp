@@ -27,61 +27,60 @@
 #include "../include/log.hpp"
 #include <fstream>
 
-static int kartCount;
+int Scene::kartCount = 0;
 
-void initialize_scene(Viewer& viewer) {
-	kartCount = 0;
+Scene::Scene(Viewer* viewer) {
+	this->viewer = viewer;
 
-    viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 6 ), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+    flatShader = std::make_shared<ShaderProgram>("./../shaders/flatVertex.glsl", "./../shaders/flatFragment.glsl");
+    viewer->addShaderProgram(flatShader);
 
-    std::string         vShader = "./../shaders/flatVertex.glsl";
-    std::string         fShader = "./../shaders/flatFragment.glsl";
-
-    ShaderProgramPtr    parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
-    viewer.addShaderProgram(parentProg);
-
-    ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
-    viewer.addShaderProgram(texShader);
+    texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
+    viewer->addShaderProgram(texShader);
 
     // Initialize a dynamic system (Solver, Time step, Restitution coefficient)
-    DynamicSystemPtr system = std::make_shared<DynamicSystem>();
+    dynSystem = std::make_shared<DynamicSystem>();
     EulerExplicitSolverPtr solver = std::make_shared<EulerExplicitSolver>();
-    system->setSolver(solver);
-    system->setDt(0.01);
-
+    dynSystem->setSolver(solver);
+    dynSystem->setDt(0.01);
+	dynSystem->setCollisionsDetection(true); // Activate collision detection
+	dynSystem->setRestitution(0.8f); // Restitution coefficient for collision - 1.0 = full elastic response, 0.0 = full absorption
+	
 	// Create a renderable associated to the dynamic system
 	// This renderable is responsible for calling DynamicSystem::computeSimulationStep() in the animate() function
 	// It is also responsible for some of the key/mouse events
-    DynamicSystemRenderablePtr systemRenderable = std::make_shared<DynamicSystemRenderable>(system);
-    viewer.addRenderable(systemRenderable);
+    systemRenderable = std::make_shared<DynamicSystemRenderable>(dynSystem);
+    viewer->addRenderable(systemRenderable);
 
-    kart_game_light(viewer);
-    kart_game_borders(viewer,system,systemRenderable);
-    kart_game_road(viewer);
+    kart_game_light();
+    kart_game_borders();
+    getRoad(flatShader, *viewer);
 
-    TexturedLightedMeshRenderablePtr    meshKart = createTexturedKartFromMesh       (texShader);
-    TexturedLightedMeshRenderablePtr    meshKar2 = createTexturedKartFromMesh       (texShader);
-    TexturedLightedMeshRenderablePtr    meshKar3 = createTexturedKartFromMesh       (texShader);
-    TexturedLightedMeshRenderablePtr    meshKar4 = createTexturedKartFromMesh       (texShader);
-    CubeRenderablePtr       			primKart = createKartFromPrimitives         (parentProg);
-    CylinderRenderablePtr   			primChar = createCharacterFromPrimitives    (parentProg);
+    TexturedLightedMeshRenderablePtr    meshKart = createTexturedKartFromMesh       ();
+    TexturedLightedMeshRenderablePtr    meshKar2 = createTexturedKartFromMesh       ();
+    TexturedLightedMeshRenderablePtr    meshKar3 = createTexturedKartFromMesh       ();
+    TexturedLightedMeshRenderablePtr    meshKar4 = createTexturedKartFromMesh       ();
+    CubeRenderablePtr       			primKart = createKartFromPrimitives         ();
+    CylinderRenderablePtr   			primChar = createCharacterFromPrimitives    ();
 
-    viewer.addRenderable(meshKart);
-    viewer.addRenderable(meshKar2);
-    viewer.addRenderable(meshKar3);
-    viewer.addRenderable(meshKar4);
-    //viewer.addRenderable(primKart);
-    //viewer.addRenderable(primChar);
+    viewer->addRenderable(meshKart);
+    viewer->addRenderable(meshKar2);
+    viewer->addRenderable(meshKar3);
+    viewer->addRenderable(meshKar4);
+    //viewer->addRenderable(primKart);
+    //viewer->addRenderable(primChar);
 
 	// Place the camera
-	viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+	viewer->getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
 
-	viewer.startAnimation();
-	viewer.setAnimationLoop(true, 4.0);
+	viewer->startAnimation();
+	viewer->setAnimationLoop(true, 4.0);
 }
 
-TexturedLightedMeshRenderablePtr createTexturedKartFromMesh(ShaderProgramPtr texShader) {
-	std::string tex[]={"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
+Scene::~Scene() {}
+
+TexturedLightedMeshRenderablePtr Scene::createTexturedKartFromMesh() {
+	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
     TexturedLightedMeshRenderablePtr kart = std::make_shared<TexturedLightedMeshRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
     kartCount++;
     kart->setMaterial(Material::Pearl());
@@ -90,12 +89,12 @@ TexturedLightedMeshRenderablePtr createTexturedKartFromMesh(ShaderProgramPtr tex
     return kart;
 }
 
-CubeRenderablePtr createKartFromPrimitives(ShaderProgramPtr parentProg) {
-    CubeRenderablePtr       root = std::make_shared<CubeRenderable>(parentProg);
-    CylinderRenderablePtr   wheel_fl = std::make_shared<CylinderRenderable>(parentProg);
-    CylinderRenderablePtr   wheel_fr = std::make_shared<CylinderRenderable>(parentProg);
-    CylinderRenderablePtr   wheel_hl = std::make_shared<CylinderRenderable>(parentProg);
-    CylinderRenderablePtr   wheel_hr = std::make_shared<CylinderRenderable>(parentProg);
+CubeRenderablePtr Scene::createKartFromPrimitives() {
+    CubeRenderablePtr       root = std::make_shared<CubeRenderable>(flatShader);
+    CylinderRenderablePtr   wheel_fl = std::make_shared<CylinderRenderable>(flatShader);
+    CylinderRenderablePtr   wheel_fr = std::make_shared<CylinderRenderable>(flatShader);
+    CylinderRenderablePtr   wheel_hl = std::make_shared<CylinderRenderable>(flatShader);
+    CylinderRenderablePtr   wheel_hr = std::make_shared<CylinderRenderable>(flatShader);
 
     glm::mat4 rootParentTransform;
     root->setParentTransform(rootParentTransform);
@@ -126,34 +125,34 @@ CubeRenderablePtr createKartFromPrimitives(ShaderProgramPtr parentProg) {
     return root;
 }
 
-CylinderRenderablePtr createCharacterFromPrimitives(ShaderProgramPtr parentProg) {
+CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
 
     // The indentation reflects the tree-like structure of the character.
-    CylinderRenderablePtr   chest                           = std::make_shared<CylinderRenderable>  (parentProg);
-    CylinderRenderablePtr       neck                        = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr         head                        = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr         shoulder_l                  = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr           upperArm_l              = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                 elbow_l             = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr                   forearm_l       = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                         wrist_l     = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr                             hand_l  = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr         shoulder_r                  = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr           upperArm_r              = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                 elbow_r             = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr                   forearm_r       = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                         wrist_r     = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr                             hand_r  = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr       upperLeg_r                  = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr             knee_r                  = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr               calf_r              = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                     ankle_r         = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr                         foot_r      = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr       upperLeg_l                  = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr             knee_l                  = std::make_shared<SphereRenderable>    (parentProg);
-    CylinderRenderablePtr               calf_l              = std::make_shared<CylinderRenderable>  (parentProg);
-    SphereRenderablePtr                     ankle_l         = std::make_shared<SphereRenderable>    (parentProg);
-    SphereRenderablePtr                         foot_l      = std::make_shared<SphereRenderable>    (parentProg);
+    CylinderRenderablePtr   chest                           = std::make_shared<CylinderRenderable>  (flatShader);
+    CylinderRenderablePtr       neck                        = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr         head                        = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr         shoulder_l                  = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr           upperArm_l              = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                 elbow_l             = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr                   forearm_l       = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                         wrist_l     = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr                             hand_l  = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr         shoulder_r                  = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr           upperArm_r              = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                 elbow_r             = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr                   forearm_r       = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                         wrist_r     = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr                             hand_r  = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr       upperLeg_r                  = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr             knee_r                  = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr               calf_r              = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                     ankle_r         = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr                         foot_r      = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr       upperLeg_l                  = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr             knee_l                  = std::make_shared<SphereRenderable>    (flatShader);
+    CylinderRenderablePtr               calf_l              = std::make_shared<CylinderRenderable>  (flatShader);
+    SphereRenderablePtr                     ankle_l         = std::make_shared<SphereRenderable>    (flatShader);
+    SphereRenderablePtr                         foot_l      = std::make_shared<SphereRenderable>    (flatShader);
 
     // Scale vectors (see ./struct/Personnage)
     glm::vec3 chestS    (0.3,  0.25, 0.6);
@@ -256,34 +255,30 @@ CylinderRenderablePtr createCharacterFromPrimitives(ShaderProgramPtr parentProg)
     return chest;
 }
 
-glm::mat4 translate(RenderablePtr obj, double x, double y, double z) {
+glm::mat4 Scene::translate(RenderablePtr obj, double x, double y, double z) {
     return translate(obj, glm::vec3(x, y, z));
 }
 
-glm::mat4 rotate(RenderablePtr obj, float alpha, double x, double y, double z) {
+glm::mat4 Scene::rotate(RenderablePtr obj, float alpha, double x, double y, double z) {
     return rotate(obj, alpha, glm::vec3(x, y, z));
 }
 
-glm::mat4 scale(RenderablePtr obj, double x, double y, double z) {
+glm::mat4 Scene::scale(RenderablePtr obj, double x, double y, double z) {
     return scale(obj, glm::vec3(x, y, z));
 }
 
-glm::mat4 translate(RenderablePtr obj, glm::vec3 vec) {
+glm::mat4 Scene::translate(RenderablePtr obj, glm::vec3 vec) {
     return glm::translate(obj->getModelMatrix(), vec);
 }
 
-glm::mat4 rotate(RenderablePtr obj, float alpha, glm::vec3 vec) {
+glm::mat4 Scene::rotate(RenderablePtr obj, float alpha, glm::vec3 vec) {
     return glm::rotate(obj->getModelMatrix(), alpha, vec);
 }
 
-glm::mat4 scale(RenderablePtr obj, glm::vec3 vec) {
+glm::mat4 Scene::scale(RenderablePtr obj, glm::vec3 vec) {
     return glm::scale(obj->getModelMatrix(), vec);
 }
-void kart_game_light(Viewer& viewer) {
-  // Default shader
-  ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-  viewer.addShaderProgram(flatShader);
-
+void Scene::kart_game_light() {
   // Temporary variables
   glm::mat4 localTransformation(1.0);
 
@@ -292,42 +287,25 @@ void kart_game_light(Viewer& viewer) {
   glm::vec3 d_ambient(1.0, 1.0, 1.0), d_diffuse(1.0, 1.0, 0.8), d_specular(1.0, 1.0, 1.0);
   DirectionalLightPtr directionalLight = std::make_shared<DirectionalLight>(d_direction, d_ambient, d_diffuse, d_specular);
 
-  //Add a renderable to display the light and control it via mouse/key event
+  // Add a renderable to display the light and control it via mouse/key event
   glm::vec3 lightPosition(0.0,0.0,5.0);
   DirectionalLightRenderablePtr directionalLightRenderable = std::make_shared<DirectionalLightRenderable>(flatShader, directionalLight, lightPosition);
   localTransformation = glm::scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5));
   directionalLightRenderable->setLocalTransform(localTransformation);
-  viewer.setDirectionalLight(directionalLight);
-  viewer.addRenderable(directionalLightRenderable);
+  viewer->setDirectionalLight(directionalLight);
+  viewer->addRenderable(directionalLightRenderable);
 }
 
-void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable) {
-  //Temporary variables
+void Scene::kart_game_borders() {
+  // Temporary variables
   glm::mat4 parentTransformation(1.0);
   std::string filename;
   MaterialPtr pearl = Material::Pearl();
 
-  //Textured shader
-  ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
-  viewer.addShaderProgram(texShader);
-
-  ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-  viewer.addShaderProgram(flatShader);
-
-// collision ***********************************
-
-  // Activate collision detection
-  system->setCollisionsDetection(true);
-
-  // Initialize the restitution coefficient for collision
-  // 1.0 = full elastic response
-  // 0.0 = full absorption
-  system->setRestitution(0.8f);
-
   // Textured plane
   glm::vec3 p1(-25.0, -25.0, -0.2), p2(25.0, -25.0, -0.2), p3(25.0, 25.0, -0.2), p4(-25.0, 25.0, -0.2);
   PlanePtr plane = std::make_shared<Plane>(p1, p2, p3);
-  system->addPlaneObstacle(plane);
+  dynSystem->addPlaneObstacle(plane);
   filename = "./../textures/grass_texture.png";
   TexturedPlaneRenderablePtr ground = std::make_shared<TexturedPlaneRenderable>(texShader, filename,0);
   parentTransformation = glm::scale(glm::mat4(1.0), glm::vec3(10.0, 10.0, 10.0));
@@ -342,7 +320,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p2 = glm::vec3(25.0, 25.0,  0.0);
   p3 = glm::vec3(25.0, 25.0,  5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
-  system->addPlaneObstacle(plane);
+  dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall1 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
   wall1->setParentTransform(parentTransformation);
@@ -353,7 +331,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p2 = glm::vec3(-25.0, 25.0,  0.0);
   p3 = glm::vec3(-25.0, 25.0,  5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
-  system->addPlaneObstacle(plane);
+  dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall2 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::translate(glm::mat4(1.0), glm::vec3(-25.0, 0.0, 0.0));
   wall2->setParentTransform(parentTransformation);
@@ -364,7 +342,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p2 = glm::vec3(25.0,  25.0, 0.0);
   p3 = glm::vec3(25.0,  25.0, 5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
-  system->addPlaneObstacle(plane);
+  dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall3 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::rotate(glm::mat4(1.0), float (M_PI/2), glm::vec3(0.0, 0.0, 1.0));
   parentTransformation*= glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
@@ -376,7 +354,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p2 = glm::vec3(25.0,  -25.0, 0.0);
   p3 = glm::vec3(25.0,  -25.0, 5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
-  system->addPlaneObstacle(plane);
+  dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall4 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::rotate(glm::mat4(1.0), float (-M_PI/2), glm::vec3(0.0,0.0,1.0));
   parentTransformation*= glm::translate(glm::mat4(1.0), glm::vec3(25.0,0.0,0.0));
@@ -385,32 +363,12 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   HierarchicalRenderable::addChild(systemRenderable, wall4);
 
   filename =  "./../textures/michelin.jpeg";
-  TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, filename,2 );
+  TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, filename, 2);
   ad->setMaterial(pearl);
-  viewer.addRenderable(ad);
-
-  glm::vec3 px,pv;
-  float pm, pr;
-  px = glm::vec3(0.0,0.0,10.0);
-  pv = glm::vec3(0.0,0.0,0.0);
-  pr = 1.;
-  pm = 5.;
-  ParticlePtr particle = std::make_shared<Particle>(px, pv, pm, pr);
-  system->addParticle(particle);
-  ParticleRenderablePtr particleRenderable = std::make_shared<ParticleRenderable>(flatShader, particle);
-  HierarchicalRenderable::addChild(systemRenderable, particleRenderable);
-
+  viewer->addRenderable(ad);
 
   // Initialize a force field that apply to all the particles of the system to simulate gravity
   // Add it to the system as a force field
-  ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(system->getParticles(), glm::vec3{0,0,-10});
-  system->addForceField(gravityForceField);
-}
-
-void kart_game_road(Viewer& viewer) {
-  // Default shader
-  ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-  viewer.addShaderProgram(flatShader);
-
-  getRoad(flatShader, viewer);
+  ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getParticles(), glm::vec3{0,0,-10});
+  dynSystem->addForceField(gravityForceField);
 }

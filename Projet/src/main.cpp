@@ -4,8 +4,8 @@
 
 int main(int argc, char* argv[]) {
     Viewer viewer(1280, 720);
-
-    initialize_scene(viewer);
+	
+	Scene gameScene(&viewer);
 
     while(viewer.isRunning()) {
         viewer.handleEvent();
