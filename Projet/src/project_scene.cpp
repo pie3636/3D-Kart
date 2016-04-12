@@ -39,7 +39,7 @@ void initialize_scene(Viewer& viewer) {
 
     ShaderProgramPtr    parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
     viewer.addShaderProgram(parentProg);
-    
+
     ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
     viewer.addShaderProgram(texShader);
 
@@ -279,7 +279,6 @@ glm::mat4 rotate(RenderablePtr obj, float alpha, glm::vec3 vec) {
 glm::mat4 scale(RenderablePtr obj, glm::vec3 vec) {
     return glm::scale(obj->getModelMatrix(), vec);
 }
-
 void kart_game_light(Viewer& viewer) {
   // Default shader
   ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
@@ -330,7 +329,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   PlanePtr plane = std::make_shared<Plane>(p1, p2, p3);
   system->addPlaneObstacle(plane);
   filename = "./../textures/grass_texture.png";
-  TexturedPlaneRenderablePtr ground = std::make_shared<TexturedPlaneRenderable>(texShader, filename,true);
+  TexturedPlaneRenderablePtr ground = std::make_shared<TexturedPlaneRenderable>(texShader, filename,0);
   parentTransformation = glm::scale(glm::mat4(1.0), glm::vec3(10.0, 10.0, 10.0));
   ground->setParentTransform(parentTransformation);
   ground->setMaterial(pearl);
@@ -344,7 +343,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p3 = glm::vec3(25.0, 25.0,  5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   system->addPlaneObstacle(plane);
-  TexturedPlaneRenderablePtr wall1 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,false);
+  TexturedPlaneRenderablePtr wall1 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
   wall1->setParentTransform(parentTransformation);
   wall1->setMaterial(pearl);
@@ -355,7 +354,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p3 = glm::vec3(-25.0, 25.0,  5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   system->addPlaneObstacle(plane);
-  TexturedPlaneRenderablePtr wall2 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,false);
+  TexturedPlaneRenderablePtr wall2 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::translate(glm::mat4(1.0), glm::vec3(-25.0, 0.0, 0.0));
   wall2->setParentTransform(parentTransformation);
   wall2->setMaterial(pearl);
@@ -366,7 +365,7 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p3 = glm::vec3(25.0,  25.0, 5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   system->addPlaneObstacle(plane);
-  TexturedPlaneRenderablePtr wall3 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,false);
+  TexturedPlaneRenderablePtr wall3 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation= glm::rotate(glm::mat4(1.0), float (M_PI/2), glm::vec3(0.0, 0.0, 1.0));
   parentTransformation*= glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
   wall3->setParentTransform(parentTransformation);
@@ -378,25 +377,29 @@ void kart_game_borders(Viewer& viewer , DynamicSystemPtr& system, DynamicSystemR
   p3 = glm::vec3(25.0,  -25.0, 5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   system->addPlaneObstacle(plane);
-  TexturedPlaneRenderablePtr wall4 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,false);
+  TexturedPlaneRenderablePtr wall4 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::rotate(glm::mat4(1.0), float (-M_PI/2), glm::vec3(0.0,0.0,1.0));
   parentTransformation*= glm::translate(glm::mat4(1.0), glm::vec3(25.0,0.0,0.0));
   wall4->setParentTransform(parentTransformation);
   wall4->setMaterial(pearl);
   HierarchicalRenderable::addChild(systemRenderable, wall4);
 
-  /*
+  filename =  "./../textures/michelin.jpeg";
+  TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, filename,2 );
+  ad->setMaterial(pearl);
+  viewer.addRenderable(ad);
+
   glm::vec3 px,pv;
   float pm, pr;
-  px = glm::vec3(20.0,0.0,3.0);
-  pv = glm::vec3(10.0,0.0,0.0);
+  px = glm::vec3(0.0,0.0,10.0);
+  pv = glm::vec3(0.0,0.0,0.0);
   pr = 1.;
   pm = 5.;
   ParticlePtr particle = std::make_shared<Particle>(px, pv, pm, pr);
   system->addParticle(particle);
   ParticleRenderablePtr particleRenderable = std::make_shared<ParticleRenderable>(flatShader, particle);
   HierarchicalRenderable::addChild(systemRenderable, particleRenderable);
-  */
+
 
   // Initialize a force field that apply to all the particles of the system to simulate gravity
   // Add it to the system as a force field

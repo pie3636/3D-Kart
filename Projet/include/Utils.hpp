@@ -50,7 +50,8 @@ void getUnitSphere(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& no
 void getTorus(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, const float& a, const float& c, const unsigned int& strips, const unsigned int& slices);
 void getUnitCone(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, const unsigned int &strips, const unsigned int& slices);
 void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
-void getWall(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
+void getWalls(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
+void getAds(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
 void getRoad(ShaderProgramPtr flatShader, Viewer& viewer);
 
 #endif //UTILS

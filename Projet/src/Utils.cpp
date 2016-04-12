@@ -522,7 +522,7 @@ void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normal
       normals.push_back(glm::vec3(0.0,0.0,1.0));
 }
 
-void getWall(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
+void getWalls(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
 {
 
     for (int i=0; i<10; i++) {
@@ -544,6 +544,27 @@ void getWall(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals,
       for (int i=0; i<6; i++)
         normals.push_back(glm::vec3(1.0,0.0,0.0));
     }
+}
+
+void getAds(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
+{
+
+      positions.push_back(glm::vec3(-5.,24.9,0.));
+      positions.push_back(glm::vec3(5.,24.9,0.));
+      positions.push_back(glm::vec3(5.,24.9,5.));
+      texCoords.push_back(glm::vec2(0.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,1.0));
+
+      positions.push_back(glm::vec3(-5.,24.9,0.));
+      positions.push_back(glm::vec3(5.,24.9,5.));
+      positions.push_back(glm::vec3(-5.,24.9,5.));
+      texCoords.push_back(glm::vec2(0.0,0.0));
+      texCoords.push_back(glm::vec2(1.0,1.0));
+      texCoords.push_back(glm::vec2(0.0,1.0));
+
+      for (int i=0; i<6; i++)
+        normals.push_back(glm::vec3(0.0,-1.0,0.0));
 }
 
 void getRoad(ShaderProgramPtr flatShader, Viewer& viewer){
