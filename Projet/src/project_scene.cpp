@@ -86,7 +86,7 @@ TexturedLightedMeshRenderablePtr createTexturedKartFromMesh(ShaderProgramPtr tex
     kartCount++;
     kart->setMaterial(Material::Pearl());
     double scaleFactor = 0.5;
-    kart->setParentTransform(translate(kart, 0, 0, 0.41) * rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, M_PI, 0, 1, 0) * scale(kart, scaleFactor, scaleFactor, scaleFactor) * translate(kart, 10 * kartCount, 0, 0));
+    kart->setParentTransform(translate(kart, 3 * kartCount, 0, 1) * rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, M_PI, 0, 1, 0) * scale(kart, scaleFactor, scaleFactor, scaleFactor));
     return kart;
 }
 
