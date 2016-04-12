@@ -16,7 +16,7 @@ void initialize_practical_07_scene( Viewer& viewer )
 
     //Default shader
     ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-    viewer.addShaderProgram( flatShader );
+    viewer.addShaderProgram(flatShader);
 
     //Add a 3D frame to the viewer
     FrameRenderablePtr frame = std::make_shared<FrameRenderable>(flatShader);

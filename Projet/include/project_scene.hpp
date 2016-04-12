@@ -6,7 +6,7 @@
 #include "CubeRenderable.hpp"
 #include "CylinderRenderable.hpp"
 #include "MeshRenderable.hpp"
-#include "MeshRenderable.hpp"
+#include "texturing/TexturedLightedMeshRenderable.hpp"
 
 #include "./dynamics/DynamicSystem.hpp"
 #include "./dynamics/DynamicSystemRenderable.hpp"
@@ -17,9 +17,10 @@ static void kart_game_light( Viewer& viewer ) ;
 static void kart_game_borders( Viewer& viewer , DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable);
 static void kart_game_road( Viewer& viewer );
 
-static MeshRenderablePtr        createKartFromMesh              (ShaderProgramPtr parentProg);
-static CubeRenderablePtr        createKartFromPrimitives        (ShaderProgramPtr parentProg);
-static CylinderRenderablePtr    createCharacterFromPrimitives   (ShaderProgramPtr parentProg);
+static TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      (ShaderProgramPtr texShader);
+static MeshRenderablePtr 				createKartFromMesh      		(ShaderProgramPtr parentProg);
+static CubeRenderablePtr        		createKartFromPrimitives        (ShaderProgramPtr parentProg);
+static CylinderRenderablePtr    		createCharacterFromPrimitives   (ShaderProgramPtr parentProg);
 
 static glm::mat4 translate  (RenderablePtr obj, double x, double y, double z);
 static glm::mat4 rotate     (RenderablePtr obj, float alpha, double x, double y, double z);

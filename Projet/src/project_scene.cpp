@@ -33,8 +33,12 @@ void initialize_scene(Viewer& viewer) {
 
     std::string         vShader = "./../shaders/flatVertex.glsl";
     std::string         fShader = "./../shaders/flatFragment.glsl";
+
     ShaderProgramPtr    parentProg = std::make_shared<ShaderProgram>(vShader, fShader);
     viewer.addShaderProgram(parentProg);
+    
+    ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
+    viewer.addShaderProgram(texShader);
 
     // Initialize a dynamic system (Solver, Time step, Restitution coefficient)
     DynamicSystemPtr system = std::make_shared<DynamicSystem>();
@@ -49,27 +53,42 @@ void initialize_scene(Viewer& viewer) {
     viewer.addRenderable(systemRenderable);
 
     kart_game_light(viewer);
-    kart_game_borders(viewer,system,systemRenderable);
-    kart_game_road(viewer);
-	//kart_game_car(viewer);
+    //kart_game_borders(viewer,system,systemRenderable);
+    //kart_game_road(viewer);
 
-    MeshRenderablePtr       meshKart = createKartFromMesh               (parentProg);
-    CubeRenderablePtr       primKart = createKartFromPrimitives         (parentProg);
-    CylinderRenderablePtr   primChar = createCharacterFromPrimitives    (parentProg);
+    MeshRenderablePtr    				meshKar2 = createKartFromMesh               (parentProg);
+    TexturedLightedMeshRenderablePtr    meshKart = createTexturedKartFromMesh       (texShader);
+    CubeRenderablePtr       			primKart = createKartFromPrimitives         (parentProg);
+    CylinderRenderablePtr   			primChar = createCharacterFromPrimitives    (parentProg);
 
-    //viewer.addRenderable(meshKart);
+	//viewer.addRenderable(meshKar2);
+    viewer.addRenderable(meshKart);
     //viewer.addRenderable(primKart);
     //viewer.addRenderable(primChar);
 
 	// Place the camera
-	viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 60 ), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+	viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, -6, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
 
 	viewer.startAnimation();
 	viewer.setAnimationLoop(true, 4.0);
 }
 
+TexturedLightedMeshRenderablePtr createTexturedKartFromMesh(ShaderProgramPtr texShader) {
+    
+    TexturedLightedMeshRenderablePtr kart = std::make_shared<TexturedLightedMeshRenderable>(texShader, "../meshes/Kart3.obj", "../textures/wood.jpg");
+    kart->setMaterial(Material::Pearl());
+    glm::mat4 parentTransformation;
+    parentTransformation = glm::translate( glm::mat4(1.0), glm::vec3( 0, 4, 1.0 ) );
+    parentTransformation = glm::rotate( parentTransformation, float(M_PI_2), glm::vec3(1,0,0) );
+    parentTransformation = glm::scale( parentTransformation, glm::vec3(2,2,2));
+    kart->setParentTransform( parentTransformation );
+    /*double scaleFactor = 0.5;
+    kart->setParentTransform(translate(kart, 0, 0, 0.41) * rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, M_PI, 0, 1, 0) * scale(kart, scaleFactor, scaleFactor, scaleFactor));*/
+    return kart;
+}
+
 MeshRenderablePtr createKartFromMesh(ShaderProgramPtr parentProg) {
-    MeshRenderablePtr kart = std::make_shared<MeshRenderable>(parentProg, "../meshes/Kart2.obj");
+	MeshRenderablePtr kart = std::make_shared<MeshRenderable>(parentProg, "../meshes/Kart.obj");
     double scaleFactor = 0.5;
     kart->setParentTransform(translate(kart, 0, 0, 0.41) * rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, M_PI, 0, 1, 0) * scale(kart, scaleFactor, scaleFactor, scaleFactor));
     return kart;
