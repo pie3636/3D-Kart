@@ -18,7 +18,6 @@ static void kart_game_borders( Viewer& viewer , DynamicSystemPtr& system, Dynami
 static void kart_game_road( Viewer& viewer );
 
 static TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      (ShaderProgramPtr texShader);
-static MeshRenderablePtr 				createKartFromMesh      		(ShaderProgramPtr parentProg);
 static CubeRenderablePtr        		createKartFromPrimitives        (ShaderProgramPtr parentProg);
 static CylinderRenderablePtr    		createCharacterFromPrimitives   (ShaderProgramPtr parentProg);
 
