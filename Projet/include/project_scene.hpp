@@ -17,6 +17,7 @@ class Scene {
   		~Scene();
 
   private:
+  		const double kartScaleFactor = 0.5;
   		static int kartCount;
   		Viewer *viewer;
   		ShaderProgramPtr flatShader;
@@ -25,19 +26,26 @@ class Scene {
   		DynamicSystemRenderablePtr systemRenderable;
   		
   		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
-		CubeRenderablePtr        		 createKartFromPrimitives        ();
 		CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
 		
 		void kart_game_light	();
 		void kart_game_borders	();
   		
-		glm::mat4 translate  (RenderablePtr obj, double x, double y, double z);
-		glm::mat4 rotate     (RenderablePtr obj, float alpha, double x, double y, double z);
-		glm::mat4 scale      (RenderablePtr obj, double x, double y, double z);
+		glm::mat4 translate  (HierarchicalRenderablePtr obj, double x, double y, double z);
+		glm::mat4 rotate     (HierarchicalRenderablePtr obj, float alpha, double x, double y, double z);
+		glm::mat4 scale      (HierarchicalRenderablePtr obj, double x, double y, double z);
 
-		glm::mat4 translate  (RenderablePtr obj, glm::vec3 vec);
-		glm::mat4 rotate     (RenderablePtr obj, float alpha, glm::vec3 vec);
-		glm::mat4 scale      (RenderablePtr obj, glm::vec3 vec);
+		glm::mat4 translate  (HierarchicalRenderablePtr obj, glm::vec3 vec);
+		glm::mat4 rotate     (HierarchicalRenderablePtr obj, float alpha, glm::vec3 vec);
+		glm::mat4 scale      (HierarchicalRenderablePtr obj, glm::vec3 vec);
+		
+		glm::mat4 translateParent    (HierarchicalRenderablePtr obj, double x, double y, double z);
+		glm::mat4 rotateParent       (HierarchicalRenderablePtr obj, float alpha, double x, double y, double z);
+		glm::mat4 scaleParent        (HierarchicalRenderablePtr obj, double x, double y, double z);
+
+		glm::mat4 translateParent    (HierarchicalRenderablePtr obj, glm::vec3 vec);
+		glm::mat4 rotateParent       (HierarchicalRenderablePtr obj, float alpha, glm::vec3 vec);
+		glm::mat4 scaleParent        (HierarchicalRenderablePtr obj, glm::vec3 vec);
 };
 
 #endif // PROJECT_SCENE_H
