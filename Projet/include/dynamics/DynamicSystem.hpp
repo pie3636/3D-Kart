@@ -5,13 +5,13 @@
 
 #include "Collision.hpp"
 #include "ForceField.hpp"
-#include "Particle.hpp"
+#include "Kart.hpp"
 #include "Solver.hpp"
 #include "../Plane.hpp"
 
 /**@brief A dynamic system.
  *
- * This class represents a dynamic system made of particles, force fields and
+ * This class represents a dynamic system made of Karts, force fields and
  * fixed planes obstacles and that handle collisions. If you want to, you can
  * replace fixed planes obstacles by triangle obstacles: you will be able to
  * model more kind of obstacles. However, this would require a spatial optimization
@@ -20,29 +20,29 @@
 class DynamicSystem
 {
 private:
-  /**@brief The set of particles managed by this system.
+  /**@brief The set of Karts managed by this system.
    *
-   * The particles managed by this dynamic system. Their positions
+   * The Karts managed by this dynamic system. Their positions
    * and velocities will be updated thanks to the solver, taking into
    * account the force field applied to them.
    */
-    std::vector<ParticlePtr> m_particles;
+    std::vector<KartPtr> m_Karts;
 
-    /**@brief The set of force fields influencing particles of this system.
+    /**@brief The set of force fields influencing Karts of this system.
      *
-     * The force fields that influence the particles of this system.
+     * The force fields that influence the Karts of this system.
      */
     std::vector<ForceFieldPtr> m_forceFields;
 
     /**@brief The set of fixed plane obstacles.
      *
-     * The set of obstacles that would repel the particles after collisions.
+     * The set of obstacles that would repel the Karts after collisions.
      */
     std::vector<PlanePtr> m_planeObstacles;
 
     /**@brief The solver of the dynamic system.
      *
-     * Solver of the dynamic system: update the particles positions and
+     * Solver of the dynamic system: update the Karts positions and
      * velocities according to the force fields applied.
      */
     SolverPtr m_solver;
@@ -81,22 +81,22 @@ public:
     ~DynamicSystem();
     DynamicSystem();
 
-    /**@brief Add a particle to the system.
+    /**@brief Add a Kart to the system.
      *
-     * Add a particle to this dynamic system.
-     * @param p The particle to add to this system.
+     * Add a Kart to this dynamic system.
+     * @param p The Kart to add to this system.
      */
-    void addParticle(ParticlePtr p);
+    void addKart(KartPtr p);
     /**@brief Add a force field to the system.
      *
-     * Add a force field to this dynamic system to influence particles.
+     * Add a force field to this dynamic system to influence Karts.
      * @param forceField The force field to add to this system.
      */
     void addForceField(ForceFieldPtr forceField);
     /**@brief Add a plane obstacle to the system.
      *
      * Add an infinite plane obstacle to the dynamic system. If collisions
-     * are activated, this plane will repel particles.
+     * are activated, this plane will repel Karts.
      * @param planeObstacle The plane to add to this system.
      */
     void addPlaneObstacle(PlanePtr planeObstacle);
@@ -127,18 +127,18 @@ public:
      */
     void setCollisionsDetection(bool onOff);
 
-    /**@brief Access to the set of particles of this system.
+    /**@brief Access to the set of Karts of this system.
      *
-     * Get the set of particles of this dynamic system.
-     * @return The set of particles of this system.
+     * Get the set of Karts of this dynamic system.
+     * @return The set of Karts of this system.
      */
-    const std::vector<ParticlePtr>& getParticles() const;
-    /**@brief Set the particles of this system.
+    const std::vector<KartPtr>& getKarts() const;
+    /**@brief Set the Karts of this system.
      *
-     * Define a new set of particles for this dynamic system.
-     * @param particles The new set of particles of this system.
+     * Define a new set of Karts for this dynamic system.
+     * @param Karts The new set of Karts of this system.
      */
-    void setParticles(const std::vector<ParticlePtr> & particles);
+    void setKarts(const std::vector<KartPtr> & Karts);
 
     /**@brief Access to the force fields of this system.
      *
@@ -190,7 +190,7 @@ public:
 
     /**@brief Clear the dynamic system.
      *
-     * Clear the system, i.e. empty the particles, force fields and plane obstacles.
+     * Clear the system, i.e. empty the Karts, force fields and plane obstacles.
      */
     void clear();
 
@@ -208,4 +208,3 @@ std::ostream& operator<<(std::ostream& os, const DynamicSystemPtr& system);
 
 
 #endif
-

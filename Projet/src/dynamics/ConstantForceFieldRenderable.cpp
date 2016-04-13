@@ -12,13 +12,13 @@ ConstantForceFieldRenderable::ConstantForceFieldRenderable(ShaderProgramPtr shad
     m_cBuffer(0)
 {
     //Create geometric data
-    const std::vector<ParticlePtr>& particles = m_forceField->getParticles();
-    m_positions.resize(2.0*particles.size());
-    m_colors.resize(2.0*particles.size());
-    m_normals.resize(2.0*particles.size());
+    const std::vector<KartPtr>& Karts = m_forceField->getKarts();
+    m_positions.resize(2.0*Karts.size());
+    m_colors.resize(2.0*Karts.size());
+    m_normals.resize(2.0*Karts.size());
 
-    int i=0; 
-    for(ParticlePtr p : particles)
+    int i=0;
+    for(KartPtr p : Karts)
     {
         m_positions[2*i+0] = p->getPosition();
         m_positions[2*i+1] = p->getPosition() + 0.1f*m_forceField->getForce();
@@ -45,13 +45,13 @@ ConstantForceFieldRenderable::ConstantForceFieldRenderable(ShaderProgramPtr shad
 
 void ConstantForceFieldRenderable::do_draw()
 {
-    //Update vertices positions from particle's positions
-    const std::vector<ParticlePtr>& particles = m_forceField->getParticles();
-    m_positions.resize(2.0*particles.size());
-    m_colors.resize(2.0*particles.size());
-    m_normals.resize(2.0*particles.size());
-    int i=0; 
-    for(ParticlePtr p : particles)
+    //Update vertices positions from Kart's positions
+    const std::vector<KartPtr>& Karts = m_forceField->getKarts();
+    m_positions.resize(2.0*Karts.size());
+    m_colors.resize(2.0*Karts.size());
+    m_normals.resize(2.0*Karts.size());
+    int i=0;
+    for(KartPtr p : Karts)
     {
         m_positions[2*i+0] = p->getPosition();
         m_positions[2*i+1] = p->getPosition() + 0.1f*m_forceField->getForce();

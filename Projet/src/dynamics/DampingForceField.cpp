@@ -1,27 +1,27 @@
 #include "./../../include/dynamics/DampingForceField.hpp"
 
-DampingForceField::DampingForceField(const std::vector<ParticlePtr> particles, const float damping)
+DampingForceField::DampingForceField(const std::vector<KartPtr> Karts, const float damping)
 {
-    m_particles = particles;
+    m_Karts = Karts;
     m_damping = damping;
 }
 
 void DampingForceField::do_addForce()
 {
-    for(ParticlePtr p : m_particles)
+    for(KartPtr p : m_Karts)
     {
         p->incrForce(-m_damping*p->getVelocity());
     }
 }
 
-const std::vector<ParticlePtr> DampingForceField::getParticles()
+const std::vector<KartPtr> DampingForceField::getKarts()
 {
-    return m_particles;
+    return m_Karts;
 }
 
-void DampingForceField::setParticles(const std::vector<ParticlePtr>& particles)
+void DampingForceField::setKarts(const std::vector<KartPtr>& Karts)
 {
-    m_particles = particles;
+    m_Karts = Karts;
 }
 
 const float& DampingForceField::getDamping()

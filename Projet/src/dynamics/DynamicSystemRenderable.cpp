@@ -43,11 +43,11 @@ void DynamicSystemRenderable::do_keyPressedEvent(sf::Event &e)
     {
         m_system->setCollisionsDetection( !m_system->getCollisionDetection() );
     }
-    else if(e.key.code == sf::Keyboard::T ) //Tilt particles
+    else if(e.key.code == sf::Keyboard::T ) //Tilt Karts
     {
         srand(time(0));
-        // "tilt" all particles randomly around their position
-        for(const ParticlePtr& p : m_system->getParticles()) {
+        // "tilt" all Karts randomly around their position
+        for(const KartPtr& p : m_system->getKarts()) {
             glm::vec3 pos = p->getPosition();
             // tilt all positions
             pos += glm::ballRand(1.0f);
@@ -56,7 +56,7 @@ void DynamicSystemRenderable::do_keyPressedEvent(sf::Event &e)
     }
     else if( e.key.code == sf::Keyboard::F5 ) //Reset the simulation
     {
-        for( const ParticlePtr& p : m_system->getParticles() )
+        for( const KartPtr& p : m_system->getKarts() )
         {
             p->restart();
         }

@@ -40,7 +40,7 @@ private:
     /**@brief Update the dynamic system.
      *
      * This function will update the managed dynamic system, i.e. compute the
-     * new positions and velocities of the particles. This update will be
+     * new positions and velocities of the Karts. This update will be
      * actually done only if the last time the system was updated was more
      * than m_sytem->m_dt ago. This allows us to update the dynamic system
      * at the specified time interval.
@@ -50,8 +50,8 @@ private:
     /**@brief Handle key pressed.
      *
      * If the key A is pressed, the collision detected is toggled.
-     * If the key T is pressed, particles are titled in random directions.
-     * If the key F5 is pressed, the particles are restarted.
+     * If the key T is pressed, Karts are titled in random directions.
+     * If the key F5 is pressed, the Karts are restarted.
      * Other key pressed are transmitted to the children of this renderable.
      * @param e A key pressed event.
      */
@@ -79,4 +79,3 @@ private:
 typedef std::shared_ptr<DynamicSystemRenderable> DynamicSystemRenderablePtr;
 
 #endif
-

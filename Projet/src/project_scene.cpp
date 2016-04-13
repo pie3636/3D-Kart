@@ -7,16 +7,11 @@
 #include "../include/lighting/DirectionalLightRenderable.hpp"
 #include "../include/texturing/TexturedLightedMeshRenderable.hpp"
 
-#include "../include/dynamics/DampingForceField.hpp"
 #include "../include/dynamics/ConstantForceField.hpp"
-#include "../include/dynamics/SpringForceField.hpp"
 #include "../include/dynamics/EulerExplicitSolver.hpp"
 
-#include "../include/dynamics/ParticleRenderable.hpp"
-#include "../include/dynamics/ParticleListRenderable.hpp"
+
 #include "../include/dynamics/ConstantForceFieldRenderable.hpp"
-#include "../include/dynamics/SpringForceFieldRenderable.hpp"
-#include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
 
 #include "./../include/Utils.hpp"
@@ -45,16 +40,16 @@ Scene::Scene(Viewer* viewer) {
     dynSystem->setDt(0.01);
 	dynSystem->setCollisionsDetection(true); // Activate collision detection
 	dynSystem->setRestitution(0.8f); // Restitution coefficient for collision - 1.0 = full elastic response, 0.0 = full absorption
-	
+
 	// Create a renderable associated to the dynamic system
 	// This renderable is responsible for calling DynamicSystem::computeSimulationStep() in the animate() function
 	// It is also responsible for some of the key/mouse events
     systemRenderable = std::make_shared<DynamicSystemRenderable>(dynSystem);
     viewer->addRenderable(systemRenderable);
-    
+
 	// Initialize a force field that apply to all the particles of the system to simulate gravity
 	// Add it to the system as a force field
-	ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getParticles(), glm::vec3{0,0,-10});
+	ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getKarts(), glm::vec3{0,0,-10});
 	dynSystem->addForceField(gravityForceField);
 
     kart_game_light();
@@ -203,10 +198,10 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
     calf_r      ->setLocalTransform(translate(calf_r,       calfRT     ) * scale(calf_r,       calfS      ));
     ankle_r     ->setLocalTransform(translate(ankle_r,      ankleRT    ) * scale(ankle_r,      ankleS     ));
     foot_r      ->setLocalTransform(translate(foot_r,       footRT     ) * scale(foot_r,       footS      ));
-    
+
     // Move character to have a proper posture in the kart
     auto tmp = chest->getParentTransform() * glm::vec4(0, 1, 0, 0) - chest->getParentTransform() * glm::vec4(0, 0, 0, 0);
-    
+
     neck        ->setParentTransform(rotateParent(neck, -M_PI/8, glm::vec3(tmp)));
     /*
     head        ->setLocalTransform(translate(head,         headT      ) * scale(head,         headS      ));
@@ -234,7 +229,7 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
     calf_r      ->setLocalTransform(translate(calf_r,       calfRT     ) * scale(calf_r,       calfS      ));
     ankle_r     ->setLocalTransform(translate(ankle_r,      ankleRT    ) * scale(ankle_r,      ankleS     ));
     foot_r      ->setLocalTransform(translate(foot_r,       footRT     ) * scale(foot_r,       footS      ));*/
-	
+
     HierarchicalRenderable::addChild(chest,         	neck       );
     HierarchicalRenderable::addChild(neck,          	head       );
     HierarchicalRenderable::addChild(chest,         	shoulder_l );

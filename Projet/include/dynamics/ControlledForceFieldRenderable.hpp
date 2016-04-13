@@ -55,7 +55,7 @@ public:
   /**@brief Build a new controlled force field renderable.
    *
    * Build a new controlled force field by user inputs.
-   * @param program The shader program used to render the force applied to particles.
+   * @param program The shader program used to render the force applied to Karts.
    * @param forceField The force field to control with user inputs.
    */
   ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField );

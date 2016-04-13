@@ -13,7 +13,7 @@ public:
     EulerExplicitSolver();
     ~EulerExplicitSolver();
 private:
-    void do_solve(const float& dt, std::vector<ParticlePtr>& particles);
+    void do_solve(const float& dt, std::vector<KartPtr>& Karts);
 };
 
 typedef std::shared_ptr<EulerExplicitSolver> EulerExplicitSolverPtr;

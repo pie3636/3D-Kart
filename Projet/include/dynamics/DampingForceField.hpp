@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "ForceField.hpp"
-#include "Particle.hpp"
+#include "Kart.hpp"
 
 /**@brief Implement a damping force field.
  *
@@ -15,26 +15,26 @@ class DampingForceField : public ForceField
     public:
         /**@brief Build a damping force field.
          *
-         * Build a damping force applied to a set of particles. The force added
-         * to a particle of velocity v is -damping * v.
-         * @param particles Set of particles influenced by this damping force.
+         * Build a damping force applied to a set of Karts. The force added
+         * to a Kart of velocity v is -damping * v.
+         * @param Karts Set of Karts influenced by this damping force.
          * @param damping Damping coefficient. */
-        DampingForceField(const std::vector<ParticlePtr> particles, const float damping);
+        DampingForceField(const std::vector<KartPtr> Karts, const float damping);
 
-        /**@brief Access to the particles influenced by this force field.
+        /**@brief Access to the Karts influenced by this force field.
          *
-         * Get the particles influenced by this damping force field.
-         * @return The set of particles influenced by this.
+         * Get the Karts influenced by this damping force field.
+         * @return The set of Karts influenced by this.
          */
-        const std::vector<ParticlePtr> getParticles();
+        const std::vector<KartPtr> getKarts();
 
-        /**@brief Define the set of particles influenced by this force field.
+        /**@brief Define the set of Karts influenced by this force field.
          *
-         * Define the set of particles that will be influenced by this damping
+         * Define the set of Karts that will be influenced by this damping
          * force force.
-         * @param particles The new set of influenced particles.
+         * @param Karts The new set of influenced Karts.
          */
-        void setParticles(const std::vector<ParticlePtr>& particles);
+        void setKarts(const std::vector<KartPtr>& Karts);
 
         /**@brief Access to the damping factor.
          *
@@ -51,11 +51,10 @@ class DampingForceField : public ForceField
 
     private:
         void do_addForce();
-        std::vector<ParticlePtr> m_particles;
+        std::vector<KartPtr> m_Karts;
         float m_damping;
 };
 
 typedef std::shared_ptr<DampingForceField> DampingForceFieldPtr;
 
 #endif // SPRING_HPP
-

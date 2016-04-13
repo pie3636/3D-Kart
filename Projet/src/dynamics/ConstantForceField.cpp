@@ -1,27 +1,27 @@
 #include "./../../include/dynamics/ConstantForceField.hpp"
 
-ConstantForceField::ConstantForceField(const std::vector<ParticlePtr>& particles, const glm::vec3& force)
+ConstantForceField::ConstantForceField(const std::vector<KartPtr>& Karts, const glm::vec3& force)
 {
-    m_particles = particles;
+    m_Karts = Karts;
     m_force = force;
 }
 
 void ConstantForceField::do_addForce()
 {
-    for(ParticlePtr p : m_particles)
+    for(KartPtr p : m_Karts)
     {
         p->incrForce(m_force*p->getMass());
     }
 }
 
-const std::vector<ParticlePtr> ConstantForceField::getParticles()
+const std::vector<KartPtr> ConstantForceField::getKarts()
 {
-    return m_particles;
+    return m_Karts;
 }
 
-void ConstantForceField::setParticles(const std::vector<ParticlePtr>& particles)
+void ConstantForceField::setKarts(const std::vector<KartPtr>& Karts)
 {
-    m_particles = particles;
+    m_Karts = Karts;
 }
 
 const glm::vec3& ConstantForceField::getForce()

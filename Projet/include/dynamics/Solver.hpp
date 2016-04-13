@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <vector>
-#include "Particle.hpp"
+#include "Kart.hpp"
 
 /**@brief Dynamic system solver interface.
  *
@@ -14,22 +14,22 @@ class Solver
 public:
   Solver(){}
   virtual  ~Solver(){}
-  /**@brief Solve the dynamic system of particles.
+  /**@brief Solve the dynamic system of Karts.
    *
-   * Solve the dynamic system of particles for a specified time step.
+   * Solve the dynamic system of Karts for a specified time step.
    * @param dt The time step for the integration.
-   * @param particles The collection of particles.
+   * @param Karts The collection of Karts.
    */
-  void solve( const float& dt, std::vector<ParticlePtr>& particles );
+  void solve( const float& dt, std::vector<KartPtr>& Karts );
 private:
   /**@brief Solve implementation.
    *
    * The actual implementation to solve the dynamic system. This should
    * be implemented in derived classes.
    * @param dt The time step for the integration.
-   * @param particles The collection of particles.
+   * @param Karts The collection of Karts.
    */
-  virtual void do_solve(const float& dt, std::vector<ParticlePtr>& particles) = 0;
+  virtual void do_solve(const float& dt, std::vector<KartPtr>& Karts) = 0;
 };
 
 typedef std::shared_ptr<Solver> SolverPtr;

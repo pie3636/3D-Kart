@@ -45,13 +45,13 @@ ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr 
     glm::vec3 initial_direction(1,0,0);
     m_status = ControlledForceFieldStatus(initial_direction);
 
-    //Create geometric data to display an arrow representing the movement of the particle
-    const std::vector<ParticlePtr>& particles = m_force->getParticles();
+    //Create geometric data to display an arrow representing the movement of the Kart
+    const std::vector<KartPtr>& Karts = m_force->getKarts();
     m_positions.clear();
     m_colors.clear();
     m_normals.clear();
 
-    for(ParticlePtr p : particles)
+    for(KartPtr p : Karts)
     {
         m_positions.push_back(p->getPosition());
         m_positions.push_back(p->getPosition() + m_status.movement);
@@ -162,14 +162,14 @@ void ControlledForceFieldRenderable::do_animate( float time )
 
 void ControlledForceFieldRenderable::do_draw()
 {
-    //Update vertices positions from particle's positions
-    const std::vector<ParticlePtr>& particles = m_force->getParticles();
+    //Update vertices positions from Kart's positions
+    const std::vector<KartPtr>& Karts = m_force->getKarts();
     m_positions.clear();
     m_colors.clear();
     m_normals.clear();
 
-    //Display an arrow representing the movement of the particle
-    for(ParticlePtr p : particles)
+    //Display an arrow representing the movement of the Kart
+    for(KartPtr p : Karts)
     {
         m_positions.push_back(p->getPosition());
         m_positions.push_back(p->getPosition()  + 2.0f* m_status.movement);

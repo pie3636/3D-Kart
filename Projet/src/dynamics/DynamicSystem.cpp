@@ -6,8 +6,8 @@
 
 #include "./../../include/gl_helper.hpp"
 #include "./../../include/dynamics/DynamicSystem.hpp"
-#include "./../../include/dynamics/ParticlePlaneCollision.hpp"
-#include "./../../include/dynamics/ParticleParticleCollision.hpp"
+#include "./../../include/dynamics/KartPlaneCollision.hpp"
+#include "./../../include/dynamics/KartKartCollision.hpp"
 
 
 DynamicSystem::DynamicSystem() :
@@ -18,14 +18,14 @@ DynamicSystem::DynamicSystem() :
 }
 
 
-const std::vector<ParticlePtr>& DynamicSystem::getParticles() const
+const std::vector<KartPtr>& DynamicSystem::getKarts() const
 {
-    return m_particles;
+    return m_Karts;
 }
 
-void DynamicSystem::setParticles(const std::vector<ParticlePtr> &particles)
+void DynamicSystem::setKarts(const std::vector<KartPtr> &Karts)
 {
-    m_particles = particles;
+    m_Karts = Karts;
 }
 
 const std::vector<ForceFieldPtr>& DynamicSystem::getForceFields() const
@@ -53,7 +53,7 @@ DynamicSystem::~DynamicSystem() {}
 
 void DynamicSystem::clear()
 {
-    m_particles.clear();
+    m_Karts.clear();
     m_forceFields.clear();
     m_planeObstacles.clear();
 }
@@ -68,9 +68,9 @@ void DynamicSystem::setCollisionsDetection(bool onOff)
     m_handleCollisions = onOff;
 }
 
-void DynamicSystem::addParticle(ParticlePtr p)
+void DynamicSystem::addKart(KartPtr p)
 {
-    m_particles.push_back(p);
+    m_Karts.push_back(p);
 }
 
 void DynamicSystem::addForceField(ForceFieldPtr forceField)
@@ -95,29 +95,29 @@ void DynamicSystem::setSolver(SolverPtr solver)
 
 void DynamicSystem::detectCollisions()
 {
-    //Detect particle plane collisions
-    for(ParticlePtr p : m_particles)
+    //Detect Kart plane collisions
+    for(KartPtr p : m_Karts)
     {
         for(PlanePtr o : m_planeObstacles)
         {
-            if(testParticlePlane(p, o))
+            if(testKartPlane(p, o))
             {
-                ParticlePlaneCollisionPtr c = std::make_shared<ParticlePlaneCollision>(p,o,m_restitution);
+                KartPlaneCollisionPtr c = std::make_shared<KartPlaneCollision>(p,o,m_restitution);
                 m_collisions.push_back(c);
             }
         }
     }
 
-    //Detect particle particle collisions
-    for(size_t i=0; i<m_particles.size(); ++i)
+    //Detect Kart Kart collisions
+    for(size_t i=0; i<m_Karts.size(); ++i)
     {
-        for(size_t j=i; j<m_particles.size(); ++j)
+        for(size_t j=i; j<m_Karts.size(); ++j)
         {
-            ParticlePtr p1 = m_particles[i];
-            ParticlePtr p2 = m_particles[j];
-            if(testParticleParticle(p1,p2))
+            KartPtr p1 = m_Karts[i];
+            KartPtr p2 = m_Karts[j];
+            if(testKartKart(p1,p2))
             {
-                ParticleParticleCollisionPtr c = std::make_shared<ParticleParticleCollision>(p1,p2,m_restitution);
+                KartKartCollisionPtr c = std::make_shared<KartKartCollision>(p1,p2,m_restitution);
                 m_collisions.push_back(c);
             }
         }
@@ -136,8 +136,8 @@ void DynamicSystem::solveCollisions()
 
 void DynamicSystem::computeSimulationStep()
 {
-    //Compute particle's force
-    for(ParticlePtr p : m_particles)
+    //Compute Kart's force
+    for(KartPtr p : m_Karts)
     {
         p->setForce(glm::vec3(0.0,0.0,0.0));
     }
@@ -146,8 +146,8 @@ void DynamicSystem::computeSimulationStep()
         f->addForce();
     }
 
-    //Integrate position and velocity of particles
-    m_solver->solve(m_dt, m_particles);
+    //Integrate position and velocity of Karts
+    m_solver->solve(m_dt, m_Karts);
 
     //Detect and resolve collisions
     if(m_handleCollisions)
@@ -169,9 +169,9 @@ void DynamicSystem::setRestitution(const float& restitution)
 
 std::ostream& operator<<(std::ostream& os, const DynamicSystemPtr& system)
 {
-    std::vector<ParticlePtr> particles = system->getParticles();
-    os << "Particle number: " << particles.size() << std::endl;
-    for(ParticlePtr p : particles)
+    std::vector<KartPtr> Karts = system->getKarts();
+    os << "Kart number: " << Karts.size() << std::endl;
+    for(KartPtr p : Karts)
         os << p << std::endl;
     return os;
 }
