@@ -10,6 +10,7 @@
 
 #include "./dynamics/DynamicSystem.hpp"
 #include "./dynamics/DynamicSystemRenderable.hpp"
+#include "../include/KeyframedKartRenderable.hpp"
 
 class Scene {
 	public:
@@ -24,13 +25,19 @@ class Scene {
   		ShaderProgramPtr texShader;
   		DynamicSystemPtr dynSystem;
   		DynamicSystemRenderablePtr systemRenderable;
-  		
-  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
-		CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
-		
+
+			KeyframedKartRenderablePtr createTexturedKartFromMesh();
+//  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
+			CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
+
 		void kart_game_light	();
 		void kart_game_borders	();
-  		
+		void moving_kart(KeyframedKartRenderablePtr root,
+						ShaderProgramPtr program,
+						const std::string& mesh_filename,
+						const std::string& texture_filename );
+
+
 		glm::mat4 translate  (HierarchicalRenderablePtr obj, double x, double y, double z);
 		glm::mat4 rotate     (HierarchicalRenderablePtr obj, float alpha, double x, double y, double z);
 		glm::mat4 scale      (HierarchicalRenderablePtr obj, double x, double y, double z);
@@ -38,7 +45,7 @@ class Scene {
 		glm::mat4 translate  (HierarchicalRenderablePtr obj, glm::vec3 vec);
 		glm::mat4 rotate     (HierarchicalRenderablePtr obj, float alpha, glm::vec3 vec);
 		glm::mat4 scale      (HierarchicalRenderablePtr obj, glm::vec3 vec);
-		
+
 		glm::mat4 translateParent    (HierarchicalRenderablePtr obj, double x, double y, double z);
 		glm::mat4 rotateParent       (HierarchicalRenderablePtr obj, float alpha, double x, double y, double z);
 		glm::mat4 scaleParent        (HierarchicalRenderablePtr obj, double x, double y, double z);

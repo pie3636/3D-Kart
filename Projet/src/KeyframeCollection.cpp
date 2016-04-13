@@ -1,5 +1,5 @@
-# include "./../include/KeyframeCollection.hpp"
-# include <glm/gtx/compatibility.hpp>
+#include "./../include/KeyframeCollection.hpp"
+#include <glm/gtx/compatibility.hpp>
 
 void KeyframeCollection::add( const GeometricTransformation& transformation, float time )
 {

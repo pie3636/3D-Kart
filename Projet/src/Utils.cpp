@@ -573,6 +573,20 @@ void getRoad(ShaderProgramPtr flatShader, Viewer& viewer){
 
   PlaneRenderablePtr portion;
 
+  // Ligne de depart
+  x1=glm::vec3(-1., 21.75, 0.2);
+  x2=glm::vec3(-1.,  15, 0.2);
+  x3=glm::vec3(-0.15,  14.75, 0.2);
+  x4=glm::vec3(-0.15, 21.75, 0.2);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, glm::vec4(1.,1.,1.,1.));
+  viewer.addRenderable(portion);
+  x1=glm::vec3(0.15, 21.75, 0.2);
+  x2=glm::vec3(0.15, 14.75, 0.2);
+  x3=glm::vec3(1., 14.5, 0.2);
+  x4=glm::vec3(1.,21.5, 0.2);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, glm::vec4(1.,1.,1.,1.));
+  viewer.addRenderable(portion);
+
   // 1ere ligne droite
   x1=glm::vec3(15.5, -12.5, 0.1);
   x2=glm::vec3(22.5, -15., 0.1);
