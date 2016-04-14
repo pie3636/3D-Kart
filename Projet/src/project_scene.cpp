@@ -424,7 +424,6 @@ void Scene::moving_kart(KeyframedKartRenderablePtr root,
 				const std::string& mesh_filename,
 				const std::string& texture_filename )
 {
-
 		root->addLocalTransformKeyframe( GeometricTransformation( glm::vec3{0,0,0}), 0.25 + 1 );
 		root->addLocalTransformKeyframe( GeometricTransformation( glm::vec3{0,0,33}), 0.5 + 1);
 		root->addLocalTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,40}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), 0.6 + 1);
