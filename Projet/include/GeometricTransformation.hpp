@@ -108,4 +108,4 @@ private:
   glm::vec3 m_scale;
 };
 
-# endif 
+# endif

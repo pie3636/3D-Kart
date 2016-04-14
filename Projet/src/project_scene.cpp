@@ -25,6 +25,7 @@
 #include <fstream>
 
 int Scene::kartCount = 0;
+float Scene::times[16] = {1.25,1.5,1.6,1.75,1.9,2.5,3,4,4.25,4.75,5.5,6,6.25,7,7.5,8} ;
 
 Scene::Scene(Viewer* viewer) {
 	this->viewer = viewer;
@@ -58,17 +59,18 @@ Scene::Scene(Viewer* viewer) {
     kart_game_borders();
     getRoad(flatShader, *viewer);
 
-    TexturedLightedMeshRenderablePtr    meshKart = createTexturedKartFromMesh       ();
+    TexturedLightedMeshRenderablePtr    meshKart1 = createTexturedKartFromMesh       ();
     //TexturedLightedMeshRenderablePtr    meshKar2 = createTexturedKartFromMesh       ();
     //TexturedLightedMeshRenderablePtr    meshKar3 = createTexturedKartFromMesh       ();
     //TexturedLightedMeshRenderablePtr    meshKar4 = createTexturedKartFromMesh       ();
 
-    viewer->addRenderable(meshKart);
+    viewer->addRenderable(meshKart1);
     //viewer->addRenderable(meshKar2);
     //viewer->addRenderable(meshKar3);
     //viewer->addRenderable(meshKar4);
 
-	viewer->addRenderable(createTexturedMovingKartFromMesh());
+		KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
+		viewer->addRenderable(meshKart2);
 
 
 	// Place the camera
@@ -87,7 +89,7 @@ KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 														 scale(kart, 0.5, 0.5, 0.5) * translate(kart, -32, 1., -2.) );
     HierarchicalRenderable::addChild(systemRenderable, 	kart							);
     HierarchicalRenderable::addChild(kart, 				createCharacterFromPrimitives() );
-	return moving_kart(kart, texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
+		return moving_kart(kart,texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
 }
 
 
@@ -424,23 +426,25 @@ KeyframedKartRenderablePtr Scene::moving_kart(KeyframedKartRenderablePtr root,
 				const std::string& mesh_filename,
 				const std::string& texture_filename )
 {
-	
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,0}), 0.25 + 1 );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{33,0,0}), 0.5 + 1);
-		/*root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,40}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), 0.6 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{5,0,45}, glm::quat( glm::vec3{0.0,  1., 0.} )), 0.75 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{10,0,45}, glm::quat( glm::vec3{0.0,  1.75, 0.} )), 0.9 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,38}, glm::quat( glm::vec3{0.0,  8., 0.} )), 1.5+ 1 );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{75,0,25}, glm::quat( glm::vec3{0.0,  10., 0.} )), 2. + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,10}, glm::quat( glm::vec3{0.0,  -8., 0.} )), 3. + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{45,0,5}, glm::quat( glm::vec3{0.0,  10., 0.} )), 3.25 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{40,0,0}, glm::quat( glm::vec3{0.0,  15., 0.} )), 3.75 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,-25}, glm::quat( glm::vec3{0.0,  -10., 0.} )), 4.5 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{65,0,-33}, glm::quat( glm::vec3{0.0,  -15., 0.} )), 5.+ 1 );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,-40}, glm::quat( glm::vec3{0.0,  -8., 0.} )), 5.25+ 1 );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, -25}, glm::quat( glm::vec3{0.0,  0., 0.} )), 6.+ 1 );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), 6.5 + 1);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), 7 + 1);*/
 
-		return root;
+		for (int i=0; i<16;i++)
+			printf("%f \n",times[i] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,0}), times[0] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,33}), times[1]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,40}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), times[2]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{5,0,45}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[3]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{10,0,45}, glm::quat( glm::vec3{0.0,  1.75, 0.} )), times[4]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,38}, glm::quat( glm::vec3{0.0,  8., 0.} )), times[5] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{75,0,25}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[6]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,10}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[7]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{45,0,5}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[8]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{40,0,0}, glm::quat( glm::vec3{0.0,  15., 0.} )), times[9]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,-25}, glm::quat( glm::vec3{0.0,  -10., 0.} )), times[10]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{65,0,-33}, glm::quat( glm::vec3{0.0,  -15., 0.} )), times[11]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,-40}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[12] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, -25}, glm::quat( glm::vec3{0.0,  0., 0.} )), times[13]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[14]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[15]);
+
+		return root ;
 }

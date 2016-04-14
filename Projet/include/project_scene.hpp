@@ -16,10 +16,11 @@ class Scene {
 	public:
   		Scene(Viewer* viewer);
   		~Scene();
+			static float times[16];
 
   private:
   		const double kartScaleFactor = 0.5;
-  		static int kartCount;
+			static int kartCount;
   		Viewer *viewer;
   		ShaderProgramPtr flatShader;
   		ShaderProgramPtr texShader;

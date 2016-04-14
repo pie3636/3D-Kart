@@ -73,6 +73,7 @@ private:
    */
   std::array< Keyframe, 2 > getBoundingKeyframes( float time ) const;
 
+
   /**
    * \brief Internal storage of the keyframes.
    *
@@ -85,4 +86,4 @@ private:
   std::map< float, GeometricTransformation > m_keyframes;
 };
 
-# endif 
+# endif

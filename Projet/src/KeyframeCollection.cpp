@@ -1,4 +1,5 @@
 #include "./../include/KeyframeCollection.hpp"
+#include "./../include/project_scene.hpp"
 #include <glm/gtx/compatibility.hpp>
 
 void KeyframeCollection::add( const GeometricTransformation& transformation, float time )
@@ -8,6 +9,7 @@ void KeyframeCollection::add( const GeometricTransformation& transformation, flo
 
 glm::mat4 KeyframeCollection::interpolateTransformation( float time ) const
 {
+
     //TODO: Complete the interpolation framework
     if( !m_keyframes.empty() )
     {

@@ -22,12 +22,14 @@ void KeyframedKartRenderable::addParentTransformKeyframe( const GeometricTransfo
 
 void KeyframedKartRenderable::do_animate( float time )
 {
+    glm::mat4 init = rotate(glm::mat4(1.0),float (M_PI/2), glm::vec3(1, 0, 0)) * rotate(glm::mat4(1.0),float (-M_PI/2-0.15), glm::vec3(0, 1, 0))  *
+                           scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5)) * translate(glm::mat4(1.0), glm::vec3(-32, 1., -2.));
     //Assign the interpolated transformations from the keyframes to the local/parent transformations.
     if(!m_localKeyframes.empty()) {
-        setLocalTransform( m_localKeyframes.interpolateTransformation( time ) );
+        setLocalTransform( init*m_localKeyframes.interpolateTransformation( time ) );
     }
     if(!m_parentKeyframes.empty()) {
-        setParentTransform( m_parentKeyframes.interpolateTransformation( time ) );
+        setParentTransform(init* m_parentKeyframes.interpolateTransformation( time ) );
     }
 }
 
