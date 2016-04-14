@@ -26,8 +26,8 @@ class Scene {
   		DynamicSystemPtr dynSystem;
   		DynamicSystemRenderablePtr systemRenderable;
 
-			KeyframedKartRenderablePtr createTexturedKartFromMesh();
-//  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
+			KeyframedKartRenderablePtr createTexturedMovingKartFromMesh();
+  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
 			CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
 
 		void kart_game_light	();
