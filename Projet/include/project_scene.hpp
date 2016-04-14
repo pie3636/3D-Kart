@@ -2,6 +2,7 @@
 #define PROJECT_SCENE_H
 
 #include "CubeRenderable.hpp"
+#include "HierarchicalTorusRenderable.hpp"
 #include "CylinderRenderable.hpp"
 #include "MeshRenderable.hpp"
 #include "FrameRenderable.hpp"
@@ -13,6 +14,7 @@
 #include "Viewer.hpp"
 #include "ShaderProgram.hpp"
 #include "Utils.hpp"
+
 
 #include "lighting/DirectionalLightRenderable.hpp"
 
@@ -54,6 +56,8 @@ class Scene {
 
 		void kart_game_light	();
 		void kart_game_borders	();
+		void kart_game_road();
+
 		KeyframedKartRenderablePtr moving_kart(KeyframedKartRenderablePtr root,
 											   ShaderProgramPtr program,
 											   const std::string& mesh_filename,

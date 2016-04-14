@@ -20,8 +20,8 @@ Scene::Scene(Viewer* viewer) {
     EulerExplicitSolverPtr solver = std::make_shared<EulerExplicitSolver>();
     dynSystem->setSolver(solver);
     dynSystem->setDt(0.01);
-	dynSystem->setCollisionsDetection(true); // Activate collision detection
-	dynSystem->setRestitution(0.8f); // Restitution coefficient for collision - 1.0 = full elastic response, 0.0 = full absorption
+		dynSystem->setCollisionsDetection(true); // Activate collision detection
+		dynSystem->setRestitution(0.8f); // Restitution coefficient for collision - 1.0 = full elastic response, 0.0 = full absorption
 
 	// Create a renderable associated to the dynamic system
 	// This renderable is responsible for calling DynamicSystem::computeSimulationStep() in the animate() function
@@ -29,26 +29,24 @@ Scene::Scene(Viewer* viewer) {
     systemRenderable = std::make_shared<DynamicSystemRenderable>(dynSystem);
     viewer->addRenderable(systemRenderable);
 
-	// Initialize a force field that apply to all the particles of the system to simulate gravity
-	// Add it to the system as a force field
-	ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getKarts(), glm::vec3{0,0,-10});
-	dynSystem->addForceField(gravityForceField);
+		// Initialize a force field that apply to all the particles of the system to simulate gravity
+		// Add it to the system as a force field
+		ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getKarts(), glm::vec3{0,0,-10});
+		dynSystem->addForceField(gravityForceField);
 
     kart_game_light();
     kart_game_borders();
-    getRoad(flatShader, *viewer);
+    kart_game_road();
 
-	KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
-	
-	KartRenderablePtr mobileRenderable = createControllableKart();
-    HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
-    HierarchicalRenderable::addChild(mobileRenderable, createCharacterFromPrimitives());
+		KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
 
-	// Place the camera
-	viewer->getCamera().setViewMatrix(glm::lookAt(glm::vec3(-25, -25, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+		KartRenderablePtr mobileRenderable = createControllableKart();
 
-	viewer->startAnimation();
-	viewer->setAnimationLoop(true, 50.0);
+		// Place the camera
+		viewer->getCamera().setViewMatrix(glm::lookAt(glm::vec3(-25, -25, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
+
+		viewer->startAnimation();
+		viewer->setAnimationLoop(true, 50.0);
 }
 
 Scene::~Scene() {}
@@ -70,27 +68,26 @@ KartRenderablePtr Scene::createControllableKart() {
 	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
  	KartPtr mobile = std::make_shared<Kart>(glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), 10, 5, 3, 1.5);
     dynSystem->addKart(mobile);
-
     kartCount++;
-    
+		KartRenderablePtr mobileRenderable = std::make_shared<KartRenderable>(texShader,
+			 	mobile, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
+		HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
+    HierarchicalRenderable::addChild(mobileRenderable, createCharacterFromPrimitives());
     // Initialize a force field that applies only to the mobile kart
     glm::vec3 nullForce(0.0,0.0,0.0);
     std::vector<KartPtr> vKart;
     vKart.push_back(mobile);
     ConstantForceFieldPtr force = std::make_shared<ConstantForceField>(vKart, nullForce);
     dynSystem->addForceField(force);
-
     // Initialize a renderable for the force field applied on the mobile particle.
     // This renderable allows to modify the attribute of the force by key/mouse events
     // Add this renderable to the systemRenderable.
     ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>(texShader, force);
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
-
     // Add a damping force field to the mobile.
     DampingForceFieldPtr dampingForceField = std::make_shared<DampingForceField>(vKart, 0.9);
     dynSystem->addForceField(dampingForceField);
-    
-    return std::make_shared<KartRenderable>(texShader, mobile, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
+		return mobileRenderable;
 }
 
 CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
@@ -198,7 +195,7 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
     calf_r      ->setParentTransform(translate(calf_r,       calfRT     ));
     ankle_r     ->setParentTransform(translate(ankle_r,      ankleRT    ));
     foot_r      ->setParentTransform(translate(foot_r,       footRT     ));
-    
+
     chest		->setLocalTransform(scale(chest,        chestS     ));
     neck        ->setLocalTransform(scale(neck,         neckS      ));
     head        ->setLocalTransform(scale(head,         headS      ));
@@ -411,6 +408,246 @@ void Scene::kart_game_borders() {
   TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, filename, 2);
   ad->setMaterial(pearl);
   viewer->addRenderable(ad);
+
+}
+
+
+void Scene::kart_game_road(){
+  glm::vec4 color = glm::vec4(0.5,0.5,0.5,1.0);
+  glm::vec3 x1, x2, x3, x4;
+
+  PlaneRenderablePtr portion;
+
+  // Ligne de depart
+  x1=glm::vec3(-1., 21.75, 0.2);
+  x2=glm::vec3(-1.,  15, 0.2);
+  x3=glm::vec3(-0.15,  14.75, 0.2);
+  x4=glm::vec3(-0.15, 21.75, 0.2);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, glm::vec4(1.,1.,1.,1.));
+  viewer->addRenderable(portion);
+  x1=glm::vec3(0.15, 21.75, 0.2);
+  x2=glm::vec3(0.15, 14.75, 0.2);
+  x3=glm::vec3(1., 14.5, 0.2);
+  x4=glm::vec3(1.,21.5, 0.2);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, glm::vec4(1.,1.,1.,1.));
+  viewer->addRenderable(portion);
+
+  // 1ere ligne droite
+  x1=glm::vec3(15.5, -12.5, 0.1);
+  x2=glm::vec3(22.5, -15., 0.1);
+  x3=glm::vec3(22.5, 7.5, 0.1);
+  x4=glm::vec3(15.5, 5., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer->addRenderable(portion);
+/*
+	for (int i=-9; i<7; i++) {
+		HierarchicalTorusRenderablePtr torus1 = std::make_shared<HierarchicalTorusRenderable>(flatShader);
+		HierarchicalTorusRenderablePtr torus2 = std::make_shared<HierarchicalTorusRenderable>(flatShader);
+		torus1->setParentTransform(glm::translate(glm::mat4(1.0),glm::vec3(23,2*i,0.5)));
+		torus2->setParentTransform(glm::translate(glm::mat4(1.0),glm::vec3(0,0,0.5)));
+		HierarchicalRenderable::addChild(systemRenderable, torus1);
+		HierarchicalRenderable::addChild(torus1, torus2);
+}*/
+
+  // 2eme ligne droite
+  x1 = glm::vec3( 11.5, -22.5, 0.1);
+  x2 = glm::vec3( 13., -15.5, 0.1);
+  x3 = glm::vec3( 2.5, -1.25, 0.1);
+  x4 = glm::vec3( 2.5, -11.25, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer->addRenderable(portion);
+
+  // 3eme ligne droite
+  x1=glm::vec3(-12.5, 24., 0.1);
+  x2=glm::vec3(-12.5, 17., 0.1);
+  x3=glm::vec3(13., 12.5, 0.1);
+  x4=glm::vec3(15., 19., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4,  color);
+  viewer->addRenderable(portion);
+
+  // 4eme ligne droite
+  x1=glm::vec3(-15.5, 12.5, 0.1);
+  x2=glm::vec3(-22.5, 15., 0.1);
+  x3=glm::vec3(-22.5, -17.5, 0.1);
+  x4=glm::vec3(-15.5, -15., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4,  color);
+  viewer->addRenderable(portion);
+
+  // 5eme ligne droite
+  x1 = glm::vec3( -5., -1.5, 0.1);
+  x2 = glm::vec3( -5., -10.25, 0.1);
+  x3 = glm::vec3( -13., -22.5, 0.1);
+  x4 = glm::vec3( -13., -12.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+  viewer->addRenderable(portion);
+/*
+  RoadRenderablePtr virage1 = std::make_shared<RoadRenderable>( flatShader, 2 );
+  viewer->addRenderable(virage1);
+*/
+
+//-----------------------------------------------------//
+  glm::vec3 s1, s2, s3, s4;
+  glm::vec3 t1, t2, t3, t4;
+
+  // 1er virage
+  // Points de controle de bezier
+  s1 = glm::vec3( 22.5, -15., 0.1);
+  s2 = glm::vec3( 22.5, -20., 0.1);
+  s3 = glm::vec3( 17.5, -25., 0.1);
+  s4 = glm::vec3(11.5, -22.5, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(-6.25, 4.5, 0.);
+  t4 = glm::vec3(15.5, -12.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-4.5, 6., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4,  color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-1., 7.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4,  color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = glm::vec3(13., -15.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4,  color);
+  viewer->addRenderable(portion);
+
+  // 2eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3( 2.5, -11.25, 0.1);
+  s2 = glm::vec3( -0.5, -7., 0.1);
+  s3 = glm::vec3( -2., -7., 0.1);
+  s4 = glm::vec3( -5., -10.25, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(0.25, 8.5, 0.);
+  t4 = glm::vec3( 2.5, -1.25, 0.1 );
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(0.25, 8.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-0.5, 8.25, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = glm::vec3( -5., -1.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+
+  // 3eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3( -13., -22.5, 0.);
+  s2 = glm::vec3( -15, -25., 0.1);
+  s3 = glm::vec3( -20., -22.5, 0.1);
+  s4 = glm::vec3( -22.5, -17.5, 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(1.25, 9.5, 0.);
+  t4 = glm::vec3( -13., -12.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(3., 8., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(4.75, 6., 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = glm::vec3(-15.5, -15., 0.1); ;
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+
+  // 4eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3(-15.5, 12.5, 0.1);
+  s2 = glm::vec3( -16., 16.5, 0.1);
+  s3 = glm::vec3( -14., 16.5, 0.1);
+  s4 = glm::vec3(-12.5, 17., 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(-6., 4.5, 0.);
+  t4 = glm::vec3(-22.5, 15., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.5);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-4.5, 6.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(-1.5, 7.5, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = glm::vec3(-12.5, 24., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+
+  // 5eme virage
+  // Points de controle de bezier
+  s1 = glm::vec3(13., 12.5, 0.1);
+  s2 = glm::vec3(14.5, 12. , 0.1);
+  s3 = glm::vec3(16., 6.5, 0.1);
+  s4 = glm::vec3(15.5, 5., 0.1);
+  // Quadriques
+  t1 = s1,
+  t2 = bezier(s1,s2,s3,s4,0.25);
+  t3 = t2 + glm::vec3(5.,6., 0.);
+  t4 = glm::vec3(15., 19., 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.50);
+  t4 = t3;
+  t3 = t2 + glm::vec3(5.5, 6.25, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2,
+  t2 = bezier(s1,s2,s3,s4,0.75);
+  t4 = t3;
+  t3 = t2 + glm::vec3(6.25, 5.75, 0.);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
+  t1 = t2;
+  t2 = s4;
+  t4 = t3;
+  t3 = glm::vec3(22.5, 7.5, 0.1);
+  portion = std::make_shared<QuadRenderable>( flatShader, t1, t2, t3, t4, color);
+  viewer->addRenderable(portion);
 }
 
 
@@ -419,9 +656,6 @@ KeyframedKartRenderablePtr Scene::moving_kart(KeyframedKartRenderablePtr root,
 				const std::string& mesh_filename,
 				const std::string& texture_filename )
 {
-
-		for (int i=0; i<16;i++)
-			printf("%f \n",times[i] );
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,0}), times[0] );
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,33}), times[1]);
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,35}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), times[2]);

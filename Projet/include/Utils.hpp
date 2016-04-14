@@ -53,5 +53,9 @@ void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normal
 void getWalls(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
 void getAds(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords);
 void getRoad(ShaderProgramPtr flatShader, Viewer& viewer);
+void draw_bezier_2d_mesh (std::vector< glm::vec3 > positions);
+void points(glm::vec3 pt1, glm::vec3 pt2, std::vector< glm::vec3 > &positions);
+glm::vec3 bezier(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, glm::vec3 p4, float t);
+
 
 #endif //UTILS
