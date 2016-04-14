@@ -22,7 +22,8 @@ class TexturedLightedMeshRenderable : public HierarchicalRenderable
     private:
         void do_draw();
         void do_animate( float time );
-
+    
+    protected:
         std::vector< glm::vec3 > m_positions;
         std::vector< glm::vec3 > m_normals;
         std::vector< glm::vec4 > m_colors;

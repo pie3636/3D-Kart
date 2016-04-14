@@ -32,10 +32,10 @@ class Scene {
 
 		void kart_game_light	();
 		void kart_game_borders	();
-		void moving_kart(KeyframedKartRenderablePtr root,
-						ShaderProgramPtr program,
-						const std::string& mesh_filename,
-						const std::string& texture_filename );
+		KeyframedKartRenderablePtr moving_kart(KeyframedKartRenderablePtr root,
+											   ShaderProgramPtr program,
+											   const std::string& mesh_filename,
+											   const std::string& texture_filename );
 
 
 		glm::mat4 translate  (HierarchicalRenderablePtr obj, double x, double y, double z);
