@@ -16,20 +16,20 @@ class Scene {
 	public:
   		Scene(Viewer* viewer);
   		~Scene();
-			static float times[16];
+		static float times[16];
 
   private:
-  		const double kartScaleFactor = 0.5;
-			static int kartCount;
+  		static const double kartScaleFactor;
+		static int kartCount;
   		Viewer *viewer;
   		ShaderProgramPtr flatShader;
   		ShaderProgramPtr texShader;
   		DynamicSystemPtr dynSystem;
   		DynamicSystemRenderablePtr systemRenderable;
 
-			KeyframedKartRenderablePtr createTexturedMovingKartFromMesh();
+		KeyframedKartRenderablePtr createTexturedMovingKartFromMesh();
   		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
-			CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
+		CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
 
 		void kart_game_light	();
 		void kart_game_borders	();

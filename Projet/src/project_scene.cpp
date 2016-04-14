@@ -25,7 +25,10 @@
 #include <fstream>
 
 int Scene::kartCount = 0;
-float Scene::times[16] = {1.25,1.5,1.6,1.75,1.9,2.5,3,4,4.25,4.75,5.5,6,6.25,7,7.5,8} ;
+const double Scene::kartScaleFactor = 0.5;
+
+//float Scene::times[16] = {1.25, 1.5, 1.6, 1.75, 1.9, 2.5, 3, 4, 4.25, 4.75, 5.5, 6, 6.25, 7, 7.5, 8};
+float Scene::times[16] = {1.5, 3, 3.2, 3.5, 3.8, 5, 6, 8, 8.5, 9.5, 11, 12, 13.5, 15, 17, 18};
 
 Scene::Scene(Viewer* viewer) {
 	this->viewer = viewer;
@@ -64,13 +67,13 @@ Scene::Scene(Viewer* viewer) {
     //TexturedLightedMeshRenderablePtr    meshKar3 = createTexturedKartFromMesh       ();
     //TexturedLightedMeshRenderablePtr    meshKar4 = createTexturedKartFromMesh       ();
 
-    viewer->addRenderable(meshKart1);
+    //viewer->addRenderable(meshKart1);
     //viewer->addRenderable(meshKar2);
     //viewer->addRenderable(meshKar3);
     //viewer->addRenderable(meshKar4);
 
-		KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
-		viewer->addRenderable(meshKart2);
+	KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
+	viewer->addRenderable(meshKart2);
 
 
 	// Place the camera
@@ -83,13 +86,17 @@ Scene::Scene(Viewer* viewer) {
 Scene::~Scene() {}
 
 KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
-    KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
+    std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
+    KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
+    kartCount++;
     kart->setMaterial(Material::Pearl());
-		kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, -M_PI/2-0.15, 0, 1, 0)  *
-														 scale(kart, 0.5, 0.5, 0.5) * translate(kart, -32, 1., -2.) );
+	kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0)
+						   * rotate(kart, -M_PI/2 - 0.15, 0, 1, 0)
+						   * scale(kart, kartScaleFactor, kartScaleFactor, kartScaleFactor)
+						   * translate(kart, -32, 1., -2.));
     HierarchicalRenderable::addChild(systemRenderable, 	kart							);
     HierarchicalRenderable::addChild(kart, 				createCharacterFromPrimitives() );
-		return moving_kart(kart,texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
+	return moving_kart(kart, texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
 }
 
 
@@ -98,12 +105,12 @@ TexturedLightedMeshRenderablePtr Scene::createTexturedKartFromMesh() {
     TexturedLightedMeshRenderablePtr kart = std::make_shared<TexturedLightedMeshRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
     kartCount++;
     kart->setMaterial(Material::Pearl());
-		kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, -M_PI/2-0.15, 0, 1, 0)  *
-														 scale(kart, 0.5, 0.5, 0.5) * translate(kart, -38, 1., -1.) );
-		HierarchicalRenderable::addChild(systemRenderable, 	kart							);
-		/*
-    kart->setParentTransform(translate(kart, 3 * kartCount, 0, 1) * scale(kart, kartScaleFactor, kartScaleFactor, kartScaleFactor));
-    kart->setLocalTransform(rotate(kart, M_PI/2, 1, 0, 0) * rotate(kart, M_PI, 0, 1, 0));*/
+	kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0)
+						   * rotate(kart, -M_PI/2 - 0.15, 0, 1, 0)
+						   * scale(kart, kartScaleFactor, kartScaleFactor, kartScaleFactor)
+						   * translate(kart, -38, 1., 1.));
+	HierarchicalRenderable::addChild(systemRenderable, 	kart);
+
     HierarchicalRenderable::addChild(systemRenderable, 	kart							);
     HierarchicalRenderable::addChild(kart, 				createCharacterFromPrimitives() );
     return kart;
@@ -142,12 +149,12 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
 
     // Scale vectors (see ./struct/Personnage)
     glm::vec3 chestS    (0.3,  0.2,  0.6);
-    glm::vec3 neckS     (0.12, 0.1,  0.1);
+    glm::vec3 neckS     (0.12, 0.1,  0.2);
     glm::vec3 headS     (0.2,  0.2,  0.25);
     glm::vec3 shoulderS (0.1,  0.1,  0.1);
-    glm::vec3 upperArmS (0.1,  0.1,  0.2);
+    glm::vec3 upperArmS (0.1,  0.1,  0.3);
     glm::vec3 elbowS    (0.1,  0.1,  0.1);
-    glm::vec3 forearmS  (0.1,  0.1,  0.25);
+    glm::vec3 forearmS  (0.1,  0.1,  0.35);
     glm::vec3 wristS    (0.08, 0.08, 0.08);
     glm::vec3 handS     (0.1,  0.05, 0.18);
     glm::vec3 hipS      (0.12, 0.12, 0.12);
@@ -158,99 +165,108 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
     glm::vec3 footS     (0.08, 0.2,  0.08);
 
     // Translation vectors (see ./struct/Personnage)
-    glm::vec3 chestT        (0,                             0,                          -chestS.z/2                                                                            );
-    glm::vec3 neckT         (0,                             0,                          chestS.z/2      			                                                           );
-    glm::vec3 headT         (0,                             0,                          (chestS.z + headS.z)/2 + neckS.z                                                       );
-    glm::vec3 shoulderLT    (-chestS.x - shoulderS.x,       0,                          (chestS.z - shoulderS.z)/2                                                             );
-    glm::vec3 upperArmLT    (-chestS.x - shoulderS.x,       0,                          (chestS.z - 2*upperArmS.z)/2 - shoulderS.z                                             );
-    glm::vec3 elbowLT       (-chestS.x - shoulderS.x,       0,                          (chestS.z - elbowS.z)/2 - shoulderS.z - upperArmS.z                                    );
-    glm::vec3 forearmLT     (-chestS.x - shoulderS.x,       0,                          (chestS.z - 2*forearmS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z                     );
-    glm::vec3 wristLT       (-chestS.x - shoulderS.x,       0,                          (chestS.z - wristS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z            );
-    glm::vec3 handLT        (-chestS.x - shoulderS.x,       0,                          (chestS.z - handS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z  );
-    glm::vec3 shoulderRT    (chestS.x + shoulderS.x,        0,                          (chestS.z - shoulderS.z)/2                                                             );
-    glm::vec3 upperArmRT    (chestS.x + shoulderS.x,        0,                          (chestS.z - 2*upperArmS.z)/2 - shoulderS.z                                             );
-    glm::vec3 elbowRT       (chestS.x + shoulderS.x,        0,                          (chestS.z - elbowS.z)/2 - shoulderS.z - upperArmS.z                                    );
-    glm::vec3 forearmRT     (chestS.x + shoulderS.x,        0,                          (chestS.z - 2*forearmS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z                     );
-    glm::vec3 wristRT       (chestS.x + shoulderS.x,        0,                          (chestS.z - wristS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z            );
-    glm::vec3 handRT        (chestS.x + shoulderS.x,        0,                          (chestS.z - handS.z)/2 - shoulderS.z - upperArmS.z - elbowS.z - forearmS.z - wristS.z  );
-    glm::vec3 hipLT    		((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - hipS.z)/2                                                                 );
-    glm::vec3 upperLegLT    ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - 2*upperLegS.z)/2 - hipS.z                                                          );
-    glm::vec3 kneeLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - kneeS.z)/2 - hipS.z - upperLegS.z                                                  );
-    glm::vec3 calfLT        ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - 2*calfS.z)/2 - hipS.z - upperLegS.z - kneeS.z                                      );
-    glm::vec3 ankleLT       ((upperLegS.x - chestS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - hipS.z - upperLegS.z - kneeS.z - calfS.z                             );
-    glm::vec3 footLT        ((upperLegS.x - chestS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - hipS.z - upperLegS.z - kneeS.z - calfS.z - ankleS.z                   );
-    glm::vec3 hipRT    		((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - hipS.z)/2                                                                 );
-    glm::vec3 upperLegRT    ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - 2*upperLegS.z)/2 - hipS.z                                                          );
-    glm::vec3 kneeRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - kneeS.z)/2 - upperLegS.z - hipS.z                                                  );
-    glm::vec3 calfRT        ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - 2*calfS.z)/2 - upperLegS.z - kneeS.z - hipS.z                                      );
-    glm::vec3 ankleRT       ((chestS.x - upperLegS.x)/2,    0,                          (-chestS.z - ankleS.z)/2 - upperLegS.z - kneeS.z - calfS.z - hipS.z                             );
-    glm::vec3 footRT        ((chestS.x - upperLegS.x)/2,    (ankleS.x + footS.x)/2,     (-chestS.z - footS.z)/2 - upperLegS.z - kneeS.z - calfS.z - ankleS.z - hipS.z                   );
-
-    // Set position in kart
-    double characterScale = 1.5;
-    chest->setParentTransform(translate(chest, -0.6, -0.5, 1)   								// Kart positioning - Standing height is ankleS.z + calfS.z + kneeS.z + upperLegS.z + hipS.z + chestS.z
-    						* rotate(chest, M_PI/4, 1, 0, 0) 									// Inclination in kart seat
-    						* scale(chest, characterScale, characterScale, characterScale)); 	// Scale adaptation
+    glm::vec3 chestT        (0,                         0,                      0                           );
+    glm::vec3 neckT         (0,                         0,                      chestS.z      			    );
+    glm::vec3 headT         (0,                         0,                      headS.z/2 + neckS.z         );
+    glm::vec3 shoulderLT    (-chestS.x - shoulderS.x,   0,                      chestS.z - shoulderS.z      );
+    glm::vec3 upperArmLT    (0,       					0,                      -upperArmS.z - shoulderS.z/2);
+    glm::vec3 elbowLT       (0,       					0,                      -elbowS.z/2                 );
+    glm::vec3 forearmLT     (0,       					0,                      -forearmS.z - elbowS.z/2    );
+    glm::vec3 wristLT       (0,       					0,                      -wristS.z/2            		);
+    glm::vec3 handLT        (0,       					0,                      -wristS.z/2 - handS.z 		);
+    glm::vec3 shoulderRT    (chestS.x + shoulderS.x,    0,                      chestS.z - shoulderS.z      );
+    glm::vec3 upperArmRT    (0,       					0,                      -upperArmS.z - shoulderS.z/2);
+    glm::vec3 elbowRT       (0,       					0,                      -elbowS.z/2                 );
+    glm::vec3 forearmRT     (0,       					0,                      -forearmS.z - elbowS.z/2    );
+    glm::vec3 wristRT       (0,       					0,                      -wristS.z/2            		);
+    glm::vec3 handRT        (0,       					0,                      -wristS.z/2 - handS.z 		);
+    glm::vec3 hipLT    		(upperLegS.x - chestS.x,    0,                      -hipS.z/2                   );
+    glm::vec3 upperLegLT    (0,    						0,                      -hipS.z/2 - upperLegS.z     );
+    glm::vec3 kneeLT        (0,    						0,                      -kneeS.z/2                  );
+    glm::vec3 calfLT        (0,    						0,                      -kneeS.z/2 - calfS.z        );
+    glm::vec3 ankleLT       (0,    						0,                      -ankleS.z/2                 );
+    glm::vec3 footLT        (0,    						(ankleS.x + footS.x)/2,	-ankleS.z/2 - footS.z/2     );
+    glm::vec3 hipRT    		(chestS.x - upperLegS.x,    0,                      -hipS.z/2                   );
+    glm::vec3 upperLegRT    (0,    						0,                      -hipS.z/2 - upperLegS.z     );
+    glm::vec3 kneeRT        (0,    						0,                      -kneeS.z/2                  );
+    glm::vec3 calfRT        (0,    						0,                      -kneeS.z/2 - calfS.z        );
+    glm::vec3 ankleRT       (0,    						0,                      -ankleS.z/2					);
+    glm::vec3 footRT        (0,    						(ankleS.x + footS.x)/2, -ankleS.z/2 - footS.z/2		);
 
     // Apply transforms (standing position)
-    chest       ->setLocalTransform(translate(chest,        chestT     ) * scale(chest,        chestS     ));
-    neck        ->setLocalTransform(translate(neck,         neckT      ) * scale(neck,         neckS      ));
-    head        ->setLocalTransform(translate(head,         headT      ) * scale(head,         headS      ));
-    shoulder_l  ->setLocalTransform(translate(shoulder_l,   shoulderLT ) * scale(shoulder_l,   shoulderS  ));
-    upperArm_l  ->setLocalTransform(translate(upperArm_l,   upperArmLT ) * scale(upperArm_l,   upperArmS  ));
-    elbow_l     ->setLocalTransform(translate(elbow_l,      elbowLT    ) * scale(elbow_l,      elbowS     ));
-    forearm_l   ->setLocalTransform(translate(forearm_l,    forearmLT  ) * scale(forearm_l,    forearmS   ));
-    wrist_l     ->setLocalTransform(translate(wrist_l,      wristLT    ) * scale(wrist_l,      wristS     ));
-    hand_l      ->setLocalTransform(translate(hand_l,       handLT     ) * scale(hand_l,       handS      ));
-    shoulder_r  ->setLocalTransform(translate(shoulder_r,   shoulderRT ) * scale(shoulder_r,   shoulderS  ));
-    upperArm_r  ->setLocalTransform(translate(upperArm_r,   upperArmRT ) * scale(upperArm_r,   upperArmS  ));
-    elbow_r     ->setLocalTransform(translate(elbow_r,      elbowRT    ) * scale(elbow_r,      elbowS     ));
-    forearm_r   ->setLocalTransform(translate(forearm_r,    forearmRT  ) * scale(forearm_r,    forearmS   ));
-    wrist_r     ->setLocalTransform(translate(wrist_r,      wristRT    ) * scale(wrist_r,      wristS     ));
-    hand_r      ->setLocalTransform(translate(hand_r,       handRT     ) * scale(hand_r,       handS      ));
-    hip_l  		->setLocalTransform(translate(hip_l,   		hipLT 	   ) * scale(hip_l,   	   hipS  	  ));
-    upperLeg_l  ->setLocalTransform(translate(upperLeg_l,   upperLegLT ) * scale(upperLeg_l,   upperLegS  ));
-    knee_l      ->setLocalTransform(translate(knee_l,       kneeLT     ) * scale(knee_l,       kneeS      ));
-    calf_l      ->setLocalTransform(translate(calf_l,       calfLT     ) * scale(calf_l,       calfS      ));
-    ankle_l     ->setLocalTransform(translate(ankle_l,      ankleLT    ) * scale(ankle_l,      ankleS     ));
-    foot_l      ->setLocalTransform(translate(foot_l,       footLT     ) * scale(foot_l,       footS      ));
-    hip_r  		->setLocalTransform(translate(hip_r,   		hipRT 	   ) * scale(hip_r,   	   hipS  	  ));
-    upperLeg_r  ->setLocalTransform(translate(upperLeg_r,   upperLegRT ) * scale(upperLeg_r,   upperLegS  ));
-    knee_r      ->setLocalTransform(translate(knee_r,       kneeRT     ) * scale(knee_r,       kneeS      ));
-    calf_r      ->setLocalTransform(translate(calf_r,       calfRT     ) * scale(calf_r,       calfS      ));
-    ankle_r     ->setLocalTransform(translate(ankle_r,      ankleRT    ) * scale(ankle_r,      ankleS     ));
-    foot_r      ->setLocalTransform(translate(foot_r,       footRT     ) * scale(foot_r,       footS      ));
+    chest       ->setParentTransform(translate(chest,        chestT     ));
+    neck        ->setParentTransform(translate(neck,         neckT      ));
+    head        ->setParentTransform(translate(head,         headT      ));
+    shoulder_l  ->setParentTransform(translate(shoulder_l,   shoulderLT ));
+    upperArm_l  ->setParentTransform(translate(upperArm_l,   upperArmLT ));
+    elbow_l     ->setParentTransform(translate(elbow_l,      elbowLT    ));
+    forearm_l   ->setParentTransform(translate(forearm_l,    forearmLT  ));
+    wrist_l     ->setParentTransform(translate(wrist_l,      wristLT    ));
+    hand_l      ->setParentTransform(translate(hand_l,       handLT     ));
+    shoulder_r  ->setParentTransform(translate(shoulder_r,   shoulderRT ));
+    upperArm_r  ->setParentTransform(translate(upperArm_r,   upperArmRT ));
+    elbow_r     ->setParentTransform(translate(elbow_r,      elbowRT    ));
+    forearm_r   ->setParentTransform(translate(forearm_r,    forearmRT  ));
+    wrist_r     ->setParentTransform(translate(wrist_r,      wristRT    ));
+    hand_r      ->setParentTransform(translate(hand_r,       handRT     ));
+    hip_l  		->setParentTransform(translate(hip_l,   	 hipLT 	   ));
+    upperLeg_l  ->setParentTransform(translate(upperLeg_l,   upperLegLT ));
+    knee_l      ->setParentTransform(translate(knee_l,       kneeLT     ));
+    calf_l      ->setParentTransform(translate(calf_l,       calfLT     ));
+    ankle_l     ->setParentTransform(translate(ankle_l,      ankleLT    ));
+    foot_l      ->setParentTransform(translate(foot_l,       footLT     ));
+    hip_r  		->setParentTransform(translate(hip_r,   	 hipRT 	   ));
+    upperLeg_r  ->setParentTransform(translate(upperLeg_r,   upperLegRT ));
+    knee_r      ->setParentTransform(translate(knee_r,       kneeRT     ));
+    calf_r      ->setParentTransform(translate(calf_r,       calfRT     ));
+    ankle_r     ->setParentTransform(translate(ankle_r,      ankleRT    ));
+    foot_r      ->setParentTransform(translate(foot_r,       footRT     ));
+    
+    chest		->setLocalTransform(scale(chest,        chestS     ));
+    neck        ->setLocalTransform(scale(neck,         neckS      ));
+    head        ->setLocalTransform(scale(head,         headS      ));
+    shoulder_l  ->setLocalTransform(scale(shoulder_l,   shoulderS  ));
+    upperArm_l  ->setLocalTransform(scale(upperArm_l,   upperArmS  ));
+    elbow_l     ->setLocalTransform(scale(elbow_l,      elbowS     ));
+    forearm_l   ->setLocalTransform(scale(forearm_l,    forearmS   ));
+    wrist_l     ->setLocalTransform(scale(wrist_l,      wristS     ));
+    hand_l      ->setLocalTransform(scale(hand_l,       handS      ));
+    shoulder_r  ->setLocalTransform(scale(shoulder_r,   shoulderS  ));
+    upperArm_r  ->setLocalTransform(scale(upperArm_r,   upperArmS  ));
+    elbow_r     ->setLocalTransform(scale(elbow_r,      elbowS     ));
+    forearm_r   ->setLocalTransform(scale(forearm_r,    forearmS   ));
+    wrist_r     ->setLocalTransform(scale(wrist_r,      wristS     ));
+    hand_r      ->setLocalTransform(scale(hand_r,       handS      ));
+    hip_l  		->setLocalTransform(scale(hip_l,   	   hipS  	  ));
+    upperLeg_l  ->setLocalTransform(scale(upperLeg_l,   upperLegS  ));
+    knee_l      ->setLocalTransform(scale(knee_l,       kneeS      ));
+    calf_l      ->setLocalTransform(scale(calf_l,       calfS      ));
+    ankle_l     ->setLocalTransform(scale(ankle_l,      ankleS     ));
+    foot_l      ->setLocalTransform(scale(foot_l,       footS      ));
+    hip_r  		->setLocalTransform(scale(hip_r,   	   hipS  	  ));
+    upperLeg_r  ->setLocalTransform(scale(upperLeg_r,   upperLegS  ));
+    knee_r      ->setLocalTransform(scale(knee_r,       kneeS      ));
+    calf_r      ->setLocalTransform(scale(calf_r,       calfS      ));
+    ankle_r     ->setLocalTransform(scale(ankle_r,      ankleS     ));
+    foot_r      ->setLocalTransform(scale(foot_r,       footS      ));
 
     // Move character to have a proper posture in the kart
-    auto tmp = chest->getParentTransform() * glm::vec4(0, 1, 0, 0) - chest->getParentTransform() * glm::vec4(0, 0, 0, 0);
-
-    neck        ->setParentTransform(rotateParent(neck, -M_PI/8, glm::vec3(tmp)));
-    /*
-    head        ->setLocalTransform(translate(head,         headT      ) * scale(head,         headS      ));
-    shoulder_l  ->setLocalTransform(translate(shoulder_l,   shoulderLT ) * scale(shoulder_l,   shoulderS  ));
-    upperArm_l  ->setLocalTransform(translate(upperArm_l,   upperArmLT ) * scale(upperArm_l,   upperArmS  ));
-    elbow_l     ->setLocalTransform(translate(elbow_l,      elbowLT    ) * scale(elbow_l,      elbowS     ));
-    forearm_l   ->setLocalTransform(translate(forearm_l,    forearmLT  ) * scale(forearm_l,    forearmS   ));
-    wrist_l     ->setLocalTransform(translate(wrist_l,      wristLT    ) * scale(wrist_l,      wristS     ));
-    hand_l      ->setLocalTransform(translate(hand_l,       handLT     ) * scale(hand_l,       handS      ));
-    shoulder_r  ->setLocalTransform(translate(shoulder_r,   shoulderRT ) * scale(shoulder_r,   shoulderS  ));
-    upperArm_r  ->setLocalTransform(translate(upperArm_r,   upperArmRT ) * scale(upperArm_r,   upperArmS  ));
-    elbow_r     ->setLocalTransform(translate(elbow_r,      elbowRT    ) * scale(elbow_r,      elbowS     ));
-    forearm_r   ->setLocalTransform(translate(forearm_r,    forearmRT  ) * scale(forearm_r,    forearmS   ));
-    wrist_r     ->setLocalTransform(translate(wrist_r,      wristRT    ) * scale(wrist_r,      wristS     ));
-    hand_r      ->setLocalTransform(translate(hand_r,       handRT     ) * scale(hand_r,       handS      ));
-    hip_l  		->setLocalTransform(translate(hip_l,   		hipLT 	   ) * scale(hip_l,   	   hipS  	  ));
-    upperLeg_l  ->setLocalTransform(translate(upperLeg_l,   upperLegLT ) * scale(upperLeg_l,   upperLegS  ));
-    knee_l      ->setLocalTransform(translate(knee_l,       kneeLT     ) * scale(knee_l,       kneeS      ));
-    calf_l      ->setLocalTransform(translate(calf_l,       calfLT     ) * scale(calf_l,       calfS      ));
-    ankle_l     ->setLocalTransform(translate(ankle_l,      ankleLT    ) * scale(ankle_l,      ankleS     ));
-    foot_l      ->setLocalTransform(translate(foot_l,       footLT     ) * scale(foot_l,       footS      ));
-    hip_r  		->setLocalTransform(translate(hip_r,   		hipRT 	   ) * scale(hip_r,   	   hipS  	  ));
-    upperLeg_r  ->setLocalTransform(translate(upperLeg_r,   upperLegRT ) * scale(upperLeg_r,   upperLegS  ));
-    knee_r      ->setLocalTransform(translate(knee_r,       kneeRT     ) * scale(knee_r,       kneeS      ));
-    calf_r      ->setLocalTransform(translate(calf_r,       calfRT     ) * scale(calf_r,       calfS      ));
-    ankle_r     ->setLocalTransform(translate(ankle_r,      ankleRT    ) * scale(ankle_r,      ankleS     ));
-    foot_r      ->setLocalTransform(translate(foot_r,       footRT     ) * scale(foot_r,       footS      ));*/
+    double characterScale = 1.5;
+    chest		->setParentTransform(translateParent(chest, 0, 0.5, 0)   						// Kart positioning
+						    * rotateParent(chest, M_PI, 0, 1, 0) 									// Face the right direction
+    						* rotateParent(chest, -M_PI/4, 1, 0, 0) 								// Inclination in kart seat
+    						* scaleParent(chest, characterScale, characterScale, characterScale));	// Scale adaptation
+    neck		->setParentTransform(rotateParent(neck, -M_PI/4, 1, 0, 0)); 						// Restore head inclination
+    shoulder_l	->setParentTransform(rotateParent(shoulder_l, M_PI/6, 1, 0, 0));					// Arms relaxed
+    shoulder_r	->setParentTransform(rotateParent(shoulder_r, M_PI/6, 1, 0, 0));
+    elbow_l		->setParentTransform(rotateParent(elbow_l, M_PI/6, 1, 0, 0));						// Forearms aiming at the steering wheel
+    elbow_r		->setParentTransform(rotateParent(elbow_r, M_PI/6, 1, 0, 0));
+    wrist_l		->setParentTransform(rotateParent(wrist_l, M_PI/6, 1, 0, 0));						// Hands on the steering wheel (kind of)
+    wrist_r		->setParentTransform(rotateParent(wrist_r, M_PI/6, 1, 0, 0));
+    hip_l		->setParentTransform(rotateParent(hip_l, M_PI/4, 1, 0, 0));							// Horizontal legs
+    hip_r		->setParentTransform(rotateParent(hip_r, M_PI/4, 1, 0, 0));
+    knee_l		->setParentTransform(rotateParent(knee_l, -M_PI/4, 1, 0, 0));						// Calves are following the curve of the body
+    knee_r		->setParentTransform(rotateParent(knee_r, -M_PI/4, 1, 0, 0));
 
     HierarchicalRenderable::addChild(chest,         	neck       );
     HierarchicalRenderable::addChild(neck,          	head       );
@@ -431,20 +447,20 @@ KeyframedKartRenderablePtr Scene::moving_kart(KeyframedKartRenderablePtr root,
 			printf("%f \n",times[i] );
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,0}), times[0] );
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0,33}), times[1]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,40}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), times[2]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{5,0,45}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[3]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{10,0,45}, glm::quat( glm::vec3{0.0,  1.75, 0.} )), times[4]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,38}, glm::quat( glm::vec3{0.0,  8., 0.} )), times[5] );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{75,0,25}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[6]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,10}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[7]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{45,0,5}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[8]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{40,0,0}, glm::quat( glm::vec3{0.0,  15., 0.} )), times[9]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{2.5,0,35}, glm::quat( glm::vec3{0.0,  0.5, 0.} )), times[2]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{5,0,40}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[3]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{10,0,40}, glm::quat( glm::vec3{0.0,  1.75, 0.} )), times[4]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,33}, glm::quat( glm::vec3{0.0,  8., 0.} )), times[5] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{67,0,25}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[6]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{40,0,10}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[7]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{38,0,5}, glm::quat( glm::vec3{0.0,  10., 0.} )), times[8]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{38,0,0}, glm::quat( glm::vec3{0.0,  15., 0.} )), times[9]);
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{60,0,-25}, glm::quat( glm::vec3{0.0,  -10., 0.} )), times[10]);
 		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{65,0,-33}, glm::quat( glm::vec3{0.0,  -15., 0.} )), times[11]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,-40}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[12] );
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, -25}, glm::quat( glm::vec3{0.0,  0., 0.} )), times[13]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[14]);
-		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{-5,0, 10}, glm::quat( glm::vec3{0.0,  1., 0.} )), times[15]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{50,0,-35}, glm::quat( glm::vec3{0.0,  -8., 0.} )), times[12] );
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{3,0, -25}, glm::quat( glm::vec3{0.0,  -1., 0.} )), times[13]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0, 10}, glm::quat( glm::vec3{0.0,  0., 0.} )), times[14]);
+		root->addParentTransformKeyframe( GeometricTransformation( glm::vec3{0,0, 10}, glm::quat( glm::vec3{0.0,  0., 0.} )), times[15]);
 
 		return root ;
 }
