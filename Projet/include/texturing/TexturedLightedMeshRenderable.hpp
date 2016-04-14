@@ -20,10 +20,11 @@ class TexturedLightedMeshRenderable : public HierarchicalRenderable
         void setMaterial(const MaterialPtr& material);
 
     private:
-        void do_draw();
         void do_animate( float time );
     
     protected:
+	    void do_draw();
+	    
         std::vector< glm::vec3 > m_positions;
         std::vector< glm::vec3 > m_normals;
         std::vector< glm::vec4 > m_colors;

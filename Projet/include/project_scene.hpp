@@ -1,16 +1,36 @@
 #ifndef PROJECT_SCENE_H
 #define PROJECT_SCENE_H
 
-#include "Viewer.hpp"
-#include "ShaderProgram.hpp"
 #include "CubeRenderable.hpp"
 #include "CylinderRenderable.hpp"
 #include "MeshRenderable.hpp"
+#include "FrameRenderable.hpp"
+#include "KeyframedKartRenderable.hpp"
+#include "QuadRenderable.hpp"
+#include "SphereRenderable.hpp"
+#include "IndexedCubeRenderable.hpp"
+
+#include "Viewer.hpp"
+#include "ShaderProgram.hpp"
+#include "Utils.hpp"
+
+#include "lighting/DirectionalLightRenderable.hpp"
+
+#include "texturing/TexturedLightedMeshRenderable.hpp"
+#include "texturing/TexturedPlaneRenderable.hpp"
 #include "texturing/TexturedLightedMeshRenderable.hpp"
 
-#include "./dynamics/DynamicSystem.hpp"
-#include "./dynamics/DynamicSystemRenderable.hpp"
-#include "../include/KeyframedKartRenderable.hpp"
+#include "dynamics/ConstantForceField.hpp"
+#include "dynamics/EulerExplicitSolver.hpp"
+#include "dynamics/KartRenderable.hpp"
+#include "dynamics/DampingForceField.hpp"
+#include "dynamics/ConstantForceFieldRenderable.hpp"
+#include "dynamics/ControlledForceFieldRenderable.hpp"
+#include "dynamics/DynamicSystem.hpp"
+#include "dynamics/DynamicSystemRenderable.hpp"
+
+#include "log.hpp"
+#include <fstream>
 
 class Scene {
 	public:
@@ -19,6 +39,7 @@ class Scene {
 		static float times[16];
 
   private:
+  		KartPtr mobile;
   		static const double kartScaleFactor;
 		static int kartCount;
   		Viewer *viewer;
@@ -27,9 +48,9 @@ class Scene {
   		DynamicSystemPtr dynSystem;
   		DynamicSystemRenderablePtr systemRenderable;
 
-		KeyframedKartRenderablePtr createTexturedMovingKartFromMesh();
-  		TexturedLightedMeshRenderablePtr createTexturedKartFromMesh      ();
+		KeyframedKartRenderablePtr createTexturedMovingKartFromMesh		 ();
 		CylinderRenderablePtr    		 createCharacterFromPrimitives   ();
+		KartRenderablePtr				 createControllableKart			 ();
 
 		void kart_game_light	();
 		void kart_game_borders	();

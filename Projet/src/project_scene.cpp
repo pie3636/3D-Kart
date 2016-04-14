@@ -1,28 +1,4 @@
-#include "./../include/project_scene.hpp"
-
-#include "../include/ShaderProgram.hpp"
-#include "../include/FrameRenderable.hpp"
-
-#include "../include/KeyframedKartRenderable.hpp"
-
-#include "../include/texturing/TexturedPlaneRenderable.hpp"
-#include "../include/lighting/DirectionalLightRenderable.hpp"
-#include "../include/texturing/TexturedLightedMeshRenderable.hpp"
-
-#include "../include/dynamics/ConstantForceField.hpp"
-#include "../include/dynamics/EulerExplicitSolver.hpp"
-
-
-#include "../include/dynamics/ConstantForceFieldRenderable.hpp"
-#include "../include/dynamics/ControlledForceFieldRenderable.hpp"
-
-#include "./../include/Utils.hpp"
-#include "./../include/QuadRenderable.hpp"
-#include "./../include/SphereRenderable.hpp"
-#include "./../include/IndexedCubeRenderable.hpp"
-
-#include "../include/log.hpp"
-#include <fstream>
+#include "../include/project_scene.hpp"
 
 int Scene::kartCount = 0;
 const double Scene::kartScaleFactor = 0.5;
@@ -62,19 +38,11 @@ Scene::Scene(Viewer* viewer) {
     kart_game_borders();
     getRoad(flatShader, *viewer);
 
-    TexturedLightedMeshRenderablePtr    meshKart1 = createTexturedKartFromMesh       ();
-    //TexturedLightedMeshRenderablePtr    meshKar2 = createTexturedKartFromMesh       ();
-    //TexturedLightedMeshRenderablePtr    meshKar3 = createTexturedKartFromMesh       ();
-    //TexturedLightedMeshRenderablePtr    meshKar4 = createTexturedKartFromMesh       ();
-
-    //viewer->addRenderable(meshKart1);
-    //viewer->addRenderable(meshKar2);
-    //viewer->addRenderable(meshKar3);
-    //viewer->addRenderable(meshKar4);
-
 	KeyframedKartRenderablePtr    meshKart2 = createTexturedMovingKartFromMesh();
-	viewer->addRenderable(meshKart2);
-
+	
+	KartRenderablePtr mobileRenderable = createControllableKart();
+    HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
+    HierarchicalRenderable::addChild(mobileRenderable, createCharacterFromPrimitives());
 
 	// Place the camera
 	viewer->getCamera().setViewMatrix(glm::lookAt(glm::vec3(-25, -25, 60), glm::vec3(0, 0, 0), glm::vec3(0, 0, 1)));
@@ -86,9 +54,8 @@ Scene::Scene(Viewer* viewer) {
 Scene::~Scene() {}
 
 KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
-    std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
+	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
     KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
-    kartCount++;
     kart->setMaterial(Material::Pearl());
 	kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0)
 						   * rotate(kart, -M_PI/2 - 0.15, 0, 1, 0)
@@ -99,21 +66,31 @@ KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 	return moving_kart(kart, texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
 }
 
-
-TexturedLightedMeshRenderablePtr Scene::createTexturedKartFromMesh() {
+KartRenderablePtr Scene::createControllableKart() {
 	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
-    TexturedLightedMeshRenderablePtr kart = std::make_shared<TexturedLightedMeshRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
-    kartCount++;
-    kart->setMaterial(Material::Pearl());
-	kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0)
-						   * rotate(kart, -M_PI/2 - 0.15, 0, 1, 0)
-						   * scale(kart, kartScaleFactor, kartScaleFactor, kartScaleFactor)
-						   * translate(kart, -38, 1., 1.));
-	HierarchicalRenderable::addChild(systemRenderable, 	kart);
+ 	KartPtr mobile = std::make_shared<Kart>(glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), 10, 5, 3, 1.5);
+    dynSystem->addKart(mobile);
 
-    HierarchicalRenderable::addChild(systemRenderable, 	kart							);
-    HierarchicalRenderable::addChild(kart, 				createCharacterFromPrimitives() );
-    return kart;
+    kartCount++;
+    
+    // Initialize a force field that applies only to the mobile kart
+    glm::vec3 nullForce(0.0,0.0,0.0);
+    std::vector<KartPtr> vKart;
+    vKart.push_back(mobile);
+    ConstantForceFieldPtr force = std::make_shared<ConstantForceField>(vKart, nullForce);
+    dynSystem->addForceField(force);
+
+    // Initialize a renderable for the force field applied on the mobile particle.
+    // This renderable allows to modify the attribute of the force by key/mouse events
+    // Add this renderable to the systemRenderable.
+    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>(texShader, force);
+    HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
+
+    // Add a damping force field to the mobile.
+    DampingForceFieldPtr dampingForceField = std::make_shared<DampingForceField>(vKart, 0.9);
+    dynSystem->addForceField(dampingForceField);
+    
+    return std::make_shared<KartRenderable>(texShader, mobile, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
 }
 
 CylinderRenderablePtr Scene::createCharacterFromPrimitives() {

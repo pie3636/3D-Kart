@@ -10,15 +10,24 @@
 KartRenderable::KartRenderable(
   ShaderProgramPtr shaderProgram, KartPtr kart, const std::string& mesh_filename, const std::string& texture_filename) :
     TexturedLightedMeshRenderable(shaderProgram, mesh_filename, texture_filename) {
-      glm::mat4 init = rotate(glm::mat4(1.0),float (M_PI/2), glm::vec3(1, 0, 0)) * rotate(glm::mat4(1.0),float (-M_PI/2-0.15), glm::vec3(0, 1, 0)) *
-                            scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5)) * translate(glm::mat4(1.0), glm::vec3(0., 1., 0.));
-      setParentTransform(glm::translate(glm::mat4(1.0),kart->getPosition())*init);
-
+		glm::mat4 init = rotate(glm::mat4(1.0),float (M_PI/2), glm::vec3(1, 0, 0))
+					   * rotate(glm::mat4(1.0),float (-M_PI/2-0.15), glm::vec3(0, 1, 0))
+					   * scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5))
+					   * translate(glm::mat4(1.0), glm::vec3(0., 1., 0.));
+		this->kart = kart;
+		setParentTransform(glm::translate(glm::mat4(1.0), kart->getPosition())*init);
     }
 
 void KartRenderable::do_draw()
 {
-    //kart->setPosition(glm::vec3(0,0,0));
+    // Update the parent and local transform matrix to position the geometric data according to the particle's data.
+    const glm::vec3& pPosition = kart->getPosition();
+    float alpha = atan2(kart->getVelocity().y, kart->getVelocity().x);
+    glm::mat4 translate = glm::translate(glm::mat4(1.0), glm::vec3(-2*pPosition.y, 2*pPosition.z, -2*pPosition.x));
+    glm::mat4 rotate = glm::rotate(glm::mat4(1.0), -2*alpha, glm::vec3(0, 1, 0));
+    
+    setLocalTransform(translate * rotate);
+    
     TexturedLightedMeshRenderable::do_draw();
 }
 

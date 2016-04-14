@@ -13,6 +13,7 @@ KartPlaneCollision::KartPlaneCollision(KartPtr Kart, PlanePtr plane, float resti
 
 void KartPlaneCollision::do_solveCollision()
 {
+	/*
     //Don't process fixed Karts (Let's assume that the ground plane is fixed)
     if (m_Kart->isFixed()) return;
 
@@ -28,16 +29,19 @@ void KartPlaneCollision::do_solveCollision()
     glm::vec3 prev_v = m_Kart->getVelocity();
     glm::vec3 new_v = prev_v - (1.0f + m_restitution)*glm::dot(prev_v, m_plane->normal())*m_plane->normal();
     m_Kart->setVelocity(new_v);
+    */
 }
 
 
 
 bool testKartPlane(const KartPtr &kart, const PlanePtr &plane)
 {
+	/*
     glm::vec3 planePoint = plane->distanceToOrigin()*plane->normal();
     glm::vec3 v = kart->getPosition()-planePoint;
     float kartPlaneDist = glm::dot(v,plane->normal());
     float c = kartPlaneDist-kart->getRadius();
     return (c<0.0f) ? true : false;
+    */
     return false;
 }

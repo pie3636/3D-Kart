@@ -12,7 +12,7 @@ void Kart::setFixed(bool isFixed)
 }
 
 Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &mass,
-  const float& width, const float& length)
+  const float& width, const float& length, const float& depth)
     : m_initialPosition( position ), m_initialVelocity( velocity ),
         m_position(position),
       m_velocity(velocity),
@@ -20,7 +20,7 @@ Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &ma
       m_mass(mass),
       length(length),
       width(width),
-      m_radius((width/2 + length/2)/2)
+      depth(depth)
 {}
 
 Kart::~Kart()
@@ -40,11 +40,6 @@ const glm::vec3 & Kart::getVelocity() const
 const glm::vec3 & Kart::getForce() const
 {
     return m_force;
-}
-
-float Kart::getRadius() const
-{
-    return m_radius;
 }
 
 float Kart::getMass() const

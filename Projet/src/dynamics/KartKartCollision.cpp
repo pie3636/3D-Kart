@@ -16,6 +16,7 @@ KartKartCollision::KartKartCollision(KartPtr k1, KartPtr k2, float restitution) 
 
 void KartKartCollision::do_solveCollision()
 {
+	/*
     //Don't process fixed Karts (Let's assume that the ground plane is fixed)
     if (kart1->isFixed() && kart2->isFixed()) return;
 
@@ -56,13 +57,17 @@ void KartKartCollision::do_solveCollision()
     glm::vec3 new_v2 = prev_v2 + proj_v/kart2->getMass()*k;
     kart1->setVelocity(new_v1);
     kart2->setVelocity(new_v2);
+    */
 }
 
 
 bool testKartKart(const KartPtr &k1, const KartPtr &k2)
 {
+	/*
     if(k1==k2) return false;
     float r = k1->getRadius() + k2->getRadius();
     float c = glm::distance2(k1->getPosition(),k2->getPosition()) - r*r;
     return (c<0.0f) ? true : false;
+    */
+    return false;
 }

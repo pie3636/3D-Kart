@@ -19,6 +19,7 @@ class KartRenderable : public TexturedLightedMeshRenderable
         ShaderProgramPtr program, KartPtr kart,
         const std::string& mesh_filename,
         const std::string& texture_filename);
+        const KartPtr getKart() const {return kart;};
 
   private:
     void do_draw();
