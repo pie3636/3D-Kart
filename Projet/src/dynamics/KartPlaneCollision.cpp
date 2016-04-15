@@ -13,35 +13,40 @@ KartPlaneCollision::KartPlaneCollision(KartPtr Kart, PlanePtr plane, float resti
 
 void KartPlaneCollision::do_solveCollision()
 {
-	/*
     //Don't process fixed Karts (Let's assume that the ground plane is fixed)
     if (m_Kart->isFixed()) return;
-
-    float lx, ly;
-
-    glm::vec3 prev_x = m_Kart->getPosition();
-    float distToPlane = glm::dot(prev_x, m_plane->normal())-m_plane->distanceToOrigin();
-    //Project the Kart on the plane
-    glm::vec3 new_x = prev_x - (distToPlane-m_Kart->getRadius())*m_plane->normal();
-    m_Kart->setPosition(new_x);
-
-    //Compute post-collision velocity
-    glm::vec3 prev_v = m_Kart->getVelocity();
-    glm::vec3 new_v = prev_v - (1.0f + m_restitution)*glm::dot(prev_v, m_plane->normal())*m_plane->normal();
-    m_Kart->setVelocity(new_v);
-    */
+	
+	glm::vec3 avGauche(- m_Kart->getLength()/2 * cos(m_Kart->getAngle()), + m_Kart->getWidth()/2 * sin(m_Kart->getAngle()), 0);
+	glm::vec3 avDroite(+ m_Kart->getLength()/2 * cos(m_Kart->getAngle()), + m_Kart->getWidth()/2 * sin(m_Kart->getAngle()), 0);
+	glm::vec3 arGauche(- m_Kart->getLength()/2 * cos(m_Kart->getAngle()), - m_Kart->getWidth()/2 * sin(m_Kart->getAngle()), 0);
+	glm::vec3 arDroite(+ m_Kart->getLength()/2 * cos(m_Kart->getAngle()), - m_Kart->getWidth()/2 * sin(m_Kart->getAngle()), 0);
+	
+	glm::vec3 projAvG = m_plane->projectOnPlane(avGauche) - avGauche;
+	glm::vec3 projAvD = m_plane->projectOnPlane(avDroite) - avDroite;
+	glm::vec3 projArG = m_plane->projectOnPlane(arGauche) - arGauche;
+	glm::vec3 projArD = m_plane->projectOnPlane(arDroite) - arDroite;
+	
+	glm::vec3 norm = m_plane->normal();
+	
+	float factAvG = projAvG.x != 0 && norm.x != 0 ? projAvG.x / norm.x : (projAvG.y != 0 && norm.y != 0 ? projAvG.y / norm.y : 0);
+	float factAvD = projAvD.x != 0 && norm.x != 0 ? projAvD.x / norm.x : (projAvD.y != 0 && norm.y != 0 ? projAvD.y / norm.y : 0);
+	float factArG = projArG.x != 0 && norm.x != 0 ? projArG.x / norm.x : (projArG.y != 0 && norm.y != 0 ? projArG.y / norm.y : 0);
+	float factArD = projArD.x != 0 && norm.x != 0 ? projArD.x / norm.x : (projArD.y != 0 && norm.y != 0 ? projArD.y / norm.y : 0);
+	
+	if (glm::distance(m_Kart->getPosition(), m_plane->projectOnPlane(m_Kart->getPosition())) < m_Kart->getDepth()/2) {
+		if (factAvG * factAvD * factArG * factArD != 0 || factAvG * factAvD * factArG * factArD >= 0 && factAvG * factAvD >= 0 && factAvG * factArG >= 0) {
+			return;
+		}
+	}
+	
+	m_Kart->incrVelocity(- (1 + m_restitution) * (glm::dot(m_Kart->getVelocity(), m_plane->normal())) * m_plane->normal());
+	m_Kart->incrPosition((m_Kart->getRadius() - glm::distance(m_Kart->getPosition(), m_plane->projectOnPlane(m_Kart->getPosition())))* m_plane->normal()); // Note : ceci est inexact mais nous n'avons pas le temps de faire mieux
 }
 
 
 
 bool testKartPlane(const KartPtr &kart, const PlanePtr &plane)
 {
-	/*
-    glm::vec3 planePoint = plane->distanceToOrigin()*plane->normal();
-    glm::vec3 v = kart->getPosition()-planePoint;
-    float kartPlaneDist = glm::dot(v,plane->normal());
-    float c = kartPlaneDist-kart->getRadius();
-    return (c<0.0f) ? true : false;
-    */
-    return false;
+    glm::vec3 p2 = plane->projectOnPlane(kart->getPosition());
+    return glm::distance(kart->getPosition(), p2) < kart->getRadius();
 }
