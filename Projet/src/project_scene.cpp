@@ -66,7 +66,7 @@ KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 
 KartRenderablePtr Scene::createControllableKart() {
 	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
- 	KartPtr mobile = std::make_shared<Kart>(glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), 10, 5, 3, 1.5, 0.0);
+ 	KartPtr mobile = std::make_shared<Kart>(glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), 1, 5, 3, 1.5, 0.0);
     dynSystem->addKart(mobile);
     kartCount++;
 		KartRenderablePtr mobileRenderable = std::make_shared<KartRenderable>(texShader,
