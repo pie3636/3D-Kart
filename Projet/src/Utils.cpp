@@ -500,18 +500,18 @@ void getUnitCone(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& norm
 
 void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
 {
-    positions.push_back(glm::vec3(-2.5,-2.5,0.0));
-    positions.push_back(glm::vec3(2.5,-2.5,0.0));
-    positions.push_back(glm::vec3(2.5,2.5,0.0));
+    positions.push_back(glm::vec3(-5,-5,0.0));
+    positions.push_back(glm::vec3(5,-5,0.0));
+    positions.push_back(glm::vec3(5,5,0.0));
 
     texCoords.push_back(glm::vec2(0.0,0.0));
     texCoords.push_back(glm::vec2(1.0,0.0));
     texCoords.push_back(glm::vec2(1.0,1.0));
 
     //Second triangle
-    positions.push_back(glm::vec3(-2.5,-2.5,0.0));
-    positions.push_back(glm::vec3(2.5,2.5,0.0));
-    positions.push_back(glm::vec3(-2.5,2.5,0.0));
+    positions.push_back(glm::vec3(-5,-5,0.0));
+    positions.push_back(glm::vec3(5,5,0.0));
+    positions.push_back(glm::vec3(-5,5,0.0));
 
     texCoords.push_back(glm::vec2(0.0,0.0));
     texCoords.push_back(glm::vec2(1.0,1.0));
@@ -524,19 +524,19 @@ void getGround(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normal
 void getWalls(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
 {
 
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<20; i++) {
       //Plane x=0
       //First triangle
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,0.0));
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),0.0));
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),5.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*i,0.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*(i+1),0.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*(i+1),5.0));
       texCoords.push_back(glm::vec2(0.0,0.0));
       texCoords.push_back(glm::vec2(1.0,0.0));
       texCoords.push_back(glm::vec2(1.0,1.0));
       //Second triangle
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,0.0));
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*(i+1),5.0));
-      positions.push_back(glm::vec3(0.0,-25.0+5.0*i,5.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*i,0.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*(i+1),5.0));
+      positions.push_back(glm::vec3(0.0,-50.0+5.0*i,5.0));
       texCoords.push_back(glm::vec2(0.0,0.0));
       texCoords.push_back(glm::vec2(1.0,1.0));
       texCoords.push_back(glm::vec2(0.0,1.0));
@@ -545,25 +545,46 @@ void getWalls(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals
     }
 }
 
-void getAds(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords)
+void getAds(std::vector<glm::vec3>& positions, std::vector<glm::vec3>& normals, std::vector<glm::vec2> &texCoords, int index)
 {
+	switch(index) {
+		case 0:
+			positions.push_back(glm::vec3(-5.,49.9,0.));
+			positions.push_back(glm::vec3(5.,49.9,0.));
+			positions.push_back(glm::vec3(5.,49.9,5.));
+			texCoords.push_back(glm::vec2(0.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,1.0));
 
-      positions.push_back(glm::vec3(-5.,24.9,0.));
-      positions.push_back(glm::vec3(5.,24.9,0.));
-      positions.push_back(glm::vec3(5.,24.9,5.));
-      texCoords.push_back(glm::vec2(0.0,0.0));
-      texCoords.push_back(glm::vec2(1.0,0.0));
-      texCoords.push_back(glm::vec2(1.0,1.0));
+			positions.push_back(glm::vec3(-5.,49.9,0.));
+			positions.push_back(glm::vec3(5.,49.9,5.));
+			positions.push_back(glm::vec3(-5.,49.9,5.));
+			texCoords.push_back(glm::vec2(0.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,1.0));
+			texCoords.push_back(glm::vec2(0.0,1.0));
+			break;
+		case 1:
+			positions.push_back(glm::vec3(-15.,49.9,0.));
+			positions.push_back(glm::vec3(-5.,49.9,0.));
+			positions.push_back(glm::vec3(-5.,49.9,5.));
+			texCoords.push_back(glm::vec2(0.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,1.0));
 
-      positions.push_back(glm::vec3(-5.,24.9,0.));
-      positions.push_back(glm::vec3(5.,24.9,5.));
-      positions.push_back(glm::vec3(-5.,24.9,5.));
-      texCoords.push_back(glm::vec2(0.0,0.0));
-      texCoords.push_back(glm::vec2(1.0,1.0));
-      texCoords.push_back(glm::vec2(0.0,1.0));
+			positions.push_back(glm::vec3(-15.,49.9,0.));
+			positions.push_back(glm::vec3(-5.,49.9,5.));
+			positions.push_back(glm::vec3(-15.,49.9,5.));
+			texCoords.push_back(glm::vec2(0.0,0.0));
+			texCoords.push_back(glm::vec2(1.0,1.0));
+			texCoords.push_back(glm::vec2(0.0,1.0));
+			break;
+		default:
+			break;
+	}
 
-      for (int i=0; i<6; i++)
-        normals.push_back(glm::vec3(0.0,-1.0,0.0));
+	for (int i=0; i<6; i++) {
+		normals.push_back(glm::vec3(0.0,-1.0,0.0));
+	}
 }
 
 

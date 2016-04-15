@@ -53,7 +53,7 @@ Scene::~Scene() {}
 
 KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 	std::string tex[] = {"metal wall2.jpg", "mur_pierre.jpeg", "wood.jpg", "grass_texture.png"};
-	KartPtr realKart = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, 0.0);
+	KartPtr realKart = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, float(M_PI));
 	realKart->setFixed(true);
     KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount], realKart);
     kart->setMaterial(Material::Pearl());
@@ -341,12 +341,37 @@ void Scene::kart_game_light() {
   DirectionalLightPtr directionalLight = std::make_shared<DirectionalLight>(d_direction, d_ambient, d_diffuse, d_specular);
 
   // Add a renderable to display the light and control it via mouse/key event
-  glm::vec3 lightPosition(0.0,0.0,5.0);
-  DirectionalLightRenderablePtr directionalLightRenderable = std::make_shared<DirectionalLightRenderable>(flatShader, directionalLight, lightPosition);
+  glm::vec3 lightPosition(0.0, 0.0, 5.0);
+  DirectionalLightRenderablePtr directionalLightRenderable = std::make_shared<DirectionalLightRenderable>(flatShader, directionalLight, glm::vec3(0.0,0.0,5.0));
   localTransformation = glm::scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5));
   directionalLightRenderable->setLocalTransform(localTransformation);
   viewer->setDirectionalLight(directionalLight);
   viewer->addRenderable(directionalLightRenderable);
+  
+	// Define a spot light
+    glm::vec3 s_position(0.0, 49.0, 8.0), s_spotDirection = glm::normalize(glm::vec3(0.0, 0.0, -1.0));
+    glm::vec3 s_ambient(0.5, 0.5, 0.5), s_diffuse(0.5, 0.5, 0.5), s_specular(0.5, 0.5, 0.5);
+    float s_constant = 1.0, s_linear = 0.0, s_quadratic = 0.0;
+    float s_innerCutOff = std::cos(glm::radians(20.0f)), s_outerCutOff = std::cos(glm::radians(40.0f));
+    SpotLightPtr spotLight = std::make_shared<SpotLight>(s_position, s_spotDirection,
+                                                         s_ambient, s_diffuse, s_specular,
+                                                         s_constant, s_linear, s_quadratic,
+                                                         s_innerCutOff, s_outerCutOff);
+    SpotLightRenderablePtr spotLightRenderable = std::make_shared<SpotLightRenderable>(flatShader, spotLight);
+    localTransformation = glm::scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5));
+    spotLightRenderable->setLocalTransform(localTransformation);
+    viewer->addSpotLight(spotLight);
+    viewer->addRenderable(spotLightRenderable);
+    
+    s_position.x += 10;
+    SpotLightPtr spotLight2 = std::make_shared<SpotLight>(s_position, s_spotDirection,
+                                                          s_ambient, s_diffuse, s_specular,
+                                                          s_constant, s_linear, s_quadratic,
+                                                          s_innerCutOff, s_outerCutOff);
+    SpotLightRenderablePtr spotLightRenderable2 = std::make_shared<SpotLightRenderable>(flatShader, spotLight2);
+    spotLightRenderable2->setLocalTransform(localTransformation);
+    viewer->addSpotLight(spotLight2);
+    viewer->addRenderable(spotLightRenderable2);
 }
 
 void Scene::kart_game_borders() {
@@ -356,7 +381,7 @@ void Scene::kart_game_borders() {
   MaterialPtr pearl = Material::Pearl();
 
   // Textured plane
-  glm::vec3 p1(-25.0, -25.0, -0.2), p2(25.0, -25.0, -0.2), p3(25.0, 25.0, -0.2), p4(-25.0, 25.0, -0.2);
+  glm::vec3 p1(-50.0, -50.0, -0.2), p2(50.0, -50.0, -0.2), p3(50.0, 50.0, -0.2), p4(-50.0, 50.0, -0.2);
   PlanePtr plane = std::make_shared<Plane>(p1, p2, p3);
   dynSystem->addPlaneObstacle(plane);
   filename = "./../textures/grass_texture.png";
@@ -369,56 +394,59 @@ void Scene::kart_game_borders() {
   // Textured plane
   filename = "./../textures/mur_pierre.jpeg";
 
-  p1 = glm::vec3(25.0, -25.0, 0.0);
-  p2 = glm::vec3(25.0, 25.0,  0.0);
-  p3 = glm::vec3(25.0, 25.0,  5.0);
+  p1 = glm::vec3(50.0, -50.0, 0.0);
+  p2 = glm::vec3(50.0, 50.0,  0.0);
+  p3 = glm::vec3(50.0, 50.0,  5.0);
   plane = std::make_shared<Plane>(p3, p2, p1); // Ordre important pour les collisions
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall1 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
-  parentTransformation = glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
+  parentTransformation = glm::translate(glm::mat4(1.0), glm::vec3(50.0, 0.0, 0.0));
   wall1->setParentTransform(parentTransformation);
   wall1->setMaterial(pearl);
   HierarchicalRenderable::addChild(systemRenderable, wall1);
 
-  p1 = glm::vec3(-25.0, -25.0, 0.0);
-  p2 = glm::vec3(-25.0, 25.0,  0.0);
-  p3 = glm::vec3(-25.0, 25.0,  5.0);
+  p1 = glm::vec3(-50.0, -50.0, 0.0);
+  p2 = glm::vec3(-50.0, 50.0,  0.0);
+  p3 = glm::vec3(-50.0, 50.0,  5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall2 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
-  parentTransformation = glm::translate(glm::mat4(1.0), glm::vec3(-25.0, 0.0, 0.0));
+  parentTransformation = glm::translate(glm::mat4(1.0), glm::vec3(-50.0, 0.0, 0.0));
   wall2->setParentTransform(parentTransformation);
   wall2->setMaterial(pearl);
   HierarchicalRenderable::addChild(systemRenderable, wall2);
 
-  p1 = glm::vec3(-25.0, 25.0, 0.0);
-  p2 = glm::vec3(25.0,  25.0, 0.0);
-  p3 = glm::vec3(25.0,  25.0, 5.0);
+  p1 = glm::vec3(-50.0, 50.0, 0.0);
+  p2 = glm::vec3(50.0,  50.0, 0.0);
+  p3 = glm::vec3(50.0,  50.0, 5.0);
   plane = std::make_shared<Plane>(p1, p2, p3);
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall3 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::rotate(glm::mat4(1.0), float (M_PI/2), glm::vec3(0.0, 0.0, 1.0));
-  parentTransformation *= glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
+  parentTransformation *= glm::translate(glm::mat4(1.0), glm::vec3(50.0, 0.0, 0.0));
   wall3->setParentTransform(parentTransformation);
   wall3->setMaterial(pearl);
   HierarchicalRenderable::addChild(systemRenderable, wall3);
 
-  p1 = glm::vec3(-25.0, -25.0, 0.0);
-  p2 = glm::vec3(25.0,  -25.0, 0.0);
-  p3 = glm::vec3(25.0,  -25.0, 5.0);
+  p1 = glm::vec3(-50.0, -50.0, 0.0);
+  p2 = glm::vec3(50.0,  -50.0, 0.0);
+  p3 = glm::vec3(50.0,  -50.0, 5.0);
   plane = std::make_shared<Plane>(p3, p2, p1);
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall4 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::rotate(glm::mat4(1.0), float (-M_PI/2), glm::vec3(0.0,0.0,1.0));
-  parentTransformation *= glm::translate(glm::mat4(1.0), glm::vec3(25.0,0.0,0.0));
+  parentTransformation *= glm::translate(glm::mat4(1.0), glm::vec3(50.0,0.0,0.0));
   wall4->setParentTransform(parentTransformation);
   wall4->setMaterial(pearl);
   HierarchicalRenderable::addChild(systemRenderable, wall4);
 
-  filename =  "./../textures/michelin.jpeg";
-  TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, filename, 2);
+  TexturedPlaneRenderablePtr ad = std::make_shared<TexturedPlaneRenderable>(texShader, "./../textures/michelin.jpeg", 2);
   ad->setMaterial(pearl);
   viewer->addRenderable(ad);
+  
+  TexturedPlaneRenderablePtr ad2 = std::make_shared<TexturedPlaneRenderable>(texShader, "./../textures/coca.png", 3);
+  ad2->setMaterial(pearl);
+  viewer->addRenderable(ad2);
 
 }
 

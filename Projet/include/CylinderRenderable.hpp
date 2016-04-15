@@ -16,8 +16,8 @@ public:
     
     SphereRenderablePtr getArticulation(void) {return m_articulation;};
     SphereRenderablePtr getArticulation2(void) {return m_articulation2;};
-    void setArticulation(SphereRenderablePtr sph) {this->m_articulation = sph;};
-    void setArticulation2(SphereRenderablePtr sph) {this->m_articulation2 = sph;};
+    void setArticulation(SphereRenderablePtr sph) {this->m_articulation = sph;}; // Left elbow
+    void setArticulation2(SphereRenderablePtr sph) {this->m_articulation2 = sph;}; // Right elbow
 
 private:
     void do_draw();

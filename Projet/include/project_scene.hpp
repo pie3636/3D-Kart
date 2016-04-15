@@ -17,6 +17,7 @@
 
 
 #include "lighting/DirectionalLightRenderable.hpp"
+#include "lighting/SpotLightRenderable.hpp"
 
 #include "texturing/TexturedLightedMeshRenderable.hpp"
 #include "texturing/TexturedPlaneRenderable.hpp"

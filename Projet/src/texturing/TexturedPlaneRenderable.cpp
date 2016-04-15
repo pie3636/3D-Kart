@@ -31,6 +31,9 @@ TexturedPlaneRenderable::TexturedPlaneRenderable(ShaderProgramPtr shaderProgram,
     else if (i==2){
       getAds(m_positions, m_normals, m_origTexCoords);
     }
+    else if (i==3){
+      getAds(m_positions, m_normals, m_origTexCoords, 1);
+    }
 
 
     m_texCoords = m_origTexCoords;
