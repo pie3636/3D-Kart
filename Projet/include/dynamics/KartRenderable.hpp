@@ -26,8 +26,6 @@ class KartRenderable : public TexturedLightedMeshRenderable
     KartPtr kart;
     
     glm::mat4 init;
-    float oldAngle;
-    glm::vec3 oldPosition;
 };
 
 typedef std::shared_ptr<KartRenderable> KartRenderablePtr;
