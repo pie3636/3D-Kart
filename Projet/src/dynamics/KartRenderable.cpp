@@ -29,6 +29,8 @@ void KartRenderable::do_draw()
     glm::mat4 translate = glm::translate(glm::mat4(1.0), pPosition);
     glm::mat4 rotate 	= glm::rotate(glm::mat4(1.0), alpha, glm::vec3(0, 0, 1));
     
+    kart->setAngle(alpha);
+    
     setParentTransform(translate * rotate * init);
     
     TexturedLightedMeshRenderable::do_draw();

@@ -64,6 +64,11 @@ void Kart::setForce(const glm::vec3 &force)
     m_force = force;
 }
 
+void Kart::setAngle(const float &angle)
+{
+    m_angle = angle;
+}
+
 void Kart::incrPosition(const glm::vec3 &pos)
 {
     m_position += pos;

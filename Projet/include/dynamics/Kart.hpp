@@ -39,6 +39,7 @@ public:
   void setVelocity(const glm::vec3 &vel);
   void setForce(const glm::vec3 &force);
   void setFixed(bool isFixed);
+  void setAngle(const float &angle);
 
   void incrPosition(const glm::vec3 &pos);
   void incrVelocity(const glm::vec3 &vel);
