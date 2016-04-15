@@ -52,7 +52,7 @@ Scene::Scene(Viewer* viewer) {
 Scene::~Scene() {}
 
 KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
-	std::string tex[] = {"metal wall2.jpg", "mur_pierre.jpeg", "wood.jpg", "grass_texture.png"};
+	std::string tex[] = {"metal wall2.jpg", "wood.jpg", "mur_pierre.jpeg", "grass_texture.png"};
 	KartPtr realKart = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, float(M_PI));
 	realKart->setFixed(true);
     KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount], realKart);
@@ -68,7 +68,7 @@ KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 }
 
 KartRenderablePtr Scene::createControllableKart() {
-	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
+	std::string tex[] = {"metal wall2.jpg", "wood.jpg", "mur_pierre.jpeg", "grass_texture.png"};
  	KartPtr mobile = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, 0.0);
  	mobile->setCharacter(createCharacterFromPrimitives());
     dynSystem->addKart(mobile);
