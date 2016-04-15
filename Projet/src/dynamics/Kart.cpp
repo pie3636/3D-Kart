@@ -12,7 +12,7 @@ void Kart::setFixed(bool isFixed)
 }
 
 Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &mass,
-  const float& width, const float& length, const float& depth, const float& angle)
+  const float& width, const float& length, const float& depth, const float& angle, CylinderRenderablePtr character)
     : m_initialPosition( position ), m_initialVelocity( velocity ), m_initialAngle(angle),
         m_position(position),
       m_velocity(velocity),
@@ -22,7 +22,8 @@ Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &ma
       m_width(width),
       m_depth(depth),
       m_radius(sqrt(pow(length,2)+pow(width,2)+pow(depth,2))/2),
-      m_angle(angle)
+      m_angle(angle),
+      m_character(character)
 {}
 
 Kart::~Kart()

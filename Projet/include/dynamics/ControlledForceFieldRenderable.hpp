@@ -58,7 +58,7 @@ public:
    * @param program The shader program used to render the force applied to Karts.
    * @param forceField The force field to control with user inputs.
    */
-  ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField );
+  ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField, Viewer* viewer);
   ~ControlledForceFieldRenderable();
 
 private:
@@ -78,6 +78,8 @@ private:
   unsigned int m_pBuffer;
   unsigned int m_cBuffer;
   unsigned int m_nBuffer;
+  
+  Viewer* viewer;
 };
 
 typedef std::shared_ptr<ControlledForceFieldRenderable> ControlledForceFieldRenderablePtr;

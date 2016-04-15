@@ -7,8 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 
-CylinderRenderable::CylinderRenderable(ShaderProgramPtr shaderProgram, int facets) :
-    HierarchicalRenderable(shaderProgram), m_vBuffer(0), m_cBuffer(0) {
+CylinderRenderable::CylinderRenderable(ShaderProgramPtr shaderProgram, int facets, SphereRenderablePtr articulation, SphereRenderablePtr articulation2):
+    HierarchicalRenderable(shaderProgram), m_vBuffer(0), m_cBuffer(0), m_articulation(articulation), m_articulation2(articulation2) {
     
     getUnitCylinder(m_positions, m_normals, facets);
     m_colors.resize(m_positions.size(), glm::vec4(1.0, 0.0, 0.0, 1.0));

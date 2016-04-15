@@ -25,6 +25,8 @@ class KartRenderable : public TexturedLightedMeshRenderable
     void do_draw();
     KartPtr kart;
     
+    float old_angle;
+    
     glm::mat4 init;
 };
 

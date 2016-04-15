@@ -5,6 +5,7 @@
 #include <memory>
 #include <glm/glm.hpp>
 
+#include "../../include/CylinderRenderable.hpp"
 
 class Kart
 {
@@ -17,7 +18,8 @@ public:
       const float& width,
       const float& length,
       const float& depth,
-      const float& angle
+      const float& angle,
+      CylinderRenderablePtr character = nullptr
     );
 
   ~Kart();
@@ -32,6 +34,7 @@ public:
   float getDepth() const {return m_depth;};
   float getRadius() const {return m_radius;};
   float getAngle() const {return m_angle;};
+  CylinderRenderablePtr getCharacter() const {return m_character;};
 
   bool isFixed() const;
 
@@ -40,6 +43,7 @@ public:
   void setForce(const glm::vec3 &force);
   void setFixed(bool isFixed);
   void setAngle(const float &angle);
+  void setCharacter(const CylinderRenderablePtr &character) {this->m_character = character;};
 
   void incrPosition(const glm::vec3 &pos);
   void incrVelocity(const glm::vec3 &vel);
@@ -65,6 +69,8 @@ private:
   float m_angle;
 
   bool m_isFixed;
+  
+  CylinderRenderablePtr m_character;
 };
 
 typedef std::shared_ptr<Kart> KartPtr;

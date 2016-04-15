@@ -15,7 +15,10 @@ KartRenderable::KartRenderable(
 			 * rotate(glm::mat4(1.0), float (-M_PI/2-0.15), glm::vec3(0, 1, 0))
 			 * scale(glm::mat4(1.0), glm::vec3(0.5, 0.5, 0.5));
 		this->kart = kart;
-		setParentTransform(glm::translate(glm::mat4(1.0), kart->getPosition()) * glm::translate(glm::mat4(1.0), glm::vec3(-35, 5, -2)) * init);
+		kart->setPosition(glm::vec3(3, 19, 0));
+		setParentTransform(glm::translate(glm::mat4(1.0), kart->getPosition()) * init);
+		
+		old_angle = 0;
     }
 
 void KartRenderable::do_draw()
@@ -29,9 +32,14 @@ void KartRenderable::do_draw()
     glm::mat4 translate = glm::translate(glm::mat4(1.0), pPosition);
     glm::mat4 rotate 	= glm::rotate(glm::mat4(1.0), alpha, glm::vec3(0, 0, 1));
     
+    kart->getCharacter()->getArticulation()->setParentTransform(glm::rotate(glm::mat4(1.0), float(M_PI/6 + 10*(alpha - old_angle)), glm::vec3(1, 0, 0)));
+    kart->getCharacter()->getArticulation2()->setParentTransform(glm::rotate(glm::mat4(1.0), float(M_PI/6 - 10*(alpha - old_angle)), glm::vec3(1, 0, 0)));
+    
     kart->setAngle(alpha);
     
     setParentTransform(translate * rotate * init);
+
+	old_angle = alpha;
     
     TexturedLightedMeshRenderable::do_draw();
 }

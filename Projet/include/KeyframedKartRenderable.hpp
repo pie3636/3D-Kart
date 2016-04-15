@@ -6,6 +6,7 @@
 #include "../include/texturing/TexturedLightedMeshRenderable.hpp"
 #include "./lighting/Material.hpp"
 #include "./lighting/Light.hpp"
+#include "./dynamics/Kart.hpp"
 
 #include <glm/glm.hpp>
 
@@ -18,7 +19,8 @@ class KeyframedKartRenderable : public TexturedLightedMeshRenderable
     KeyframedKartRenderable(
         ShaderProgramPtr program,
         const std::string& mesh_filename,
-        const std::string& texture_filename);
+        const std::string& texture_filename,
+        KartPtr kart);
 
     void addLocalTransformKeyframe( const GeometricTransformation& transformation, float time );
 
@@ -26,7 +28,9 @@ class KeyframedKartRenderable : public TexturedLightedMeshRenderable
 
 private:
     void do_animate(float time);
-
+    
+	KartPtr kart;
+	
     KeyframeCollection m_localKeyframes; /*!< A collection of keyframes for the local transformation of renderable. */
     KeyframeCollection m_parentKeyframes; /*!< A collection of keyframes for the parent transformation of renderable. */
 };

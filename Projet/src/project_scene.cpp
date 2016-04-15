@@ -4,7 +4,7 @@ int Scene::kartCount = 0;
 const double Scene::kartScaleFactor = 0.5;
 
 //float Scene::times[16] = {1.25, 1.5, 1.6, 1.75, 1.9, 2.5, 3, 4, 4.25, 4.75, 5.5, 6, 6.25, 7, 7.5, 8};
-float Scene::times[16] = {1.5, 3, 3.2, 3.5, 3.8, 5, 6, 8, 8.5, 9.5, 11, 12, 13.5, 15, 17, 18};
+float Scene::times[16] = {1.5, 4, 4.3, 4.5, 5, 6.5, 8, 9, 9.7, 11.2, 13.2, 14.7, 16.7, 18.7, 21.7, 23.2};
 
 Scene::Scene(Viewer* viewer) {
 	this->viewer = viewer;
@@ -52,8 +52,10 @@ Scene::Scene(Viewer* viewer) {
 Scene::~Scene() {}
 
 KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
-	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
-    KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
+	std::string tex[] = {"metal wall2.jpg", "mur_pierre.jpeg", "wood.jpg", "grass_texture.png"};
+	KartPtr realKart = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, 0.0);
+	realKart->setFixed(true);
+    KeyframedKartRenderablePtr kart = std::make_shared<KeyframedKartRenderable>(texShader, "../meshes/Kart.obj", "../textures/" + tex[kartCount], realKart);
     kart->setMaterial(Material::Pearl());
 	kart->setParentTransform(rotate(kart, M_PI/2, 1, 0, 0)
 						   * rotate(kart, -M_PI/2 - 0.15, 0, 1, 0)
@@ -61,17 +63,19 @@ KeyframedKartRenderablePtr Scene::createTexturedMovingKartFromMesh() {
 						   * translate(kart, -32, 1., -2.));
     HierarchicalRenderable::addChild(systemRenderable, 	kart							);
     HierarchicalRenderable::addChild(kart, 				createCharacterFromPrimitives() );
+    dynSystem->addKart(realKart);
 	return moving_kart(kart, texShader, "../meshes/Kart.obj", "../textures/wood.jpg");
 }
 
 KartRenderablePtr Scene::createControllableKart() {
 	std::string tex[] = {"grass_texture.png", "mur_pierre.jpeg", "wood.jpg", "metal wall2.jpg"};
- 	KartPtr mobile = std::make_shared<Kart>(glm::vec3(1, 1, 10), glm::vec3(0, 0, 0), 1, 5, 1, 1.5, 0.0);
+ 	KartPtr mobile = std::make_shared<Kart>(glm::vec3(3, 19, 0), glm::vec3(0, 0, 0), 1, 5, 2, 1.5, 0.0);
+ 	mobile->setCharacter(createCharacterFromPrimitives());
     dynSystem->addKart(mobile);
     kartCount++;
 	KartRenderablePtr mobileRenderable = std::make_shared<KartRenderable>(texShader, mobile, "../meshes/Kart.obj", "../textures/" + tex[kartCount]);
 	HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
-    HierarchicalRenderable::addChild(mobileRenderable, createCharacterFromPrimitives());
+    HierarchicalRenderable::addChild(mobileRenderable, mobile->getCharacter());
     // Initialize a force field that applies only to the mobile kart
     glm::vec3 nullForce(0.0,0.0,0.0);
     std::vector<KartPtr> vKart;
@@ -82,7 +86,7 @@ KartRenderablePtr Scene::createControllableKart() {
     // Initialize a renderable for the force field applied on the mobile particle.
     // This renderable allows to modify the attribute of the force by key/mouse events
     // Add this renderable to the systemRenderable.
-    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>(texShader, force);
+    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>(texShader, force, viewer);
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
     
 	ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(dynSystem->getKarts(), glm::vec3{0,0,-10});
@@ -272,6 +276,9 @@ CylinderRenderablePtr Scene::createCharacterFromPrimitives() {
     HierarchicalRenderable::addChild(knee_r,        	calf_r     );
     HierarchicalRenderable::addChild(calf_r,        	ankle_r    );
     HierarchicalRenderable::addChild(ankle_r,       	foot_r     );
+    
+    chest->setArticulation(elbow_l);
+    chest->setArticulation2(elbow_r);
 
     return chest;
 }
@@ -365,7 +372,7 @@ void Scene::kart_game_borders() {
   p1 = glm::vec3(25.0, -25.0, 0.0);
   p2 = glm::vec3(25.0, 25.0,  0.0);
   p3 = glm::vec3(25.0, 25.0,  5.0);
-  plane = std::make_shared<Plane>(p1, p2, p3);
+  plane = std::make_shared<Plane>(p3, p2, p1); // Ordre important pour les collisions
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall1 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::translate(glm::mat4(1.0), glm::vec3(25.0, 0.0, 0.0));
@@ -399,7 +406,7 @@ void Scene::kart_game_borders() {
   p1 = glm::vec3(-25.0, -25.0, 0.0);
   p2 = glm::vec3(25.0,  -25.0, 0.0);
   p3 = glm::vec3(25.0,  -25.0, 5.0);
-  plane = std::make_shared<Plane>(p1, p2, p3);
+  plane = std::make_shared<Plane>(p3, p2, p1);
   dynSystem->addPlaneObstacle(plane);
   TexturedPlaneRenderablePtr wall4 = std::make_shared<TexturedPlaneRenderable>(texShader, filename,1);
   parentTransformation = glm::rotate(glm::mat4(1.0), float (-M_PI/2), glm::vec3(0.0,0.0,1.0));

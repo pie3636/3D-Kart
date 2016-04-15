@@ -9,8 +9,10 @@
 #include <GL/glew.h>
 
 KeyframedKartRenderable::KeyframedKartRenderable(
-  ShaderProgramPtr shaderProgram, const std::string& mesh_filename, const std::string& texture_filename) :
-    TexturedLightedMeshRenderable(shaderProgram, mesh_filename, texture_filename) {}
+  ShaderProgramPtr shaderProgram, const std::string& mesh_filename, const std::string& texture_filename, KartPtr kart) :
+    TexturedLightedMeshRenderable(shaderProgram, mesh_filename, texture_filename) {
+    	this->kart = kart;
+    }
 
 void KeyframedKartRenderable::addLocalTransformKeyframe( const GeometricTransformation& transformation, float time ) {
   m_localKeyframes.add( transformation, time );

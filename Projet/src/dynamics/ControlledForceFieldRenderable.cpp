@@ -1,6 +1,7 @@
 #include "./../../include/dynamics/ControlledForceFieldRenderable.hpp"
 #include "./../../include/gl_helper.hpp"
 #include "./../../include/log.hpp"
+#include "./../../include/Viewer.hpp"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
@@ -39,10 +40,11 @@ void ControlledForceFieldStatus::clear()
     turning_right =  false;
 }
 
-ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField )
+ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField , Viewer* viewer)
     : HierarchicalRenderable(program), m_force( forceField ), m_pBuffer(0), m_cBuffer(0), m_nBuffer(0)
 {
-    glm::vec3 initial_direction(1,0,0);
+	this->viewer = viewer;
+    glm::vec3 initial_direction(-1,0,0);
     m_status = ControlledForceFieldStatus(initial_direction);
 
     //Create geometric data to display an arrow representing the movement of the Kart
@@ -173,6 +175,11 @@ void ControlledForceFieldRenderable::do_draw()
     //Display an arrow representing the movement of the Kart
     for(KartPtr p : Karts)
     {
+    	glm::vec3 center = p->getPosition() - m_status.movement - m_status.movement - m_status.movement;
+    	center.z += 3;
+    	glm::vec3 eye = p->getPosition() + m_status.movement;
+    	eye.z += 1;
+    	viewer->getCamera().setViewMatrix(glm::lookAt(center, eye, glm::vec3(0, 0, 1)));
         m_positions.push_back(p->getPosition());
         m_positions.push_back(p->getPosition()  + 2.0f* m_status.movement);
         m_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
