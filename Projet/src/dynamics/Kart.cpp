@@ -18,10 +18,11 @@ Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &ma
       m_velocity(velocity),
       m_force(glm::vec3(0.0,0.0,0.0)),
       m_mass(mass),
-      m_angle(angle		),
-      length(length),
-      width(width),
-      depth(depth)
+      m_length(length),
+      m_width(width),
+      m_depth(depth),
+      m_radius(sqrt(pow(length,2)+pow(width,2)+pow(depth,2))/2),
+      m_angle(angle)
 {}
 
 Kart::~Kart()
