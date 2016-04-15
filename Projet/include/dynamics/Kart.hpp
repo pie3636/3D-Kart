@@ -16,7 +16,8 @@ public:
       const float& mass,
       const float& width,
       const float& length,
-      const float& depth
+      const float& depth,
+      const float& angle
     );
 
   ~Kart();
@@ -29,6 +30,7 @@ public:
   float getLength() const {return length;};
   float getWidth() const {return width;};
   float getDepth() const {return depth;};
+  float getAngle() const {return m_angle;};
 
   bool isFixed() const;
 
@@ -47,6 +49,7 @@ private:
 
   const glm::vec3 m_initialPosition;
   const glm::vec3 m_initialVelocity;
+  const float m_initialAngle;
 
   glm::vec3 m_position;
   glm::vec3 m_velocity;
@@ -56,6 +59,7 @@ private:
   float length;
   float depth;
   float m_mass;
+  float m_angle;
 
   bool m_isFixed;
 };

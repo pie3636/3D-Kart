@@ -12,12 +12,13 @@ void Kart::setFixed(bool isFixed)
 }
 
 Kart::Kart(const glm::vec3 &position, const glm::vec3 &velocity, const float &mass,
-  const float& width, const float& length, const float& depth)
-    : m_initialPosition( position ), m_initialVelocity( velocity ),
+  const float& width, const float& length, const float& depth, const float& angle)
+    : m_initialPosition( position ), m_initialVelocity( velocity ), m_initialAngle(angle),
         m_position(position),
       m_velocity(velocity),
       m_force(glm::vec3(0.0,0.0,0.0)),
       m_mass(mass),
+      m_angle(angle		),
       length(length),
       width(width),
       depth(depth)
@@ -81,6 +82,7 @@ void Kart::restart()
 {
   m_position = m_initialPosition;
   m_velocity = m_initialVelocity;
+  m_angle	 = m_initialAngle;
 }
 
 std::ostream& operator<<(std::ostream& os, const KartPtr& p)

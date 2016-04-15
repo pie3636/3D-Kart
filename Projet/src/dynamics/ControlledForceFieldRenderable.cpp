@@ -26,11 +26,11 @@ void ControlledForceFieldStatus::clear()
     angle =  0;
     last_time =  0;
     intensity = 0;
-    acceleration = 10.0;
-    deacceleration = 5.0;
+    acceleration = 20.0;
+    deacceleration = 10.0;
     angularSpeed = 2.0;
     dampingFactor = 0.8;
-    min_intensity = -1;
+    min_intensity = -10;
     max_intensity = 10;
 
     accelerating =  false;
@@ -147,11 +147,13 @@ void ControlledForceFieldRenderable::do_animate( float time )
                                           0);
         }
 
-        if( m_status.accelerating )
+        if( m_status.accelerating ) {
             m_status.intensity += dt * m_status.acceleration;
-        else if( m_status.deaccelerating )
+        } else if( m_status.deaccelerating ) {
             m_status.intensity -= dt * m_status.deacceleration;
-        else m_status.intensity *= dt * m_status.dampingFactor;
+        } else {
+        	m_status.intensity *= dt * m_status.dampingFactor;
+        }
 
         m_status.intensity = glm::clamp( m_status.intensity, m_status.min_intensity, m_status.max_intensity );
 
