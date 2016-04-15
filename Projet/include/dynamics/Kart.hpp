@@ -26,9 +26,10 @@ public:
   const glm::vec3& getForce() const;
 
   float getMass() const;
-  float getLength() const {return length;};
-  float getWidth() const {return width;};
-  float getDepth() const {return depth;};
+  float getLength() const {return m_length;};
+  float getWidth() const {return m_width;};
+  float getDepth() const {return m_depth;};
+  float getRadius() const {return m_radius;};
 
   bool isFixed() const;
 
@@ -51,10 +52,11 @@ private:
   glm::vec3 m_position;
   glm::vec3 m_velocity;
   glm::vec3 m_force;
+  float m_radius;
 
-  float width;
-  float length;
-  float depth;
+  float m_width;
+  float m_length;
+  float m_depth;
   float m_mass;
 
   bool m_isFixed;
