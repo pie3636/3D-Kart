@@ -1,0 +1,38 @@
+M = Maxime
+R = Rafik
+S = Salomé (proposition)
+* = On s'en fiche (pas long)
+
+I - Contenu du rendu
+	1 - Modélisation
+		M Personnage (hiérarchique, positions, angles, transforms)
+		R Route (Bézier, discrétisation, QuadRenderable)
+		M Kart
+		R Terrain
+		* Lumières
+		* Pubs
+		* Textures
+	2 - Collisions
+		- Plan - kart
+			M Détection - hitbox rectangulaire
+			R Traitement - hitbox cylindrique
+		* Verticales
+	3 - Animation
+		R Contrôle du kart (position, atan2, sauvegarde position)
+		R Kart automatique (IA, KeyframedRenderable)
+		M Mains qui tournent
+		* Gravité
+		M Caméra qui bouge
+		
+II - Limites et ouverture
+	1 - Modélisation
+		M Personnage (CylinderRenderable, textures)
+		S Route : Pour ajouter une texture à la route, il aurait fallu avoir plus de temps. En effet, la route est constitué de quadrilatères de formes différentes (les bords des quadrilatères suivent une courbe de Bézier pour les virages), et il est long d'ajouter des textures car il aurait fallu faire de nombreux cas de tests (orientation des textures, choix des quatre points sur la texture).
+		S Kart : Il aurait fallu décomposer le kart en plusieurs primitives (au moins les roues et le volant à part) afin de pouvoir avoir des textures différentes. Pas fait par manque de temps.
+	2 - Collisions
+		S Collisions kart-kart : Elles ont été implémentées en considérant que les deux karts sont des sphères, mais la fonction ne marche pas et a été commentée (par manque de temps). Cf. practical 5 pour comprendre comment les collisions de sphères marchent.
+		S Amélioration possible si plus de temps : Avoir une hitbox rectangulaire (parallèlépipède), plus difficile de gérer le repositionnement après collision (angles à calculer et tout).
+		S Autre amélioration possible : Repositionnement correct de la caméra après collision (pour éviter la trajectoire étrange qui arrive si on fonce dans un mur de travers et continue d'avancer)
+	3 - Animation
+		S Mains du personnage qui bougent quand on tourne : Va trop loin (mains s'éloignent du volant)
+		S Si plus de temps : Système de victoire/défaite : L'animation s'éxècute pendant un certain temps qui correspond à la durée mise par le kart IA pour parcourir tout le circuit. À chaque frame, on regarde si le kart du joueur est proche d'un certains nombres de "checkpoints" placés stratégiquement sur le circuit de manière à ce que le joueur franchisse bien tous les virages et ne coupe pas à travers le terrain. A chaque "checkpoint" passé, incrémente un compteur de 1. Si le compteur atteint sa valeur maximale, le joueur a gagné. Si l'animation se termine d'abord, le joueur a perdu. On penssait également ajouter des animations du joueur en cas de victoire/défaite. Voir le fichier "checkpoint.png" pour comprendre.
