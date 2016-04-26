@@ -1,0 +1,27 @@
+Position (x, y, z) = centre
+x = largeur, y = profondeur, z = hauteur. Tout donné par rapport au centre du parent. Racine = torse du personnage
+Mesures = au repos (debout, bras et jambes le long du corps)
+z positif vers le haut
+                                        x       z       y
+N°  Partie                  Primitive   Width   Height  Depth       posx            posz                        posy
+
+    Body                    ----------------------------------------------------------------------------------------------------
+A   | Head                  Sphere      0.2     0.25    0.2         0               (zC+zB+zA)/2                0
+B   | Neck                  Cylinder    0.12    0.1     0.1         0               (zC+zB)/2                   0
+    | Torso                 ----------------------------------------------------------------------------------------------------
+C   | | Chest               Cylinder    0.3     0.6     0.25        0               0                           0
+    | | Arm x2              ----------------------------------------------------------------------------------------------------
+D   | | | Shoulder          Sphere      0.1     0.1     0.1         (xC+xD)/2       (zC-zD)/2                   0
+E   | | | Upper arm         Cylinder    0.1     0.2     0.1         (xC+xD)/2       (zC-zD-zE)/2                0
+F   | | | Elbow             Sphere      0.1     0.1     0.1         (xC+xD)/2       (zC-zD-zE-zF)/2             0
+G   | | | Forearm           Cylinder    0.1     0.25    0.1         (xC+xD)/2       (zC-zD-zE-zF-zG)/2          0
+H   | | | Wrist             Sphere      0.08    0.08    0.08        (xC+xD)/2       (zC-zD-zE-zF-zG-zH)/2       0
+I   | | | Hand              Sphere      0.1     0.18    0.05        (xC+xD)/2       (zC-zD-zE-zF-zG-zH-zI)/2    0
+    | Bottom                ----------------------------------------------------------------------------------------------------
+    | | Leg x2              ----------------------------------------------------------------------------------------------------
+J   | | | Upper leg         Cylinder    0.15    0.3     0.15        ±(xC-xJ)/2      (-zC-zJ)/2                  0
+K   | | | Knee              Sphere      0.12    0.12    0.12        ±(xC-xJ)/2      (-zC-zJ-zK)/2               0
+L   | | | Calf              Cylinder    0.12    0.25    0.12        ±(xC-xJ)/2      (-zC-zJ-zK-zL)/2            0
+M   | | | Ankle             Sphere      0.08    0.08    0.08        ±(xC-xJ)/2      (-zC-zJ-zK-zL-zM)/2         0
+N   | | | Foot              Sphere      0.08    0.08    0.2         ±(xC-xJ)/2      (-zC-zJ-zK-zL-zM-zN)/2      (±)(yM+yN)/2
+
